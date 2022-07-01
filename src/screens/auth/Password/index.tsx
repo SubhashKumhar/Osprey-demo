@@ -24,10 +24,8 @@ export default function Password() {
     const reg =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     if (reg.test(password)) {
-      console.log(!reg.test(password));
       return false;
     }
-    console.log(!reg.test(password));
     return true;
   };
   const onEyePress = () => {
