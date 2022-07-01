@@ -1,6 +1,6 @@
-import {vh, vw} from '../../../utils/Dimension';
+import {vh, vw} from '../../utils/Dimension';
 import {StyleSheet} from 'react-native';
-import Color from '../../../utils/constant/colors';
+import Color from '../../utils/constant/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -53,6 +53,30 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: vh(40),
     // bottom: vh(40),
+  },
+  number: {
+    marginTop: vh(8),
+    fontSize: vw(16),
+    fontWeight: '700',
+    color: Color.Cyan_Blue,
+  },
+  headerTopText: {
+    flexDirection: 'row',
+  },
+  modalStyles: {
+    margin: 0,
+    marginHorizontal: vw(3),
+  },
+  eyeImg: {
+    height: '100%',
+    width: '100%',
+  },
+  eyeContainer: {
+    height: vh(25),
+    width: vw(25),
+    position: 'absolute',
+    right: vw(15),
+    alignSelf: 'center',
   },
 });
 export default styles;

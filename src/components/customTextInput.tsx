@@ -6,16 +6,26 @@ import Color from '../utils/constant/colors';
 interface Props {
   placeholder: string;
   width: number;
+  onChangeText: any;
+  value: string;
+  secureTextEntry: boolean;
 }
 
 export default function CustomTextInput(props: Props) {
+  const {width = 375} = props;
   return (
     <View
       style={[
         styles.container,
-        props.hasOwnProperty('width') ? {width: vw(props?.width)} : {},
+        props.hasOwnProperty('width') ? {width: vw(width)} : {},
       ]}>
-      <TextInput placeholder={props.placeholder} style={styles.textInput} />
+      <TextInput
+        value={props.value}
+        onChangeText={props.onChangeText}
+        placeholder={props.placeholder}
+        style={styles.textInput}
+        secureTextEntry={props.secureTextEntry}
+      />
     </View>
   );
 }

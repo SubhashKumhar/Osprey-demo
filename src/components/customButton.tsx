@@ -8,13 +8,19 @@ interface propInterface {
   text: string;
   onPressButton: Function;
   disable: boolean;
+  disableColor: any;
 }
 
 export default function CustomButton(props: propInterface) {
   const {textColor, bgColor, text, onPressButton, disable = false} = props;
   return (
     <TouchableOpacity
-      style={{...styles.signInWithEmail, backgroundColor: bgColor}}
+      style={[
+        styles.signInWithEmail,
+        {
+          backgroundColor: disable ? props?.disableColor : bgColor,
+        },
+      ]}
       activeOpacity={0.8}
       onPress={() => onPressButton()}
       disabled={disable}>

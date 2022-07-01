@@ -1,7 +1,7 @@
-const Names = {
+const ComponentNames = {
   AuthStack: 'AuthStack',
   Login: 'Login',
   Password: 'Password',
 };
 
-export default Names;
+export default ComponentNames;
