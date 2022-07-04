@@ -12,7 +12,7 @@ export const AuthReducer = (
   const {type, payload} = action;
   switch (type) {
     case 'Store_PhoneNumber':
-      return {...state, ...payload};
+      return {...state, phoneNumber: payload};
     default:
       return state;
   }

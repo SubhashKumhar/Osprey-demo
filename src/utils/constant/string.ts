@@ -12,6 +12,11 @@ const Strings = {
   Password_Input: 'Enter Password',
   Close: 'Close',
   Search: 'Search',
+  Verify_Number: 'Verify Number',
+  OTP_Header: 'Please enter OTP in order to verify your mobile number',
+  OTP_Sent: 'We have sent a four digit OTP to',
+  Submit_OTP: 'Submit OTP',
+  Resend_Code: 'Resend Code',
 };
 
 export default Strings;

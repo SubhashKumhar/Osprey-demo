@@ -5,6 +5,8 @@ const Color = {
   TextInputBackground: 'rgba(36, 116, 255, 0.05)',
   Light_SkyBlue: '#d8e6ff',
   Black: 'black',
+  Grey: 'grey',
+  Orange: '#FF9800',
 };
 
 export default Color;

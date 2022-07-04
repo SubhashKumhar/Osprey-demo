@@ -23,7 +23,7 @@ export default function CustomTextInput(props: Props) {
         value={props.value}
         onChangeText={props.onChangeText}
         placeholder={props.placeholder}
-        style={styles.textInput}
+        style={[styles.textInput, {width: vw(width)}]}
         secureTextEntry={props.secureTextEntry}
       />
     </View>
@@ -41,5 +41,6 @@ const styles = StyleSheet.create({
     height: vh(48),
     width: '100%',
     marginHorizontal: vw(12),
+    paddingHorizontal: vh(5),
   },
 });

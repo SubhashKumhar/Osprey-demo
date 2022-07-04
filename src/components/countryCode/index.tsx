@@ -4,15 +4,15 @@ import {
   TouchableOpacity,
   View,
   KeyboardAvoidingView,
+  TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
 import {countryCodes} from './constants';
 import {styles} from './styles';
 import Strings from '../../utils/constant/string';
-import CustomTextInput from '../customTextInput';
 
 export default function CountryCode(props: any) {
-  const [searchContent, setSearchContent] = useState('');
+  const [search, setSearch] = useState('');
   const [helperData, setHelperData] = useState(countryCodes);
 
   const renderList = ({item}: any) => {
@@ -30,23 +30,28 @@ export default function CountryCode(props: any) {
       </TouchableOpacity>
     );
   };
-  const listHeader = () => {
-    return (
-      <View style={styles.listHeader}>
-        <CustomTextInput
-          value={searchContent}
-          placeholder={Strings.Search}
-          onChangeText={onChangeText}
-        />
-      </View>
-    );
-  };
 
   const onChangeText = (text: string) => {
-    setSearchContent(text);
+    setSearch(text);
+    if (text) {
+      const newData = countryCodes.filter((item: any) => {
+        const itemData = item.name.en
+          ? item.name.en.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setHelperData(newData);
+    } else {
+      setHelperData(countryCodes);
+    }
   };
   const itemSeparator = () => {
     return <View style={styles.lineSeparator} />;
+  };
+
+  const emptyList = () => {
+    return <View style={styles.emptyFlatlist} />;
   };
 
   return (
@@ -55,13 +60,20 @@ export default function CountryCode(props: any) {
         <Text style={styles.closeText}>{Strings.Close}</Text>
       </TouchableOpacity>
       <View style={styles.innerContainer}>
+        <View style={styles.textInputContainer}>
+          <TextInput
+            value={search}
+            onChangeText={onChangeText}
+            placeholder={Strings.Search}
+            style={styles.textInput}
+          />
+        </View>
         <FlatList
-          data={searchContent ? helperData : countryCodes}
+          data={helperData}
           renderItem={renderList}
           showsVerticalScrollIndicator={false}
-          ListHeaderComponent={listHeader}
           ItemSeparatorComponent={itemSeparator}
-          stickyHeaderIndices={[0]}
+          ListEmptyComponent={emptyList}
           contentContainerStyle={styles.innerContainer}
         />
       </View>

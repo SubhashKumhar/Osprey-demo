@@ -1,4 +1,4 @@
-import {View, Text, Alert, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CustomButton from '../../../components/customButton';
@@ -6,11 +6,14 @@ import CustomTextInput from '../../../components/customTextInput';
 import Color from '../../../utils/constant/colors';
 import Strings from '../../../utils/constant/string';
 import TopAuthHeader from '../components/topAuthHeader';
-import styles from '../../styles/styles';
+import styles from '../styles';
 import {useSelector} from 'react-redux';
 import LocalImages from '../../../utils/constant/localImages';
+import {useNavigation} from '@react-navigation/native';
+import ComponentNames from '../../../utils/constant/componentNameStrings';
 
 export default function Password() {
+  const navigation = useNavigation<any>();
   const [password, setPassword] = React.useState<string>('');
   const [showPassword, setShowPassword] = useState(true);
   const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
@@ -18,7 +21,7 @@ export default function Password() {
     setPassword(text);
   };
   const onLoginPress = () => {
-    Alert.alert('loggedIn');
+    navigation.navigate(ComponentNames.OTP);
   };
   const validatePassword = () => {
     const reg =

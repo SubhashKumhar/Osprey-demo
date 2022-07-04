@@ -1,6 +1,6 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import styles from '../../styles/styles';
+import styles from '../styles';
 import Strings from '../../../utils/constant/string';
 import TopAuthHeader from '../components/topAuthHeader';
 import CustomTextInput from '../../../components/customTextInput';

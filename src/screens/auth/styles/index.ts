@@ -1,6 +1,6 @@
-import {vh, vw} from '../../utils/Dimension';
+import {vh, vw} from '../../../utils/Dimension';
 import {StyleSheet} from 'react-native';
-import Color from '../../utils/constant/colors';
+import Color from '../../../utils/constant/colors';
 
 const styles = StyleSheet.create({
   container: {
