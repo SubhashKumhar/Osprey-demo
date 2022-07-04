@@ -13,9 +13,10 @@ import localImages from '../../utils/localImages';
 import Input from '../../component/input/input';
 import Button from '../../component/button';
 import styles from './style';
-import { passwordTest,emailTest } from '../../utils/validation';
+import {passwordTest, emailTest, firstNameTest} from '../../utils/validation';
 
-export default function SignUp() {
+export default function SignUp({navigation}:any) {
+  const [eyePress, setEyePress] = useState(false);
   const [details, setDetails] = useState({
     fName: '',
     mName: '',
@@ -24,17 +25,24 @@ export default function SignUp() {
     password: '',
   });
 
-  const [err,setErr]=useState(false);
+  const [err, setErr] = useState(false);
 
- const onProceedPress=()=>{
-    if(passwordTest(details.password ) && emailTest(details.email)){
-       
+  const onProceedPress = () => {
+    if (
+      passwordTest(details.password) &&
+      emailTest(details.email) &&
+      firstNameTest(details.fName)
+    ) {
+      navigation.navigate('role');
+      setErr(false);
+    } else {
+      setErr(true);
     }
-    else
-    {
-      setErr(true)   
-    }
-  }
+  };
+
+  const onEyePress = () => {
+    setEyePress(!eyePress);
+  };
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -100,18 +108,11 @@ export default function SignUp() {
           <Text style={styles.astrickColor}>{' *'}</Text>
         </Text>
         <View style={styles.phoneTextViewStyle}>
-          <View
-            style={styles.countryCodeView}>
-            <Text style={styles.countryCodeText}>
-              {'+91'}
-            </Text>
+          <View style={styles.countryCodeView}>
+            <Text style={styles.countryCodeText}>{'+91'}</Text>
           </View>
-          <View
-            style={styles.phoneView}>
-            <Input 
-            place={'Phone'} 
-            placeholderColor="#333333" 
-            />
+          <View style={styles.phoneView}>
+            <Input place={'Phone'} placeholderColor="#333333" />
           </View>
         </View>
 
@@ -137,15 +138,29 @@ export default function SignUp() {
           <Input
             place="Enter your password"
             placeholderColor="#333333"
-            secure={true}
+            secure={!eyePress}
             onChangeText={(text: string) => {
               setDetails({...details, password: text});
             }}
           />
+          <TouchableOpacity onPress={onEyePress}>
+            <Image
+              source={!eyePress ? localImages.eyeClosed : localImages.eyeIcon}
+            />
+          </TouchableOpacity>
         </View>
-        {
-          err?<Text>{'Galat hai'}</Text>:null
-        }
+        {err ? (
+          <View
+            style={{top: 30, flexDirection: 'row', justifyContent: 'center'}}>
+            <Image
+              source={localImages.warningIcon}
+              style={{height: 20, width: 20}}
+            />
+            <Text style={{marginLeft: 5, color: 'red'}}>
+              {'Incorrect format'}
+            </Text>
+          </View>
+        ) : null}
       </ScrollView>
 
       <View style={styles.bottomFooterView}>
@@ -161,12 +176,14 @@ export default function SignUp() {
             <Text style={styles.blueColorText}>{' Privacy Policy'}</Text>
           </Text>
         </View>
+        
         <Button
           title="Proceed"
           customContainerStyle={styles.buttonContainerView}
           customTextStyle={styles.buttonTitleView}
           onPress={onProceedPress}
         />
+      
       </View>
     </SafeAreaView>
   );

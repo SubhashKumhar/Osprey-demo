@@ -15,6 +15,7 @@ export default function Button(props: PropInterface) {
     props;
   return (
     <TouchableOpacity
+    disabled={disabled}
       onPress={onPress}
       style={[styles.buttonMain, customContainerStyle]}
       activeOpacity={0.7}>

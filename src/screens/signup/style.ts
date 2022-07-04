@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     paddingHorizontal: normalize(16),
-    paddingBottom: normalize(80),
+    paddingBottom: normalize(60),
     backgroundColor: '#ffffff',
   },
   astrickColor: {
@@ -51,9 +51,11 @@ const styles = StyleSheet.create({
   inputTextViewStyle: {
     height: normalize(42),
     padding: normalize(16),
-    justifyContent: 'center',
+   justifyContent: 'space-between',
+   alignItems:'center',
     backgroundColor: '#dfebff',
     borderRadius: 4,
+    flexDirection:'row'
   },
   NextNameText: {
     lineHeight: normalize(24),
