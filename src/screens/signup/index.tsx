@@ -5,8 +5,6 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  StyleSheet,
-  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import localImages from '../../utils/localImages';
@@ -14,9 +12,11 @@ import Input from '../../component/input/input';
 import Button from '../../component/button';
 import styles from './style';
 import {passwordTest, emailTest, firstNameTest} from '../../utils/validation';
+import localString from '../../utils/localString';
 
-export default function SignUp({navigation}:any) {
-  const [eyePress, setEyePress] = useState(false);
+export default function SignUp({navigation}: any) {
+  const [err, setErr] = useState(false);
+  const [errText, setErrText] = useState('');
   const [details, setDetails] = useState({
     fName: '',
     mName: '',
@@ -24,24 +24,40 @@ export default function SignUp({navigation}:any) {
     email: '',
     password: '',
   });
+  const [eyePress, setEyePress] = useState(false);
 
-  const [err, setErr] = useState(false);
-
-  const onProceedPress = () => {
-    if (
-      passwordTest(details.password) &&
-      emailTest(details.email) &&
-      firstNameTest(details.fName)
-    ) {
+  const onProceedPress2 = () => {
+    if (!firstNameTest(details.fName)) {
+      setErr(true);
+      setErrText(localString.incorrectName);
+    } else if (!emailTest(details.email)) {
+      setErr(true);
+      setErrText(localString.incorrectEmail);
+    } else if (!passwordTest(details.password)) {
+      setErr(true);
+      setErrText(localString.incorrectPassword);
+    } else {
       navigation.navigate('role');
       setErr(false);
-    } else {
-      setErr(true);
+      setDetails.
     }
   };
 
   const onEyePress = () => {
     setEyePress(!eyePress);
+  };
+
+  const isDisable = () => {
+    if (
+      details.fName.length > 0 &&
+      details.lName.length > 0 &&
+      details.email.length > 0 &&
+      details.password.length > 0
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   return (
@@ -50,20 +66,18 @@ export default function SignUp({navigation}:any) {
         <TouchableOpacity>
           <Image style={styles.backArrow} source={localImages.leftArrow} />
         </TouchableOpacity>
-        <Text style={styles.headerText}>{'Signup & register'}</Text>
+        <Text style={styles.headerText}>{localString.signUp}</Text>
       </View>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
         contentContainerStyle={styles.scrollViewStyle}>
-        <Text style={styles.signUpTitleText}>
-          {'Signup and register yourself on OSPREY'}
-        </Text>
+        <Text style={styles.signUpTitleText}>{localString.signUpOsprey}</Text>
 
         <Text style={styles.FirstNameText}>
-          {'First name'}
-          <Text style={styles.astrickColor}>{' *'}</Text>
+          {localString.firstName}
+          <Text style={styles.astrickColor}>{localString.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -76,8 +90,8 @@ export default function SignUp({navigation}:any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {'Middle name'}
-          <Text style={styles.optionalTextColor}>{' (optional)'}</Text>
+          {localString.middleName}
+          <Text style={styles.optionalTextColor}>{localString.optional}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -90,8 +104,8 @@ export default function SignUp({navigation}:any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {'Last name'}
-          <Text style={styles.astrickColor}>{' *'}</Text>
+          {localString.lastName}
+          <Text style={styles.astrickColor}>{localString.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -104,8 +118,8 @@ export default function SignUp({navigation}:any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {'Phone Number'}
-          <Text style={styles.astrickColor}>{' *'}</Text>
+          {localString.phone}
+          <Text style={styles.astrickColor}>{localString.astrick}</Text>
         </Text>
         <View style={styles.phoneTextViewStyle}>
           <View style={styles.countryCodeView}>
@@ -117,8 +131,8 @@ export default function SignUp({navigation}:any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {'Email'}
-          <Text style={styles.astrickColor}>{' *'}</Text>
+          {localString.email}
+          <Text style={styles.astrickColor}>{localString.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -131,8 +145,8 @@ export default function SignUp({navigation}:any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {'Password'}
-          <Text style={styles.astrickColor}>{' *'}</Text>
+          {localString.password}
+          <Text style={styles.astrickColor}>{localString.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -156,9 +170,7 @@ export default function SignUp({navigation}:any) {
               source={localImages.warningIcon}
               style={{height: 20, width: 20}}
             />
-            <Text style={{marginLeft: 5, color: 'red'}}>
-              {'Incorrect format'}
-            </Text>
+            <Text style={{marginLeft: 5, color: 'red'}}>{errText}</Text>
           </View>
         ) : null}
       </ScrollView>
@@ -170,20 +182,24 @@ export default function SignUp({navigation}:any) {
             style={styles.circleImageStyle}
           />
           <Text style={styles.creatingAccountText}>
-            {'By creating an account, you have read and agreed to our '}
-            <Text style={styles.blueColorText}>{'Terms and Conditions'}</Text>
+            {localString.creatingAccount}
+            <Text style={styles.blueColorText}>
+              {localString.termsAndCondition}
+            </Text>
             <Text>{' &'}</Text>
-            <Text style={styles.blueColorText}>{' Privacy Policy'}</Text>
+            <Text style={styles.blueColorText}>
+              {localString.privacyPolicy}
+            </Text>
           </Text>
         </View>
-        
+
         <Button
           title="Proceed"
-          customContainerStyle={styles.buttonContainerView}
+          disabled={isDisable()}
+          customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
-          onPress={onProceedPress}
+          onPress={onProceedPress2}
         />
-      
       </View>
     </SafeAreaView>
   );
