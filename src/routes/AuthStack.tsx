@@ -3,7 +3,7 @@ import React from 'react';
 import Login from '../screens/auth/login';
 import OTP from '../screens/auth/otp';
 import Password from '../screens/auth/Password';
-import Names from '../utils/constant/componentNameStrings';
+import Names from '../utils/constant/componentNames';
 
 const AuthStacks = createNativeStackNavigator();
 export default function AuthStack() {

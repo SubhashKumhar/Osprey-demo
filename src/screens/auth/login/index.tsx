@@ -8,7 +8,7 @@ import LocalImages from '../../../utils/constant/localImages';
 import CustomButton from '../../../components/customButton';
 import Color from '../../../utils/constant/colors';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 import {useNavigation} from '@react-navigation/native';
 import {storePhoneNumber} from '../../../redux/auth/action';
 import {useDispatch} from 'react-redux';

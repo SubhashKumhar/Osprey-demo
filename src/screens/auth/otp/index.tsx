@@ -12,12 +12,12 @@ import Strings from '../../../utils/constant/string';
 import styles from './styles';
 import ItemSeparator from '../../../components/ItemSeparator';
 import LocalImages from '../../../utils/constant/localImages';
-import DashedLine from 'react-native-dashed-line';
 import Color from '../../../utils/constant/colors';
 import {useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import {Alert} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
+import DottedLine from '../../../components/dottedLine';
 
 export default function OTP() {
   const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
@@ -148,11 +148,7 @@ export default function OTP() {
             />
             <Text style={styles.otpHeaderText}>{Strings.OTP_Header}</Text>
           </View>
-          <DashedLine
-            dashLength={3}
-            dashColor={Color.Grey}
-            dashStyle={styles.dashLine}
-          />
+          <DottedLine />
           <View style={styles.otpSentView}>
             <Text style={styles.otpSentText}>{Strings.OTP_Sent}</Text>
             <Text style={styles.number}>{phoneNumber}</Text>

@@ -10,7 +10,7 @@ import styles from '../styles';
 import {useSelector} from 'react-redux';
 import LocalImages from '../../../utils/constant/localImages';
 import {useNavigation} from '@react-navigation/native';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 
 export default function Password() {
   const navigation = useNavigation<any>();

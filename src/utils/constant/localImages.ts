@@ -8,6 +8,8 @@ const LocalImages = {
   OTP_Box: require('../../assets/images/otp_box.png'),
   Grey_Cross: require('../../assets/images/Cancel_job_icon.png'),
   ClockIcon: require('../../assets/images/ClockIcon.png'),
+  Arrow_Left: require('../../assets/images/arrow-left(non-optimized).png'),
+  CheckIcon: require('../../assets/images/check_icon.png'),
 };
 
 export default LocalImages;
