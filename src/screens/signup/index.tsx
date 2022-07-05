@@ -39,7 +39,6 @@ export default function SignUp({navigation}: any) {
     } else {
       navigation.navigate('role');
       setErr(false);
-      setDetails.
     }
   };
 

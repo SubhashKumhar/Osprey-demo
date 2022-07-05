@@ -1,19 +1,20 @@
 import {StyleSheet} from 'react-native';
-import {normalize} from '../../utils/dimensions';
+import {normalize,vh,vw} from '../../utils/dimensions';
+import colors from '../../utils/colors';
 
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   topHeaderView: {
-    height: normalize(44),
-    width: normalize(375),
+    height: vh(44),
+    width: vw(375),
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 3,
-    borderBottomColor: '#f3f3f3',
-    backgroundColor: 'white',
+    borderBottomColor: colors.whiteSmoke,
+    backgroundColor: colors.white,
   },
   headerText: {
     fontSize: 16,
@@ -21,36 +22,36 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   backArrow: {
-    height: normalize(24),
-    width: normalize(24),
+    height: vh(24),
+    width: vh(24),
     marginLeft: 15,
   },
 
   signUpTitleText: {
-    lineHeight: normalize(24),
+    lineHeight: vh(24),
     fontWeight: '500',
-    fontSize: normalize(16),
-    marginTop: normalize(20),
-    color: 'black',
+    fontSize: vh(16),
+    marginTop: vh(20),
+    color: colors.black,
   },
   FirstNameText: {
-    lineHeight: normalize(24),
+    lineHeight: vh(24),
     fontWeight: '400',
-    fontSize: normalize(14),
-    marginTop: normalize(32),
-    color: 'black',
+    fontSize: vh(14),
+    marginTop: vh(32),
+    color: colors.black,
   },
   scrollViewStyle: {
-    paddingHorizontal: normalize(16),
-    paddingBottom: normalize(60),
-    backgroundColor: '#ffffff',
+    paddingHorizontal: vw(16),
+    paddingBottom: vh(70),
+    backgroundColor: colors.white,
   },
   astrickColor: {
     color: 'red',
   },
   inputTextViewStyle: {
-    height: normalize(42),
-    padding: normalize(16),
+    height: vh(42),
+    padding: vh(16),
    justifyContent: 'space-between',
    alignItems:'center',
     backgroundColor: '#dfebff',
@@ -58,72 +59,72 @@ const styles = StyleSheet.create({
     flexDirection:'row'
   },
   NextNameText: {
-    lineHeight: normalize(24),
+    lineHeight: vh(24),
     fontWeight: '400',
-    fontSize: normalize(14),
-    marginTop: normalize(24),
-    color: 'black',
+    fontSize: vh(14),
+    marginTop: vh(24),
+    color: colors.black,
   },
   optionalTextColor: {
     color: '#858585',
   },
   bottomFooterView: {
-    height: normalize(135),
-    marginTop: normalize(4),
-    borderTopWidth: normalize(5),
-    borderTopColor: '#f3f3f3',
+    height: vh(135),
+    marginTop: vh(4),
+    borderTopWidth: vh(5),
+    borderTopColor: colors.whiteSmoke,
   },
   bottomTextView: {
-    height: normalize(36),
-    marginTop: normalize(16),
+    height: vh(36),
+    marginTop: vh(16),
     flexDirection: 'row',
     alignItems: 'center',
   },
   circleImageStyle: {
-    marginLeft: normalize(20),
-    height: normalize(24),
-    width: normalize(24),
+    marginLeft: vw(20),
+    height: vw(24),
+    width: vw(24),
   },
   blueColorText: {
     color: '#2474ff',
   },
   creatingAccountText: {
-    fontSize: normalize(12),
+    fontSize: vh(12),
     width: 317,
-    marginLeft: normalize(8),
+    marginLeft: vw(8),
   },
   buttonContainerView: {
     backgroundColor: '#2474ff',
-    marginHorizontal: normalize(16),
-    marginTop: normalize(12),
+    marginHorizontal: vw(16),
+    marginTop: vh(12),
     borderRadius: 4,
   },
   buttonTitleView: {
-    color: '#ffffff',
+    color: colors.white,
     fontWeight: '600',
   },
   phoneTextViewStyle: {
-    height: normalize(42),
+    height: vh(42),
     alignItems:'center',
     borderRadius: 4,
     flexDirection:'row'
   },
   countryCodeView:{
-    height: normalize(42),
-    width: normalize(56),
+    height: vh(42),
+    width: vw(56),
     backgroundColor: '#dfebff',
     borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  countryCodeText:{fontSize: normalize(16), color: '#231e1e'},
+  countryCodeText:{fontSize: vh(16), color: '#231e1e'},
   phoneView:{
-    marginLeft: normalize(8),
+    marginLeft: vw(8),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#dfebff',
-    width: normalize(279),
-    height: normalize(42),
+    width: vw(279),
+    height: vh(42),
     borderRadius:4
   }
 

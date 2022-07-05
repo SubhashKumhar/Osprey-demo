@@ -3,25 +3,34 @@ import React, {useState} from 'react';
 import localImages from '../../utils/localImages';
 import Button from '../../component/button';
 import styles from './style';
+import localString from '../../utils/localString';
 
 export default function Choose_Role({navigation}: any) {
   const [press, setPress] = useState(false);
   const [clientPress, setClientPress] = useState(false);
 
   const pressWorkerImg = () => {
-    setPress(!press);
+    setPress(true);
     setClientPress(false);
   };
 
   const pressClientImg = () => {
-    setClientPress(!clientPress);
+    setClientPress(true);
     setPress(false);
+  };
+
+  const isDisable = () => {
+    if (press == true || clientPress == true) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   return (
     <View style={styles.parentView}>
       <View style={styles.mainView}>
-        <Text style={styles.roleTextStyle}>{'Choose role'}</Text>
+        <Text style={styles.roleTextStyle}>{localString.chooseRole}</Text>
       </View>
 
       <View style={styles.secondViewStyle}>
@@ -31,10 +40,10 @@ export default function Choose_Role({navigation}: any) {
         />
         <View style={styles.lineView}></View>
         <Text style={styles.chooseRoleText}>
-          {'Choose your role for setting up your profile on the application'}
+          {localString.settingUpProfile}
         </Text>
         <Text style={styles.setupProfileText}>
-          {'I want to setup my profile as a'}
+          {localString.setUpProfileAs}
         </Text>
         <View style={styles.workerClientView}>
           <TouchableOpacity activeOpacity={0.6} onPress={pressWorkerImg}>
@@ -62,7 +71,7 @@ export default function Choose_Role({navigation}: any) {
       <View style={styles.buttonView}>
         <Button
           title="Proceed"
-          disabled={false}
+          disabled={isDisable()}
           customContainerStyle={[
             press == true || clientPress == true
               ? styles.buttonContainerView
