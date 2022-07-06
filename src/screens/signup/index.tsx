@@ -11,10 +11,15 @@ import localImages from '../../utils/localImages';
 import Input from '../../component/input/input';
 import Button from '../../component/button';
 import styles from './style';
-import {passwordTest, emailTest, firstNameTest} from '../../utils/validation';
-import localString from '../../utils/localString';
+import { passwordTest,emailTest,firstNameTest } from '../../utils/constant/validation';
+import Names from '../../utils/constant/componentNameStrings';
+import Strings from '../../utils/constant/string';
+import { useDispatch } from 'react-redux';
+
 
 export default function SignUp({navigation}: any) {
+  const dispatch=useDispatch();
+
   const [err, setErr] = useState(false);
   const [errText, setErrText] = useState('');
   const [details, setDetails] = useState({
@@ -29,15 +34,16 @@ export default function SignUp({navigation}: any) {
   const onProceedPress2 = () => {
     if (!firstNameTest(details.fName)) {
       setErr(true);
-      setErrText(localString.incorrectName);
+      setErrText(Strings.incorrectName);
     } else if (!emailTest(details.email)) {
       setErr(true);
-      setErrText(localString.incorrectEmail);
+      setErrText(Strings.incorrectEmail);
     } else if (!passwordTest(details.password)) {
       setErr(true);
-      setErrText(localString.incorrectPassword);
+      setErrText(Strings.incorrectPassword);
     } else {
-      navigation.navigate('role');
+      dispatch({type:'UserData',payload:details})
+      navigation.navigate(Names.role);
       setErr(false);
     }
   };
@@ -65,18 +71,18 @@ export default function SignUp({navigation}: any) {
         <TouchableOpacity>
           <Image style={styles.backArrow} source={localImages.leftArrow} />
         </TouchableOpacity>
-        <Text style={styles.headerText}>{localString.signUp}</Text>
+        <Text style={styles.headerText}>{Strings.signUp}</Text>
       </View>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
         contentContainerStyle={styles.scrollViewStyle}>
-        <Text style={styles.signUpTitleText}>{localString.signUpOsprey}</Text>
+        <Text style={styles.signUpTitleText}>{Strings.signUpOsprey}</Text>
 
         <Text style={styles.FirstNameText}>
-          {localString.firstName}
-          <Text style={styles.astrickColor}>{localString.astrick}</Text>
+          {Strings.firstName}
+          <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -89,8 +95,8 @@ export default function SignUp({navigation}: any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {localString.middleName}
-          <Text style={styles.optionalTextColor}>{localString.optional}</Text>
+          {Strings.middleName}
+          <Text style={styles.optionalTextColor}>{Strings.optional}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -103,8 +109,8 @@ export default function SignUp({navigation}: any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {localString.lastName}
-          <Text style={styles.astrickColor}>{localString.astrick}</Text>
+          {Strings.lastName}
+          <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -117,8 +123,8 @@ export default function SignUp({navigation}: any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {localString.phone}
-          <Text style={styles.astrickColor}>{localString.astrick}</Text>
+          {Strings.phone}
+          <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
         <View style={styles.phoneTextViewStyle}>
           <View style={styles.countryCodeView}>
@@ -130,8 +136,8 @@ export default function SignUp({navigation}: any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {localString.email}
-          <Text style={styles.astrickColor}>{localString.astrick}</Text>
+          {Strings.email}
+          <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -144,8 +150,8 @@ export default function SignUp({navigation}: any) {
         </View>
 
         <Text style={styles.NextNameText}>
-          {localString.password}
-          <Text style={styles.astrickColor}>{localString.astrick}</Text>
+          {Strings.password}
+          <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
         <View style={styles.inputTextViewStyle}>
           <Input
@@ -159,6 +165,7 @@ export default function SignUp({navigation}: any) {
           <TouchableOpacity onPress={onEyePress}>
             <Image
               source={!eyePress ? localImages.eyeClosed : localImages.eyeIcon}
+              style={styles.eyeIconStyle}
             />
           </TouchableOpacity>
         </View>
@@ -181,14 +188,12 @@ export default function SignUp({navigation}: any) {
             style={styles.circleImageStyle}
           />
           <Text style={styles.creatingAccountText}>
-            {localString.creatingAccount}
+            {Strings.creatingAccount}
             <Text style={styles.blueColorText}>
-              {localString.termsAndCondition}
+              {Strings.termsAndCondition}
             </Text>
             <Text>{' &'}</Text>
-            <Text style={styles.blueColorText}>
-              {localString.privacyPolicy}
-            </Text>
+            <Text style={styles.blueColorText}>{Strings.privacyPolicy}</Text>
           </Text>
         </View>
 

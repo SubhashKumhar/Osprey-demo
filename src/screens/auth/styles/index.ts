@@ -1,4 +1,4 @@
-import {vh, vw} from '../../../utils/Dimension';
+import {vh, vw} from '../../../utils/dimensions';
 import {StyleSheet} from 'react-native';
 import Color from '../../../utils/constant/colors';
 

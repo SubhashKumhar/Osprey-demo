@@ -3,7 +3,8 @@ import React, {useState} from 'react';
 import localImages from '../../utils/localImages';
 import Button from '../../component/button';
 import styles from './style';
-import localString from '../../utils/localString';
+import Strings from '../../utils/constant/string';
+import Names from '../../utils/constant/componentNameStrings';
 
 export default function Choose_Role({navigation}: any) {
   const [press, setPress] = useState(false);
@@ -27,10 +28,14 @@ export default function Choose_Role({navigation}: any) {
     }
   };
 
+  const onBtnPress=()=>{
+    navigation.navigate(Names.welcomeScreen)
+  }
+
   return (
     <View style={styles.parentView}>
       <View style={styles.mainView}>
-        <Text style={styles.roleTextStyle}>{localString.chooseRole}</Text>
+        <Text style={styles.roleTextStyle}>{Strings.chooseRole}</Text>
       </View>
 
       <View style={styles.secondViewStyle}>
@@ -40,10 +45,10 @@ export default function Choose_Role({navigation}: any) {
         />
         <View style={styles.lineView}></View>
         <Text style={styles.chooseRoleText}>
-          {localString.settingUpProfile}
+          {Strings.settingUpProfile}
         </Text>
         <Text style={styles.setupProfileText}>
-          {localString.setUpProfileAs}
+          {Strings.setUpProfileAs}
         </Text>
         <View style={styles.workerClientView}>
           <TouchableOpacity activeOpacity={0.6} onPress={pressWorkerImg}>
@@ -82,6 +87,7 @@ export default function Choose_Role({navigation}: any) {
               ? styles.buttonTitleView
               : styles.buttonUnselectedText,
           ]}
+          onPress={onBtnPress}
         />
       </View>
     </View>
