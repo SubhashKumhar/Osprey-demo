@@ -9,6 +9,7 @@ interface Props {
   onChangeText: any;
   value: string;
   secureTextEntry: boolean;
+  maxLength: number;
 }
 
 export default function CustomTextInput(props: Props) {
@@ -22,6 +23,7 @@ export default function CustomTextInput(props: Props) {
       <TextInput
         value={props.value}
         onChangeText={props.onChangeText}
+        maxLength={props.maxLength}
         placeholder={props.placeholder}
         style={[styles.textInput, {width: vw(width)}]}
         secureTextEntry={props.secureTextEntry}
@@ -32,7 +34,7 @@ export default function CustomTextInput(props: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Color.TextInputBackground,
+    backgroundColor: Color.textInputBackground,
     borderRadius: vh(5),
     marginVertical: vh(8),
     width: '100%',

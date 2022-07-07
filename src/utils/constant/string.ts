@@ -20,32 +20,59 @@ const Strings = {
   Phone_Number: 'Phone Number',
   PasswordHeader: 'Welcome back',
   Verify_Number: 'Verify Number',
-  stepOne:'• Step 1 : Basic Info',
+  stepOne: '• Step 1 : Basic Info',
   privacyPolicy: ' Privacy Policy',
   Password_Input: 'Enter Password',
   LoginHeader: 'Welcome to Pivvot,',
-  stepTwo:'• Step 2 : Job Preferences',
+  stepTwo: '• Step 2 : Job Preferences',
   Phone_Number_Input: 'Enter Phone Number',
   termsAndCondition: 'Terms and Conditions',
   OTP_Sent: 'We have sent a four digit OTP to',
+  Job_Preferences: 'Job Preferences',
+  Two: '2',
+  Three: '3',
+  Know_Your_Job_Preferences: 'Please let us know your preferences for your job',
+  Add_Prefered_Job_Category:
+    'Please add your preferred job category along with their respective roles.',
+  Add_Job_Roles: '+ Add job roles ',
+  Add_Skills:
+    'Add some of your skills to the profile in order to get the opportunities accordingly.',
+  Skills: 'Skills',
+  Know_Skills: 'Please let us know about your skills',
+  selectLocation: 'Select locations',
+  provideLocationPreferennce:
+    'Please provide location preferences and time preferences.',
+  location: 'Location',
+  addTimePreferences: '+ Add time preferences ',
+  timePreference: 'Time Preference',
+  saveAndContinue: 'Save & continue',
+  done: 'Done',
+  selectTimePreference: 'Select time preferences',
+  selectlocations: 'Select locations',
+  selectJobRoles: 'Select job roles',
+  selectSkills: 'Select skills',
   incorrectEmail: 'Incorrect email, please retry',
   setUpProfileAs: 'I want to setup my profile as a',
   incorrectName: 'Name should be in correct format',
-  stepThree:'• Step 3 : Credentials and other info',
+  stepThree: '• Step 3 : Credentials and other info',
   LoginSubHeader: 'Enter mobile number to get started',
   signUpOsprey: 'Signup and register yourself on OSPREY',
-  completeProfile:'Complete your profile in just few steps',
+  completeProfile: 'Complete your profile in just few steps',
   PasswordSubHeader: 'Enter your password to login into your account',
   OTP_Header: 'Please enter OTP in order to verify your mobile number',
   creatingAccount: 'By creating an account, you have read and agreed to our ',
-  succesfullyCreatedAccount:'You have successfully created your account with OSPREY',
-  settingUpProfile:'Choose your role for setting up your profile on the application',
-  tellUsYourSelf:'Please tell us about yourself. This step is required to explore jobs',
-  prefrenceForJob:'Please let us know your preferences for jobs. This step required to explore jobs',
-  incorrectPassword:'Password must contain minimum 8 characters, one uppercase, lowercase, number and a special character.',
-  identifyDocuments:'Please provide the identity documents and other info. This step is optional to explore jobs but required to apply to jobs',
-
-
+  succesfullyCreatedAccount:
+    'You have successfully created your account with OSPREY',
+  settingUpProfile:
+    'Choose your role for setting up your profile on the application',
+  tellUsYourSelf:
+    'Please tell us about yourself. This step is required to explore jobs',
+  prefrenceForJob:
+    'Please let us know your preferences for jobs. This step required to explore jobs',
+  incorrectPassword:
+    'Password must contain minimum 8 characters, one uppercase, lowercase, number and a special character.',
+  identifyDocuments:
+    'Please provide the identity documents and other info. This step is optional to explore jobs but required to apply to jobs',
 };
 
 export default Strings;

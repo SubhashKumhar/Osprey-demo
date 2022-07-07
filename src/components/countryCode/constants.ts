@@ -1306,7 +1306,7 @@ export const countryCodes = [
   },
   {
     name: {
-      en: "Korea, Democratic People's Republic of",
+      en: 'Korea',
       ru: 'Корея, Народно-Демократическая Республика',
       pl: 'Korea, Republika Ludowo-Demokratyczna',
       ua: 'Корея, Народно-Демократична Республіка',
@@ -1318,21 +1318,6 @@ export const countryCodes = [
     dial_code: '+850',
     code: 'KP',
     flag: '🇰🇵',
-  },
-  {
-    name: {
-      en: 'Korea, Republic of',
-      ru: 'Республика Корея',
-      pl: 'Republika Korei',
-      ua: 'Корея, Республіка',
-      cz: 'Korea, republika',
-      by: '',
-      pt: 'Coreia do Sul',
-      es: 'Corea, República de',
-    },
-    dial_code: '+82',
-    code: 'KR',
-    flag: '🇰🇷',
   },
   {
     name: {
@@ -1363,21 +1348,6 @@ export const countryCodes = [
     dial_code: '+996',
     code: 'KG',
     flag: '🇰🇬',
-  },
-  {
-    name: {
-      en: "Lao People's Democratic Republic",
-      ru: 'Лаосская Народно-Демократическая Республика',
-      pl: 'Laotańska Republika Ludowo-Demokratyczna',
-      ua: 'Лаоська Народно-Демократична Республіка',
-      cz: 'Laoská lidově demokratická republika',
-      by: '',
-      pt: 'Laos',
-      es: 'República Democrática Popular de Laos',
-    },
-    dial_code: '+856',
-    code: 'LA',
-    flag: '🇱🇦',
   },
   {
     name: {

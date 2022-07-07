@@ -1,6 +1,7 @@
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {vw, vh} from '../utils/dimensions';
+import Fonts from '../utils/constant/fonts';
 
 interface propInterface {
   textColor: string;
@@ -30,7 +31,7 @@ export default function CustomButton(props: propInterface) {
 }
 const styles = StyleSheet.create({
   signInWithEmail: {
-    height: vh(56),
+    height: vh(42),
     marginTop: vh(16),
     borderRadius: 8,
     paddingHorizontal: vw(24),
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontSize: vw(17),
-    fontWeight: '500',
+    fontFamily: Fonts.Lato_Heavy,
     textAlign: 'center',
   },
 });

@@ -3,18 +3,18 @@ import React from 'react';
 import Login from '../screens/auth/login';
 import OTP from '../screens/auth/otp';
 import Password from '../screens/auth/Password';
-import Names from '../utils/constant/componentNameStrings';
+import Names from '../utils/constant/componentNames';
 import SignUp from '../screens/signup';
 import Choose_Role from '../screens/choose_role';
 import WelcomeScreen from '../screens/welcome/stepone/welcomeScreen';
 
 const AuthStacks = createNativeStackNavigator();
+
 export default function AuthStack() {
   return (
     <AuthStacks.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={Names.signUp}
-    >
+      initialRouteName={Names.signUp}>
       <AuthStacks.Screen name={Names.Login} component={Login} />
       <AuthStacks.Screen name={Names.Password} component={Password} />
       <AuthStacks.Screen name={Names.OTP} component={OTP} />

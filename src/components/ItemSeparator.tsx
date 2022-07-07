@@ -8,7 +8,7 @@ export default function ItemSeparator() {
 }
 const styles = StyleSheet.create({
   lineSeparator: {
-    backgroundColor: Color.Grey,
+    backgroundColor: Color.grey,
     height: vh(2),
     opacity: 0.1,
   },

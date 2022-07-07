@@ -1,12 +1,16 @@
 const Color = {
-  Grey: 'grey',
-  White: 'white',
-  Black: 'black',
-  Orange: '#FF9800',
-  Cyan_Blue: '#2474FF',
-  Light_SkyBlue: '#d8e6ff',
-  Cyan_Blue_Light: '#71a5ff',
-  TextInputBackground: 'rgba(36, 116, 255, 0.05)',
+  white: 'white',
+  cyanBlue: '#2474FF',
+  cyanBlueLight: '#F4F8FF',
+  textInputBackground: 'rgba(36, 116, 255, 0.05)',
+  lightSkyBlue: '#d8e6ff',
+  black: '#231E1E',
+  grey: 'grey',
+  orange: '#FF9800',
+  lightGrey: '#DBE2EA',
+  lightText: '#333333',
+  darkTextInputColor: '#EBF1FC',
+  lineSeparator: '#EEEEF4',
 };
 
 export default Color;
