@@ -1,6 +1,6 @@
 import {StyleSheet, TextInput, View} from 'react-native';
 import React from 'react';
-import {vw, vh} from '../utils/Dimension';
+import {vw, vh} from '../utils/dimensions';
 import Color from '../utils/constant/colors';
 
 interface Props {

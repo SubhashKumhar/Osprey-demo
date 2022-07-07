@@ -7,9 +7,9 @@ export const DesignHeight = 814;
 export const DesignWidth = 375;
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 // It is based on the screen width of your design layouts e.g Height 600 x Width 375
-const scale = SCREEN_WIDTH / 390;
+const scale = SCREEN_WIDTH / 375;
 
-export function normalize(size: any) {
+export function normalize(size: number) {
   return PixelRatio.roundToNearestPixel(size * scale);
 }
 
