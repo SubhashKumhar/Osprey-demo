@@ -14,7 +14,7 @@
     "@react-navigation/native-stack": "^6.6.2",
     "axios": "^0.27.2",
     "react": "18.0.0",
-    "react-native": "0.69.0",
+    "react-native": "0.69.1",
     "react-native-background-timer": "^2.4.1",
     "react-native-dashed-line": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
