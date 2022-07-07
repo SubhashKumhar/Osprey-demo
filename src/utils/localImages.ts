@@ -7,6 +7,7 @@ export default {
     businessClient: require('../assets/images/business_client.png'),
     leftArrow: require('../assets/images/arrow-left(non-optimized).png'),
     staffWorker: require('../assets/images/staff_worker_unselected.png'),
+    confirmationCheck:require('../assets/images/ConfirmationCheckIcon.png'),
     staffWorkerSelected: require('../assets/images/staff_worker_selected.png'),
     businessClientSelected: require('../assets/images/Business_Client_Selected.png'),
 };

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {normalize, vh, vw} from '../../utils/dimensions';
+import { vh,vw } from '../../utils/dimensions';
 
 const styles = StyleSheet.create({
   parentView: {

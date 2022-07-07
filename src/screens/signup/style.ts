@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {normalize,vh,vw} from '../../utils/dimensions';
-import colors from '../../utils/colors';
+import Color from '../../utils/constant/colors';
 
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: Color.White,
   },
   topHeaderView: {
     height: vh(44),
@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 3,
-    borderBottomColor: colors.whiteSmoke,
-    backgroundColor: colors.white,
+    borderBottomColor: '#f3f3f3',
+    backgroundColor: Color.White,
   },
   headerText: {
     fontSize: 16,
@@ -32,19 +32,19 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: vh(16),
     marginTop: vh(20),
-    color: colors.black,
+    color: Color.Black,
   },
   FirstNameText: {
     lineHeight: vh(24),
     fontWeight: '400',
     fontSize: vh(14),
     marginTop: vh(32),
-    color: colors.black,
+    color: Color.Black,
   },
   scrollViewStyle: {
     paddingHorizontal: vw(16),
     paddingBottom: vh(70),
-    backgroundColor: colors.white,
+    backgroundColor: Color.White,
   },
   astrickColor: {
     color: 'red',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: vh(14),
     marginTop: vh(24),
-    color: colors.black,
+    color: Color.Black,
   },
   optionalTextColor: {
     color: '#858585',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     height: vh(135),
     marginTop: vh(4),
     borderTopWidth: vh(5),
-    borderTopColor: colors.whiteSmoke,
+    borderTopColor: '#f3f3f3',
   },
   bottomTextView: {
     height: vh(36),
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonTitleView: {
-    color: colors.white,
+    color: Color.White,
     fontWeight: '600',
   },
   phoneTextViewStyle: {
@@ -126,6 +126,10 @@ const styles = StyleSheet.create({
     width: vw(279),
     height: vh(42),
     borderRadius:4
+  },
+  eyeIconStyle:{
+    height:vh(30),
+    width:vh(30)
   }
 
 });
