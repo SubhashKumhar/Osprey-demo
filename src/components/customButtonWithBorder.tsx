@@ -1,6 +1,7 @@
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {vw, vh} from '../utils/Dimension';
+import Fonts from '../utils/constant/fonts';
 
 interface propInterface {
   textColor: string;
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: vw(17),
-    fontWeight: '500',
+    fontFamily: Fonts.Lato_Heavy,
     textAlign: 'center',
   },
 });

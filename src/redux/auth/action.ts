@@ -1,6 +1,28 @@
-const storePhoneNumber = (payload: any) => {
-  return (dispatch: (arg0: {type: string; payload: any}) => void) => {
-    dispatch({type: 'Store_PhoneNumber', payload: payload});
+import {validatePhoneNumber} from '../../services/api/apiCall';
+
+const storeLoginData = (
+  payload: any,
+  successCallback: Function,
+  failureCallback: Function,
+) => {
+  return (dispatch: Function) => {
+    validatePhoneNumber(
+      payload,
+      (resp: Object) => {
+        console.log('resp', resp);
+        successCallback(resp);
+        dispatch({type: 'Store_PhoneNumber', payload: payload});
+      },
+      (error: Object) => {
+        failureCallback(error);
+        console.log('error', error);
+      },
+    );
   };
 };
-export {storePhoneNumber};
+const storePassword = (payload: any) => {
+  return (dispatch: Function) => {
+    dispatch({type: 'Store_Password', payload: payload});
+  };
+};
+export {storeLoginData, storePassword};

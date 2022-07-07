@@ -9,7 +9,7 @@ export default function DottedLine() {
     <View>
       <DashedLine
         dashLength={3}
-        dashColor={Color.Grey}
+        dashColor={Color.grey}
         dashStyle={styles.dashLine}
       />
     </View>

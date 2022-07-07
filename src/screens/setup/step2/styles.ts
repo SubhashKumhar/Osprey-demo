@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
 import Color from '../../../utils/constant/colors';
+import Fonts from '../../../utils/constant/fonts';
 import {vh, vw} from '../../../utils/Dimension';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
   },
   header: {
     flexDirection: 'row',
@@ -22,9 +23,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: vw(18),
-    fontWeight: '700',
+    fontFamily: Fonts.Lato_Bold,
     marginLeft: vw(8),
-    color: Color.Black,
+    color: Color.black,
   },
   stepView: {
     flexDirection: 'row',
@@ -35,21 +36,21 @@ const styles = StyleSheet.create({
   stepLine: {
     width: vw(80),
     marginHorizontal: vw(4),
-    backgroundColor: Color.Grey,
-    opacity: 0.2,
+    backgroundColor: Color.grey,
+    opacity: 0.5,
     height: vh(1),
   },
   selectedStep: {
     height: vh(24),
     width: vh(24),
-    backgroundColor: Color.Cyan_Blue,
+    backgroundColor: Color.cyanBlue,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: vh(12),
   },
   stepText: {
     fontSize: vw(12),
-    color: Color.Black,
+    color: Color.black,
   },
   subHeader: {
     marginVertical: vh(8),
@@ -57,9 +58,9 @@ const styles = StyleSheet.create({
   },
   subHeaderText: {
     fontSize: vw(15),
-    fontWeight: '600',
+    fontFamily: Fonts.Lato_Heavy,
     marginBottom: vh(6),
-    color: Color.Black,
+    color: Color.black,
   },
   jobCategory: {
     marginHorizontal: vw(16),
@@ -67,8 +68,8 @@ const styles = StyleSheet.create({
   },
   jobCategoryText: {
     fontSize: vw(14),
-    fontFamily: 'Lato-Bold',
-    color: Color.Black,
+    fontFamily: Fonts.Lato_Medium,
+    color: Color.black,
     lineHeight: vw(24),
   },
   skillHeaderText: {
@@ -77,21 +78,101 @@ const styles = StyleSheet.create({
   },
   skillContainer: {
     marginHorizontal: vw(16),
+    marginVertical: vh(12),
   },
   skillTitle: {
     fontSize: vw(14),
+    fontFamily: Fonts.Lato_Medium,
     lineHeight: vh(16.8),
     marginTop: vh(16),
   },
   addSkillButton: {
-    backgroundColor: Color.Light_SkyBlue,
     height: vh(42),
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   addSkillButtonText: {
     fontSize: vw(16),
+    fontFamily: Fonts.Lato_Medium,
     lineHeight: vh(26),
+    color: Color.lightText,
+    opacity: 0.5,
+  },
+  arrow: {
+    height: vh(24),
+    width: vw(24),
+    tintColor: Color.cyanBlue,
+  },
+  contiueButton: {
+    marginHorizontal: vw(16),
+  },
+  modal: {
+    margin: 0,
+  },
+  itemText: {
+    fontSize: vw(14),
+    fontFamily: Fonts.Lato_Bold,
+    lineHeight: vh(16.8),
+  },
+  selectedJobRoles: {
+    flexDirection: 'row',
+    marginHorizontal: vw(8),
+    marginVertical: vh(5),
+  },
+  deleteButtonView: {
+    height: vh(17),
+    width: vw(17),
+    position: 'absolute',
+    right: 0,
+  },
+  deleteButton: {
+    height: '100%',
+    width: '100%',
+  },
+  addSkillView: {
+    backgroundColor: Color.cyanBlueLight,
+    borderRadius: vw(5),
+    paddingHorizontal: vw(9),
+    borderWidth: vh(1),
+    borderColor: Color.cyanBlue,
+    marginVertical: vh(10),
+  },
+  selectedLocations: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: vw(8),
+    paddingHorizontal: vw(8),
+    backgroundColor: Color.darkTextInputColor,
+    height: vh(32),
+    borderRadius: vw(4),
+    marginTop: vh(8),
+  },
+  locationText: {
+    fontSize: vw(14),
+    lineHeight: vh(22),
+    color: Color.cyanBlue,
+    fontFamily: Fonts.Lato_Bold,
+  },
+  deleteLocationButtonView: {
+    height: vh(16),
+    width: vw(16),
+    backgroundColor: Color.cyanBlue,
+    borderRadius: vh(10),
+    overflow: 'hidden',
+    marginLeft: vw(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  deleteLocationButton: {
+    height: '50%',
+    width: '50%',
+    tintColor: Color.cyanBlueLight,
+  },
+  innerLocationView: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingVertical: vw(8),
   },
 });
 export default styles;

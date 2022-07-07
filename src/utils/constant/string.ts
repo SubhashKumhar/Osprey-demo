@@ -28,6 +28,19 @@ const Strings = {
     'Add some of your skills to the profile in order to get the opportunities accordingly.',
   Skills: 'Skills',
   Know_Skills: 'Please let us know about your skills',
+  selectLocation: 'Select locations',
+  provideLocationPreferennce:
+    'Please provide location preferences and time preferences.',
+  location: 'Location',
+  addTimePreferences: '+ Add time preferences ',
+  timePreference: 'Time Preference',
+  astrick: '*',
+  saveAndContinue: 'Save & continue',
+  done: 'Done',
+  selectTimePreference: 'Select time preferences',
+  selectlocations: 'Select locations',
+  selectJobRoles: 'Select job roles',
+  selectSkills: 'Select skills',
 };
 
 export default Strings;

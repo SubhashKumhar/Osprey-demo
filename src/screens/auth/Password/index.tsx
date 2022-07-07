@@ -7,20 +7,26 @@ import Color from '../../../utils/constant/colors';
 import Strings from '../../../utils/constant/string';
 import TopAuthHeader from '../components/topAuthHeader';
 import styles from '../styles';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import LocalImages from '../../../utils/constant/localImages';
 import {useNavigation} from '@react-navigation/native';
 import ComponentNames from '../../../utils/constant/componentNames';
+import {storePassword} from '../../../redux/auth/action';
 
 export default function Password() {
   const navigation = useNavigation<any>();
   const [password, setPassword] = React.useState<string>('');
   const [showPassword, setShowPassword] = useState(true);
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
+  const authDetails = useSelector((state: any) => state.AuthReducer);
+  const dispatch = useDispatch<any>();
   const onChangeText = (text: any) => {
     setPassword(text);
   };
   const onLoginPress = () => {
+    let payload = {
+      password: password,
+    };
+    dispatch(storePassword(payload));
     navigation.navigate(ComponentNames.OTP);
   };
   const validatePassword = () => {
@@ -43,7 +49,10 @@ export default function Password() {
             <Text style={styles.headerText}>{Strings.PasswordHeader}</Text>
           </View>
           <Text style={styles.subheaderText}>{Strings.PasswordSubHeader}</Text>
-          <Text style={styles.number}>{phoneNumber}</Text>
+          <Text
+            style={
+              styles.number
+            }>{`${authDetails.countryCode} - ${authDetails.phoneNumber}`}</Text>
         </View>
         <Text style={styles.textInputHeader}>{Strings.Phone_Number}</Text>
         <View style={styles.textInputView}>
@@ -53,6 +62,7 @@ export default function Password() {
             placeholder={Strings.Password_Input}
             onChangeText={onChangeText}
             width={340}
+            maxLength={25}
           />
           <TouchableOpacity
             activeOpacity={0.8}
@@ -60,7 +70,7 @@ export default function Password() {
             onPress={onEyePress}>
             <Image
               source={
-                !showPassword ? LocalImages.EyeOpen : LocalImages.EyeClosed
+                !showPassword ? LocalImages.eyeOpen : LocalImages.eyeClosed
               }
               resizeMode={'contain'}
               style={styles.eyeImg}
@@ -70,9 +80,9 @@ export default function Password() {
         <View style={styles.buttonContainer}>
           <CustomButton
             text={Strings.Login}
-            textColor={Color.White}
-            bgColor={Color.Cyan_Blue}
-            disableColor={Color.Cyan_Blue_Light}
+            textColor={Color.white}
+            bgColor={Color.cyanBlue}
+            disableColor={Color.lightGrey}
             onPressButton={onLoginPress}
             disable={validatePassword()}
           />

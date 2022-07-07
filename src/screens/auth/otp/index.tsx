@@ -142,7 +142,7 @@ export default function OTP() {
         <View style={styles.mainView}>
           <View style={styles.otpHeaderView}>
             <Image
-              source={LocalImages.OTP_Box}
+              source={LocalImages.otpBox}
               style={styles.otpBoxImg}
               resizeMode={'contain'}
             />
@@ -240,16 +240,14 @@ export default function OTP() {
                 style={[
                   styles.resendBtn,
                   {
-                    color: enableReset
-                      ? Color.Cyan_Blue
-                      : Color.Cyan_Blue_Light,
+                    color: enableReset ? Color.cyanBlue : Color.grey,
                   },
                 ]}>
                 {Strings.Resend_Code}
               </Text>
             </TouchableOpacity>
             <View style={styles.timer}>
-              <Image source={LocalImages.ClockIcon} style={styles.clockIcon} />
+              <Image source={LocalImages.clockIcon} style={styles.clockIcon} />
               <Text style={styles.clockText}>
                 {clockify().displayMinute + ':' + clockify().displaySeconds}
               </Text>
@@ -261,11 +259,11 @@ export default function OTP() {
           <View style={styles.button}>
             <CustomButton
               text={Strings.Submit_OTP}
-              textColor={Color.White}
-              bgColor={Color.Cyan_Blue}
+              textColor={Color.white}
+              bgColor={Color.cyanBlue}
               onPressButton={onContinuePress}
               disable={!(otp.length === 4) ? true : false}
-              disableColor={Color.Cyan_Blue_Light}
+              disableColor={Color.cyanBlueLight}
             />
           </View>
         </View>
