@@ -11,14 +11,17 @@ import localImages from '../../utils/localImages';
 import Input from '../../component/input/input';
 import Button from '../../component/button';
 import styles from './style';
-import { passwordTest,emailTest,firstNameTest } from '../../utils/constant/validation';
-import Names from '../../utils/constant/componentNameStrings';
+import {
+  passwordTest,
+  emailTest,
+  firstNameTest,
+} from '../../utils/constant/validation';
+import Names from '../../utils/constant/componentNames';
 import Strings from '../../utils/constant/string';
-import { useDispatch } from 'react-redux';
-
+import {useDispatch} from 'react-redux';
 
 export default function SignUp({navigation}: any) {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const [err, setErr] = useState(false);
   const [errText, setErrText] = useState('');
@@ -42,7 +45,7 @@ export default function SignUp({navigation}: any) {
       setErr(true);
       setErrText(Strings.incorrectPassword);
     } else {
-      dispatch({type:'UserData',payload:details})
+      dispatch({type: 'UserData', payload: details});
       navigation.navigate(Names.role);
       setErr(false);
     }

@@ -1,6 +1,6 @@
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
-import {vw, vh} from '../utils/Dimension';
+import {vw, vh} from '../utils/dimensions';
 import Fonts from '../utils/constant/fonts';
 
 interface propInterface {

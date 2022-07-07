@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Strings from '../../../utils/constant/string';
-import {vh, vw} from '../../../utils/Dimension';
+import {vh, vw} from '../../../utils/dimensions';
 import LocalImages from '../../../utils/constant/localImages';
 import Color from '../../../utils/constant/colors';
 import CustomButton from '../../../components/customButton';

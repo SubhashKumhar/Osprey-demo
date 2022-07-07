@@ -12,8 +12,7 @@ export default function MainStack() {
     <NavigationContainer>
       <Stacks.Navigator
         screenOptions={{headerShown: false}}
-        // initialRouteName={Names.SetupStack}
-      >
+        initialRouteName={Names.SetupStack}>
         <Stacks.Screen name={Names.AuthStack} component={AuthStack} />
         <Stacks.Screen name={Names.SetupStack} component={SetupStack} />
       </Stacks.Navigator>

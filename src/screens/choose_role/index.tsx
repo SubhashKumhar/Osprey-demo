@@ -1,10 +1,10 @@
-import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import localImages from '../../utils/localImages';
 import Button from '../../component/button';
 import styles from './style';
 import Strings from '../../utils/constant/string';
-import Names from '../../utils/constant/componentNameStrings';
+import Names from '../../utils/constant/componentNames';
 
 export default function Choose_Role({navigation}: any) {
   const [press, setPress] = useState(false);
@@ -28,9 +28,9 @@ export default function Choose_Role({navigation}: any) {
     }
   };
 
-  const onBtnPress=()=>{
-    navigation.navigate(Names.welcomeScreen)
-  }
+  const onBtnPress = () => {
+    navigation.navigate(Names.welcomeScreen);
+  };
 
   return (
     <View style={styles.parentView}>
@@ -43,13 +43,9 @@ export default function Choose_Role({navigation}: any) {
           source={localImages.profileTypeImg}
           style={styles.profileTypeStyle}
         />
-        <View style={styles.lineView}></View>
-        <Text style={styles.chooseRoleText}>
-          {Strings.settingUpProfile}
-        </Text>
-        <Text style={styles.setupProfileText}>
-          {Strings.setUpProfileAs}
-        </Text>
+        <View style={styles.lineView} />
+        <Text style={styles.chooseRoleText}>{Strings.settingUpProfile}</Text>
+        <Text style={styles.setupProfileText}>{Strings.setUpProfileAs}</Text>
         <View style={styles.workerClientView}>
           <TouchableOpacity activeOpacity={0.6} onPress={pressWorkerImg}>
             <Image
