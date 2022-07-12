@@ -11,17 +11,29 @@ import localImages from '../../utils/localImages';
 import Input from '../../component/input/input';
 import Button from '../../component/button';
 import styles from './style';
-import { passwordTest,emailTest,firstNameTest } from '../../utils/constant/validation';
+import {
+  passwordTest,
+  emailTest,
+  firstNameTest,
+} from '../../utils/constant/validation';
 import Names from '../../utils/constant/componentNameStrings';
 import Strings from '../../utils/constant/string';
-import { useDispatch } from 'react-redux';
-
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function SignUp({navigation}: any) {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+
+  /**
+   * @state change state of error
+   */
 
   const [err, setErr] = useState(false);
   const [errText, setErrText] = useState('');
+
+  /**
+   * @details state of all the input data
+   */
+
   const [details, setDetails] = useState({
     fName: '',
     mName: '',
@@ -29,8 +41,15 @@ export default function SignUp({navigation}: any) {
     email: '',
     password: '',
   });
+
+  /**
+   * @eye state of Password eye
+   */
   const [eyePress, setEyePress] = useState(false);
 
+  /**
+   * @function this function check the firstName,email and password with regex
+   */
   const onProceedPress2 = () => {
     if (!firstNameTest(details.fName)) {
       setErr(true);
@@ -42,16 +61,23 @@ export default function SignUp({navigation}: any) {
       setErr(true);
       setErrText(Strings.incorrectPassword);
     } else {
-      dispatch({type:'UserData',payload:details})
-      navigation.navigate(Names.role);
+      dispatch({type: 'UserData', payload: details});
+      navigation.navigate(Names.OTP);
       setErr(false);
     }
   };
 
+  /**
+   * @function this function change the state of the eye
+   */
   const onEyePress = () => {
     setEyePress(!eyePress);
   };
 
+  /**
+   *
+   * @returns change the disability of the button
+   */
   const isDisable = () => {
     if (
       details.fName.length > 0 &&
@@ -64,6 +90,9 @@ export default function SignUp({navigation}: any) {
       return true;
     }
   };
+
+  const {phoneNumber} = useSelector((state:any) => state.AuthReducer);
+  console.log('dsgfhgjhkj', phoneNumber);
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -128,10 +157,15 @@ export default function SignUp({navigation}: any) {
         </Text>
         <View style={styles.phoneTextViewStyle}>
           <View style={styles.countryCodeView}>
-            <Text style={styles.countryCodeText}>{'+91'}</Text>
+            <Text style={styles.countryCodeText}>
+              {phoneNumber.split('-')[0]}
+            </Text>
           </View>
           <View style={styles.phoneView}>
-            <Input place={'Phone'} placeholderColor="#333333" />
+            <Text
+              style={styles.phNumberTextStyle}>
+              {phoneNumber.split('-')[1]}
+            </Text>
           </View>
         </View>
 

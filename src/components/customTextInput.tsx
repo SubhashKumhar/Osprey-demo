@@ -23,7 +23,7 @@ export default function CustomTextInput(props: Props) {
         value={props.value}
         onChangeText={props.onChangeText}
         placeholder={props.placeholder}
-        style={[styles.textInput, {width: vw(width)}]}
+        style={[styles.textInput, {width: vw(width-80)}]}
         secureTextEntry={props.secureTextEntry}
       />
     </View>

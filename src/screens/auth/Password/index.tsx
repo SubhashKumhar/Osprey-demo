@@ -21,7 +21,7 @@ export default function Password() {
     setPassword(text);
   };
   const onLoginPress = () => {
-    navigation.navigate(ComponentNames.OTP);
+    navigation.navigate(ComponentNames.signUp);
   };
   const validatePassword = () => {
     const reg =
@@ -45,7 +45,7 @@ export default function Password() {
           <Text style={styles.subheaderText}>{Strings.PasswordSubHeader}</Text>
           <Text style={styles.number}>{phoneNumber}</Text>
         </View>
-        <Text style={styles.textInputHeader}>{Strings.Phone_Number}</Text>
+        <Text style={styles.textInputHeader}>{Strings.password}</Text>
         <View style={styles.textInputView}>
           <CustomTextInput
             value={password}

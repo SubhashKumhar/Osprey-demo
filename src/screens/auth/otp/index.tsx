@@ -18,8 +18,9 @@ import {useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import {Alert} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
+import ComponentNames from '../../../utils/constant/componentNameStrings';
 
-export default function OTP() {
+export default function OTP({navigation}:any) {
   const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
   const [otp, setOtp] = useState('');
   const textInput1 = useRef<any>();
@@ -72,7 +73,7 @@ export default function OTP() {
   };
 
   const onContinuePress = () => {
-    Alert.alert('OTP SUBMITTED');
+    navigation.navigate(ComponentNames.role)
   };
 
   const first = (text: string) => {

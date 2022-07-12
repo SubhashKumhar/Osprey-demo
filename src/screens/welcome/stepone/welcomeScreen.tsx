@@ -14,8 +14,14 @@ import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import Button from '../../../component/button';
+import ComponentNames from '../../../utils/constant/componentNameStrings';
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({navigation}:any) {
+
+  /**
+   * @arr Array of the three Steps
+   */
+
   const arr = [
     {
       header: Strings.stepOne,
@@ -30,7 +36,12 @@ export default function WelcomeScreen() {
       subHeader: Strings.identifyDocuments,
     },
   ];
+  
   const {data} = useSelector(store => store.SignUpReducer);
+  const onBtnPress = ()=>{
+    navigation.navigate(ComponentNames.basicInfo)
+    
+  }
   return (
     <>
       <View style={styles.mainView}>
@@ -76,6 +87,7 @@ export default function WelcomeScreen() {
         title='Continue with profile setup'
         customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
+          onPress={onBtnPress}
         />
 
       </View>

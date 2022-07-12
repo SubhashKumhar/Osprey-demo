@@ -3,8 +3,8 @@ import React from 'react';
 import Color from '../utils/constant/colors';
 import {vh} from '../utils/dimensions';
 
-export default function ItemSeparator() {
-  return <View style={styles.lineSeparator} />;
+export default function ItemSeparator({lineWidth}:any) {
+  return <View style={[styles.lineSeparator,lineWidth]} />;
 }
 const styles = StyleSheet.create({
   lineSeparator: {

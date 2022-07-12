@@ -1,6 +1,6 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import React from 'react';
-import { normalize } from '../../utils/dimensions';
+import { vh,vw } from '../../utils/dimensions';
 
 export default function Input({
   place,
@@ -34,10 +34,10 @@ export default function Input({
 
 const styles = StyleSheet.create({
   textInputStyle: {
-        height:normalize(19),
+        height:vh(19),
         width:'80%',
-        fontSize:normalize(16),
-        lineHeight:normalize(19),
+        fontSize:vh(16),
+        lineHeight:vh(19),
         fontWeight:'400',
   },
 });
