@@ -1,6 +1,6 @@
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../../utils/Dimension';
+import {vh, vw} from '../../../utils/dimensions';
 import LocalImages from '../../../utils/constant/localImages';
 import Strings from '../../../utils/constant/string';
 import Color from '../../../utils/constant/colors';
@@ -9,7 +9,7 @@ export default function TopAuthHeader() {
   return (
     <View style={styles.topContainer}>
       <Image
-        source={LocalImages.OspreyQRLogo}
+        source={LocalImages.ospreyQRLogo}
         style={styles.logoImg}
         resizeMode={'contain'}
       />
@@ -18,12 +18,12 @@ export default function TopAuthHeader() {
       <View style={[styles.circle, styles.bottomCircle]} />
       <TouchableOpacity style={styles.topFlag} activeOpacity={0.8}>
         <Image
-          source={LocalImages.India}
+          source={LocalImages.india}
           style={styles.flagImg}
           resizeMode={'contain'}
         />
         <Image
-          source={LocalImages.Chevron_Down_Arrow}
+          source={LocalImages.arrowDown}
           style={styles.dropDownButton}
           resizeMode={'contain'}
         />
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     height: vh(442),
-    backgroundColor: Color.Cyan_Blue,
+    backgroundColor: Color.cyanBlue,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   logoText: {
     fontSize: vh(20),
     fontWeight: '700',
-    color: Color.White,
+    color: Color.white,
     marginTop: vh(29.4),
   },
   circle: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     width: vh(212),
     borderRadius: vh(200),
     borderWidth: vh(25),
-    borderWidthColor: Color.White,
+    borderWidthColor: Color.white,
     opacity: 0.05,
     position: 'absolute',
   },
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
   dropDownButton: {
     height: vh(30),
     width: vw(20),
-    tintColor: 'white',
+    tintColor: Color.white,
   },
 });

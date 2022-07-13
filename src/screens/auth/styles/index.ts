@@ -1,4 +1,4 @@
-import {vh, vw} from '../../../utils/Dimension';
+import {vh, vw} from '../../../utils/dimensions';
 import {StyleSheet} from 'react-native';
 import Color from '../../../utils/constant/colors';
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   countryCodeView: {
-    backgroundColor: Color.TextInputBackground,
+    backgroundColor: Color.textInputBackground,
     borderRadius: vh(5),
     marginVertical: vh(8),
     height: vh(48),
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     marginTop: vh(8),
     fontSize: vw(16),
     fontWeight: '700',
-    color: Color.Cyan_Blue,
+    color: Color.cyanBlue,
   },
   headerTopText: {
     flexDirection: 'row',
