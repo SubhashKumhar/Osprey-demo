@@ -58,22 +58,6 @@ export default function SkillModal({...props}) {
             setSelected([...selected, item]);
           }
         }}>
-        {/* <Image
-           source={
-             selected.length !== 0
-               ? selected.findIndex(
-                   (element: any) =>
-                     element[Object.keys(element)[0]] ===
-                       item[Object.keys(item)[0]] &&
-                     element[Object.keys(element)[1]] ===
-                       item[Object.keys(item)[1]],
-                 ) !== -1
-                 ? LocalImages.tickedBox
-                 : LocalImages.emptyBox
-               : LocalImages.emptyBox
-           }
-           style={styles.tickBox}
-         /> */}
         <Text style={styles.itemText}>{item[Object.keys(item)[0]]}</Text>
         <Text
           style={[styles.itemText, {fontFamily: Fonts.Lato_Regular}]}>{` - ${

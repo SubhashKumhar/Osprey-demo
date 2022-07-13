@@ -4,13 +4,14 @@ import {vw, vh} from '../utils/dimensions';
 import Fonts from '../utils/constant/fonts';
 
 interface propInterface {
-  textColor: string;
-  bgColor: string;
-  text: string;
+  textColor?: string;
+  bgColor?: string;
+  text?: string;
   onPressButton: Function;
-  disable: boolean;
-  disableColor: any;
-  borderColor: string;
+  disable?: boolean;
+  disableColor?: any;
+  borderColor?: string;
+  width?: number;
 }
 
 export default function CustomButtonWithBorder(props: propInterface) {
@@ -21,6 +22,7 @@ export default function CustomButtonWithBorder(props: propInterface) {
     onPressButton,
     disable = false,
     borderColor,
+    width,
   } = props;
   return (
     <TouchableOpacity
@@ -30,6 +32,7 @@ export default function CustomButtonWithBorder(props: propInterface) {
           backgroundColor: disable ? props?.disableColor : bgColor,
           borderColor: borderColor,
         },
+        {width: width},
       ]}
       activeOpacity={0.8}
       onPress={() => onPressButton()}
@@ -43,12 +46,12 @@ const styles = StyleSheet.create({
     height: vh(42),
     marginTop: vh(16),
     borderRadius: 8,
-    paddingHorizontal: vw(24),
     justifyContent: 'center',
     borderWidth: vh(1),
   },
   buttonText: {
-    fontSize: vw(17),
+    fontSize: vw(14),
+    lineHeight: vh(30),
     fontFamily: Fonts.Lato_Heavy,
     textAlign: 'center',
   },

@@ -11,7 +11,7 @@ const storeLocation = (payload: any) => {
 };
 const storeSkills = (payload: any) => {
   return (dispatch: Function) => {
-    dispatch({type: 'Store_Location', payload: payload});
+    dispatch({type: 'Store_Skills', payload: payload});
   };
 };
 const storeTimePreference = (payload: any) => {

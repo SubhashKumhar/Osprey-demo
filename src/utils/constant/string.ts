@@ -1,5 +1,8 @@
 const Strings = {
+  Two: '2',
+  Three: '3',
   astrick: ' *',
+  skip: 'Skip',
   email: 'Email',
   Close: 'Close',
   Login: 'Login',
@@ -23,6 +26,7 @@ const Strings = {
   middleName: 'Middle name',
   chooseRole: 'Choose role',
   Resend_Code: 'Resend Code',
+  otherInfo: 'Other info',
   signUp: 'Signup & register',
   Phone_Number: 'Phone Number',
   PasswordHeader: 'Welcome back',
@@ -36,9 +40,8 @@ const Strings = {
   Phone_Number_Input: 'Enter Phone Number',
   termsAndCondition: 'Terms and Conditions',
   OTP_Sent: 'We have sent a four digit OTP to',
+  exploreJobsNow: 'Explore jobs now ?',
   Job_Preferences: 'Job Preferences',
-  Two: '2',
-  Three: '3',
   Know_Your_Job_Preferences: 'Please let us know your preferences for your job',
   Add_Prefered_Job_Category:
     'Please add your preferred job category along with their respective roles.',
@@ -55,11 +58,18 @@ const Strings = {
   timePreference: 'Time Preference',
   saveAndContinue: 'Save & continue',
   done: 'Done',
+  completeProfileButton: 'Complete profile',
   selectTimePreference: 'Select time preferences',
   selectlocations: 'Select locations',
   selectJobRoles: 'Select job roles',
   selectSkills: 'Select skills',
   incorrectEmail: 'Incorrect email, please retry',
+  requirementsToBuildYourProfile: 'Requirements to build your profile',
+  identification: '• Identification',
+  language: '• Language',
+  certification: '• Certification',
+  resume: '• Resume',
+  skipAndExplore: 'Skip & explore jobs',
   setUpProfileAs: 'I want to setup my profile as a',
   incorrectName: 'Name should be in correct format',
   stepThree: '• Step 3 : Credentials and other info',
@@ -83,6 +93,10 @@ const Strings = {
     'Password must contain minimum 8 characters, one uppercase, lowercase, number and a special character.',
   identifyDocuments:
     'Please provide the identity documents and other info. This step is optional to explore jobs but required to apply to jobs',
+  congratulationLines:
+    'Congratulations! You have completed the first 2 stages of your Profile Setup. Now you can start exploring jobs. ',
+  youCanComplete:
+    'You can complete the final stage at a later time before you apply to jobs. ',
 };
 
 export default Strings;

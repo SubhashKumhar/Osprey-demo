@@ -19,12 +19,15 @@ import CustomButtonWithBorder from '../../../components/customButtonWithBorder';
 import CustomButton from '../../../components/customButton';
 import ModalWithTick from '../../../components/modalWithSearch';
 import Modal from 'react-native-modal';
-import {useDispatch, useSelector} from 'react-redux';
-import Fonts from '../../../utils/constant/fonts';
-import {storeJobRoles, storeLocation} from '../../../redux/setup/action';
+import {useSelector} from 'react-redux';
 import LocalData from '../../../utils/constant/localData';
 import TimePreferenceModal from '../components/timePreferenceModal';
 import SkillModal from '../components/skillModal';
+import ComponentNames from '../../../utils/constant/componentNames';
+import Header from './header';
+import Location from './location';
+import JobRole from './jobRoles';
+import Skills from './skills';
 
 function Step2() {
   const navigation = useNavigation<any>();
@@ -34,46 +37,13 @@ function Step2() {
   const [viewTimeModal, setViewTimeModal] = useState<boolean>(false);
   const [action, setAction] = useState<String>('');
   const [modalTitle, setModalTitle] = useState('');
-  const {jobRoles, location, timePreference} = useSelector(
+  const {timePreference, skills} = useSelector(
     (state: any) => state.SetupReducer,
   );
-  const dispatch = useDispatch<any>();
-  const onBackPress = () => {
-    navigation.goBack();
-  };
 
-  const onAddJobRolesPress = () => {
-    setModalTitle(Strings.selectJobRoles);
-    setModalData(LocalData.jobRoleData);
-    setAction('jobRole');
-    setViewModal(true);
-  };
-
-  const onSkillPress = () => {
-    setModalTitle(Strings.selectSkills);
-    setSkillModal(true);
-  };
   const onEditTimePreference = () => {
     setViewTimeModal(true);
   };
-
-  const onLocationPress = () => {
-    setModalTitle(Strings.selectLocation);
-    setModalData(LocalData.LocationData);
-    setAction('location');
-    setViewModal(true);
-  };
-
-  const onDeleteJobRoles = (index: number) => {
-    jobRoles.splice(index, 1);
-    dispatch(storeJobRoles(jobRoles));
-  };
-
-  const onDeleteLocation = (index: number) => {
-    location.splice(index, 1);
-    dispatch(storeLocation(location));
-  };
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const memoizedValue = useMemo(() => check(), [timePreference]);
 
@@ -114,21 +84,7 @@ function Step2() {
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
-
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.arrowleftContainer}
-          activeOpacity={0.8}
-          onPress={onBackPress}>
-          <Image
-            source={LocalImages.arrowLeft}
-            style={styles.arrowleft}
-            resizeMode={'contain'}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>{Strings.Job_Preferences}</Text>
-      </View>
-      <ItemSeparator />
+      <Header />
       <ScrollView>
         {/* Top Current Step View  */}
 
@@ -160,151 +116,23 @@ function Step2() {
 
         {/* Add Job roles */}
 
-        <View style={styles.jobCategory}>
-          <Text style={styles.jobCategoryText}>
-            {Strings.Add_Prefered_Job_Category}
-          </Text>
-          {jobRoles.map((item: any, index: number) => {
-            return (
-              <View key={index.toString()} style={styles.selectedJobRoles}>
-                <Text style={styles.itemText}>
-                  {item[Object.keys(item)[0]]}
-                </Text>
-                <Text
-                  style={[
-                    styles.itemText,
-                    {fontFamily: Fonts.Lato_Regular},
-                  ]}>{` - ${item[Object.keys(item)[1]]}`}</Text>
-                <TouchableOpacity
-                  style={styles.deleteButtonView}
-                  activeOpacity={0.8}
-                  onPress={() => onDeleteJobRoles(index)}>
-                  <Image
-                    source={LocalImages.delete}
-                    style={styles.deleteButton}
-                    resizeMode={'contain'}
-                  />
-                </TouchableOpacity>
-              </View>
-            );
-          })}
-          <CustomButtonWithBorder
-            text={Strings.Add_Job_Roles}
-            textColor={Color.cyanBlue}
-            bgColor={Color.cyanBlueLight}
-            onPressButton={onAddJobRolesPress}
-            disable={false}
-            disableColor={null}
-            borderColor={Color.cyanBlue}
-          />
-        </View>
-        <View style={styles.dottedLine}>
-          <DottedLine />
-        </View>
+        <JobRole
+          setModalTitle={setModalTitle}
+          setModalData={setModalData}
+          setAction={setAction}
+          setViewModal={setViewModal}
+        />
 
         {/* Skills  */}
-
-        <View style={styles.skillContainer}>
-          <Text style={styles.skillHeaderText}>{Strings.Add_Skills}</Text>
-          <Text style={styles.skillTitle}>{`${Strings.Skills} *`}</Text>
-          <View style={styles.addSkillView}>
-            {location.length !== 0 && (
-              <View style={styles.innerLocationView}>
-                {location.map((item: any, index: number) => {
-                  return (
-                    <View
-                      key={index.toString()}
-                      style={styles.selectedLocations}>
-                      <Text style={styles.locationText}>
-                        {item[Object.keys(item)[0]]}
-                      </Text>
-                      <Text style={styles.locationText}>{` - ${
-                        item[Object.keys(item)[1]]
-                      }`}</Text>
-                      <TouchableOpacity
-                        style={styles.deleteLocationButtonView}
-                        activeOpacity={0.8}
-                        onPress={() => onDeleteLocation(index)}>
-                        <Image
-                          source={LocalImages.cross}
-                          style={styles.deleteLocationButton}
-                          resizeMode={'contain'}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  );
-                })}
-              </View>
-            )}
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={styles.addSkillButton}
-              onPress={onSkillPress}>
-              <Text style={styles.addSkillButtonText}>
-                {Strings.Know_Skills}
-              </Text>
-              <Image
-                source={LocalImages.arrowRight}
-                style={styles.arrow}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-          </View>
-          <DottedLine />
-        </View>
+        <Skills setModalTitle={setModalTitle} setSkillModal={setSkillModal} />
 
         {/* Location */}
-
-        <View style={styles.skillContainer}>
-          <Text style={styles.skillHeaderText}>
-            {Strings.provideLocationPreferennce}
-          </Text>
-          <Text style={styles.skillTitle}>{Strings.location}</Text>
-          <View style={styles.addSkillView}>
-            {location.length !== 0 && (
-              <View style={styles.innerLocationView}>
-                {location.map((item: any, index: number) => {
-                  return (
-                    <View
-                      key={index.toString()}
-                      style={styles.selectedLocations}>
-                      <Text style={styles.locationText}>
-                        {item[Object.keys(item)[0]]}
-                      </Text>
-                      <Text style={styles.locationText}>{` - ${
-                        item[Object.keys(item)[1]]
-                      }`}</Text>
-                      <TouchableOpacity
-                        style={styles.deleteLocationButtonView}
-                        activeOpacity={0.8}
-                        onPress={() => onDeleteLocation(index)}>
-                        <Image
-                          source={LocalImages.cross}
-                          style={styles.deleteLocationButton}
-                          resizeMode={'contain'}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  );
-                })}
-              </View>
-            )}
-            <TouchableOpacity
-              style={styles.addSkillButton}
-              activeOpacity={0.8}
-              onPress={onLocationPress}>
-              <Text style={styles.addSkillButtonText}>
-                {Strings.selectLocation}
-              </Text>
-              <Image
-                source={LocalImages.arrowDown}
-                style={styles.arrow}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <ItemSeparator />
+        <Location
+          setModalTitle={setModalTitle}
+          setModalData={setModalData}
+          setAction={setAction}
+          setViewModal={setViewModal}
+        />
 
         {/* Time Preference */}
 
@@ -403,9 +231,11 @@ function Step2() {
           textColor={Color.cyanBlueLight}
           bgColor={Color.cyanBlue}
           text={Strings.saveAndContinue}
-          onPressButton={() => {}}
-          disable={false}
-          disableColor={undefined}
+          onPressButton={() => {
+            navigation.navigate(ComponentNames.Step3);
+          }}
+          disable={!(memoizedValue && skills.length !== 0)}
+          disableColor={Color.cyanLightBlue}
         />
       </View>
     </SafeAreaView>

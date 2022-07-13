@@ -6,9 +6,9 @@ const LocalData = {
     {type: 'Teacher', job: 'Maths'},
   ],
   SkillData: [
-    {Country: 'Singapore', City: 'City'},
-    {Country: 'India', City: 'Delhi'},
-    {Country: 'India', City: 'UP'},
+    {designation: 'Software', work: 'Trainee'},
+    {designation: 'Software Engineer', work: 'React Native'},
+    {designation: 'Designing', work: 'UI Design'},
   ],
   LocationData: [
     {Country: 'Singapore', City: 'City'},
