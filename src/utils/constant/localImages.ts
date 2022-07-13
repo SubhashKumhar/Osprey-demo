@@ -15,6 +15,10 @@ const LocalImages = {
   tickedBox: require('../../assets/images/checkedCheckbox.png'),
   delete: require('../../assets/images/Delete.png'),
   early: require('../../assets/images/early.png'),
+  anyTimeSelected: require('../../assets/images/any.png'),
+  dayIcon: require('../../assets/images/day.png'),
+  nightIcon: require('../../assets/images/night.png'),
+  editIcon: require('../../assets/images/otp_pencil.png'),
 };
 
 export default LocalImages;

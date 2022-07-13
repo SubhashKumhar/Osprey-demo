@@ -2,7 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Names from '../utils/constant/componentNames';
-import AuthStack from './authStack';
+import AuthStack from './AuthStack';
 import SetupStack from './setupStack';
 
 const Stacks = createNativeStackNavigator();
