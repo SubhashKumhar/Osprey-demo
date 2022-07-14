@@ -2,6 +2,7 @@ const Color = {
   white: 'white',
   cyanBlue: '#2474FF',
   cyanBlueLight: '#F4F8FF',
+  cyanLightBlue: '#DFEBFF',
   textInputBackground: 'rgba(36, 116, 255, 0.05)',
   lightSkyBlue: '#d8e6ff',
   black: '#231E1E',

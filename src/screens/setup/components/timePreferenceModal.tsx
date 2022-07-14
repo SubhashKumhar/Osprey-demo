@@ -13,13 +13,14 @@ import {vh, vw} from '../../../utils/dimensions';
 import LocalImages from '../../../utils/constant/localImages';
 import Color from '../../../utils/constant/colors';
 import CustomButton from '../../../components/customButton';
-import {useDispatch} from 'react-redux';
-import {storeJobRoles, storeLocation} from '../../../redux/setup/action';
+import {useDispatch, useSelector} from 'react-redux';
 import Fonts from '../../../utils/constant/fonts';
 import ItemSeparator from '../../../components/ItemSeparator';
+import {storeTimePreference} from '../../../redux/setup/action';
 
 export default function TimePreferenceModal({...props}) {
-  const [selected, setSelected] = useState<Array<Object>>([]);
+  const {timePreference} = useSelector((state: any) => state.SetupReducer);
+  const [selected, setSelected] = useState<Array<Object>>(timePreference);
   const dispatch = useDispatch<any>();
 
   /**
@@ -28,23 +29,108 @@ export default function TimePreferenceModal({...props}) {
    * @returns
    */
 
-  console.log(props);
   const renderList = ({item}: any) => {
     return (
       <View style={styles.itemContainer}>
-        <Text style={styles.dayText}>{item}</Text>
+        <View style={styles.dayTitleView}>
+          <Text style={styles.dayText}>{item.toUpperCase()}</Text>
+        </View>
         <View style={styles.dayIconCotainer}>
-          <TouchableOpacity style={styles.dayIcon}>
-            <Image source={LocalImages.early} style={styles.dayIconImg} />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.dayIcon}
+            onPress={() => {
+              if (
+                selected[item.toLowerCase()] !== '' &&
+                selected[item.toLowerCase()] === 'Early Shift'
+              ) {
+                selected[item.toLowerCase()] = '';
+              } else {
+                selected[item.toLowerCase()] = 'Early Shift';
+              }
+              setSelected({...selected});
+            }}>
+            <Image
+              source={LocalImages.early}
+              style={
+                selected[item.toLowerCase()] === 'Early Shift'
+                  ? styles.dayIconImg
+                  : [styles.dayIconImg, {tintColor: Color.grey}]
+              }
+              resizeMode={'contain'}
+            />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.dayIcon}>
-            <Image source={LocalImages.early} style={styles.dayIconImg} />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.dayIcon}
+            onPress={() => {
+              if (
+                selected[item.toLowerCase()] !== '' &&
+                selected[item.toLowerCase()] === 'Day Shift'
+              ) {
+                selected[item.toLowerCase()] = '';
+              } else {
+                selected[item.toLowerCase()] = 'Day Shift';
+              }
+              setSelected({...selected});
+            }}>
+            <Image
+              source={LocalImages.dayIcon}
+              style={
+                selected[item.toLowerCase()] === 'Day Shift'
+                  ? styles.dayIconImg
+                  : [styles.dayIconImg, {tintColor: Color.grey}]
+              }
+              resizeMode={'contain'}
+            />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.dayIcon}>
-            <Image source={LocalImages.early} style={styles.dayIconImg} />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.dayIcon}
+            onPress={() => {
+              if (
+                selected[item.toLowerCase()] !== '' &&
+                selected[item.toLowerCase()] === 'Night Shift'
+              ) {
+                selected[item.toLowerCase()] = '';
+              } else {
+                selected[item.toLowerCase()] = 'Night Shift';
+              }
+              setSelected({...selected});
+            }}>
+            <Image
+              source={LocalImages.nightIcon}
+              style={
+                selected[item.toLowerCase()] === 'Night Shift'
+                  ? styles.dayIconImg
+                  : [styles.dayIconImg, {tintColor: Color.grey}]
+              }
+              resizeMode={'contain'}
+            />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.dayIcon}>
-            <Image source={LocalImages.early} style={styles.dayIconImg} />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.dayIcon}
+            onPress={() => {
+              if (
+                selected[item.toLowerCase()] !== '' &&
+                selected[item.toLowerCase()] === 'All Day'
+              ) {
+                selected[item.toLowerCase()] = '';
+              } else {
+                selected[item.toLowerCase()] = 'All Day';
+              }
+              setSelected({...selected});
+            }}>
+            <Image
+              source={LocalImages.anyTimeSelected}
+              style={
+                selected[item.toLowerCase()] === 'All Day'
+                  ? styles.dayIconImg
+                  : [styles.dayIconImg, {tintColor: Color.grey}]
+              }
+              resizeMode={'contain'}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -64,12 +150,8 @@ export default function TimePreferenceModal({...props}) {
   };
 
   const onDonePress = () => {
-    if (props.storeList === 'jobRole') {
-      dispatch(storeJobRoles(selected));
-    } else if (props.storeList === 'location') {
-      dispatch(storeLocation(selected));
-    }
-    props.setViewModal(false);
+    dispatch(storeTimePreference(selected));
+    props.setViewTimeModal(false);
   };
 
   return (
@@ -83,6 +165,29 @@ export default function TimePreferenceModal({...props}) {
         </TouchableOpacity>
       </View>
       <ItemSeparator />
+      <View>
+        <Text style={styles.subheaderText}>
+          {Strings.timePreferenceSubHeader}
+        </Text>
+        <View style={styles.listHeader}>
+          <View style={styles.listSubheader}>
+            <Text style={styles.daysHeaderText}>{Strings.earlyShift}</Text>
+            <Text style={styles.headerTimeText}>{Strings['4AM+']}</Text>
+          </View>
+          <View style={styles.listSubheader}>
+            <Text style={styles.daysHeaderText}>{Strings.dayShift}</Text>
+            <Text style={styles.headerTimeText}>{Strings['8AM+']}</Text>
+          </View>
+          <View style={styles.listSubheader}>
+            <Text style={styles.daysHeaderText}>{Strings.nightShift}</Text>
+            <Text style={styles.headerTimeText}>{Strings['6PM+']}</Text>
+          </View>
+          <View style={styles.listSubheader}>
+            <Text style={styles.daysHeaderText}>{Strings.allDay}</Text>
+            <Text style={styles.headerTimeText}>{Strings.anyShift}</Text>
+          </View>
+        </View>
+      </View>
       <FlatList
         data={props.modalData}
         renderItem={renderList}
@@ -119,12 +224,13 @@ const styles = StyleSheet.create({
     fontSize: vw(16),
     marginLeft: vw(16),
     lineHeight: vh(24),
+    color: Color.black,
   },
   crossImgContainer: {
     backgroundColor: Color.lightGrey,
     borderRadius: vh(10),
     height: vh(20),
-    width: vw(20),
+    width: vh(20),
     overflow: 'hidden',
     alignSelf: 'flex-end',
     alignItems: 'center',
@@ -147,7 +253,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     backgroundColor: Color.white,
     paddingHorizontal: vw(15),
-    paddingTop: vh(15),
     minHeight: vh(450),
     paddingBottom: vh(100),
   },
@@ -179,15 +284,24 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     marginVertical: vh(18),
+    marginHorizontal: vw(16),
     flexDirection: 'row',
+    justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  dayTitleView: {
+    height: vh(26),
+    width: vw(48),
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Color.cyanLightBlue,
+    borderRadius: vw(3),
   },
   dayText: {
-    height: vh(26),
     fontSize: vw(12),
     lineHeight: vh(18),
-    width: vw(48),
     fontFamily: Fonts.Lato_Medium,
+    color: Color.black,
   },
   dayIconImg: {
     height: '100%',
@@ -196,10 +310,47 @@ const styles = StyleSheet.create({
   dayIcon: {
     height: vh(24),
     width: vw(24),
+    marginHorizontal: vw(25),
   },
   dayIconCotainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  subheaderText: {
+    fontSize: vw(14),
+    lineHeight: vh(24),
+    fontFamily: Fonts.Lato_Medium,
+    marginHorizontal: vw(16),
+    marginVertical: vh(16),
+    color: Color.black,
+  },
+  listHeader: {
+    flexDirection: 'row',
+    marginHorizontal: vw(16),
+    marginLeft: vw(73.5),
+    justifyContent: 'center',
+  },
+  daysHeaderText: {
+    fontSize: vw(12),
+    lineHeight: vh(18),
+    color: Color.black,
+    width: vw(35),
+    fontFamily: Fonts.Lato_Light,
+    textAlign: 'center',
+  },
+  listSubheader: {
+    marginHorizontal: vw(9.5),
+    height: vh(55),
+    width: vw(54.75),
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  headerTimeText: {
+    fontSize: vw(12),
+    lineHeight: vw(18),
+    fontFamily: Fonts.Lato_Regular,
+    textAlign: 'center',
+    color: Color.black,
   },
 });

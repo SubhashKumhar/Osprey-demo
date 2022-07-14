@@ -2,7 +2,15 @@ const initial_state = {
   jobRoles: [],
   skills: [],
   location: [],
-  timePreference: [],
+  timePreference: {
+    mon: '',
+    tue: '',
+    wed: '',
+    thu: '',
+    fri: '',
+    sat: '',
+    sun: '',
+  },
 };
 
 export const SetupReducer = (
@@ -15,6 +23,10 @@ export const SetupReducer = (
       return {...state, jobRoles: payload};
     case 'Store_Location':
       return {...state, location: payload};
+    case 'Store_Skills':
+      return {...state, skills: payload};
+    case 'Store_TimePreference':
+      return {...state, timePreference: payload};
     default:
       return state;
   }

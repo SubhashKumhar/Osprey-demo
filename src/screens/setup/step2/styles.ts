@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: vh(12),
   },
+  dottedLine: {
+    marginHorizontal: vw(16),
+  },
   stepText: {
     fontSize: vw(12),
     color: Color.black,
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
   skillHeaderText: {
     fontSize: vw(14),
     lineHeight: vh(24),
+    color: Color.black,
   },
   skillContainer: {
     marginHorizontal: vw(16),
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
   },
   skillTitle: {
     fontSize: vw(14),
-    fontFamily: Fonts.Lato_Medium,
+    fontFamily: Fonts.Lato_Semibold,
     lineHeight: vh(16.8),
     marginTop: vh(16),
   },
@@ -106,6 +110,7 @@ const styles = StyleSheet.create({
   },
   contiueButton: {
     marginHorizontal: vw(16),
+    paddingBottom: vh(6),
   },
   modal: {
     margin: 0,
@@ -173,6 +178,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     paddingVertical: vw(8),
+  },
+  timePreferenceHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  timePreferenceText: {
+    fontSize: vw(14),
+    fontFamily: Fonts.Lato_Semibold,
+    lineHeight: vh(16.8),
+  },
+  editIcon: {
+    height: vh(24),
+    width: vw(24),
+  },
+  selectedTimePreferenceView: {
+    marginVertical: vh(16),
+    marginHorizontal: vw(7),
+    height: vh(92),
+    alignItems: 'center',
+    width: vw(34),
+  },
+  timeIcon: {
+    height: vh(30),
+    width: vw(30),
+    resizeMode: 'contain',
+    marginVertical: vh(14),
+  },
+  timeFlatlist: {
+    // paddingHorizontal: vw(16),
   },
 });
 export default styles;
