@@ -18,6 +18,7 @@ import Button from '../../../component/button';
 import Picker from './datePicker';
 import Header from './header';
 import ModalScreen from './modalScreen';
+import ImageSelector from './imageSelector';
 
 const data = [
   {
@@ -65,7 +66,7 @@ const gender = [
   },
 ];
 
-const BasicInfo = ({navigation}:any) => {
+const BasicInfo = ({navigation}: any) => {
   const [infoDetails, setInfoDetails] = useState({
     natinality: '',
     location: '',
@@ -90,7 +91,7 @@ const BasicInfo = ({navigation}:any) => {
   };
 
   const handleJob = useCallback(
-    (item:any) => {
+    (item: any) => {
       setJob(item);
     },
     [selJob],
@@ -101,6 +102,10 @@ const BasicInfo = ({navigation}:any) => {
   const onModalPress = () => {
     setModal(!modal);
   };
+
+  const [img, setImg] = useState(
+    'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
+  );
 
   return (
     <View style={styles.parentMainView}>
@@ -185,6 +190,7 @@ const BasicInfo = ({navigation}:any) => {
             data={data}
             modal={modal}
             setModal={setModal}
+            filterData={data}
           />
         </View>
 
@@ -272,6 +278,8 @@ const BasicInfo = ({navigation}:any) => {
             />
           </View>
         </View>
+
+        <ImageSelector />
       </ScrollView>
 
       <View style={styles.buttonView}>
@@ -335,6 +343,8 @@ const styles = StyleSheet.create({
   },
   genderView: {
     width: vw(164),
+    borderBottomWidth: 0.2,
+    borderBottomColor: Color.Cyan_Blue,
   },
   calanderView: {
     width: vw(164),
@@ -366,6 +376,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderColor: Color.Cyan_Blue,
+    borderWidth: 0.2,
   },
   nationalityView: {
     marginHorizontal: vw(16),
@@ -381,6 +393,8 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 4,
     backgroundColor: Color.solitude,
+    borderWidth: 0.2,
+    borderColor: Color.Cyan_Blue,
   },
   inputViewStyle: {
     marginLeft: vw(16),
@@ -405,6 +419,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderWidth: 0.2,
+    borderColor: Color.Cyan_Blue,
   },
   calenderText: {
     marginLeft: vw(16),

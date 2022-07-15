@@ -17,46 +17,47 @@ import localImages from '../../../utils/localImages';
 import Input from '../../../component/input/input';
 import Button from '../../../component/button';
 
-export default function ModalScreen({modal, setModal, data,  setJob}: any) {
+export default function ModalScreen({modal, setModal, data, setJob}: any) {
+  const filterData = (txt:any) => {
+    let newData = data.filter(item =>
+      item?.item?.toLowerCase().includes(txt.toLowerCase()),
+    );
+    return newData;
+  };
 
   const [curr, setCurr] = useState(0);
-  const [search,setSearch]=useState('');
+  const [search, setSearch] = useState('');
 
-  const onSearch =(text:any)=>{
-    if (text){
-      const newData = data.filter((item: any)=>{
-        const itemData= item.item
-        
-      })
-    }
-  }
+  const onSearch = (text: any) => {
+    setSearch(text);
+  };
 
   const onRender = ({item, index}: any) => {
     return (
-        <View style={styles.renderMainView}>
-          <TouchableOpacity
-            onPress={() => {
-              let i = data.findIndex((x:any)=>x === item);
-              setCurr(i);
-              setJob(data[i].item)
-            }}>
-            { !(index===curr)? (
-              <Image
-                source={localImages.jobRadioButtonInActive}
-                style={styles.radioButtonStyle}
-              />
-            ) : (
-              <Image
-                source={localImages.jobRadioButtonActive}
-                style={styles.radioButtonStyle}
-              />
-            )}
-          </TouchableOpacity>
-          <View style={styles.renderItemView}>
-            <Text style={styles.renderItemText}>{item.item}</Text>
-            <ItemSeparator lineWidth={styles.itemSeperatorStyle} />
-          </View>
+      <View style={styles.renderMainView}>
+        <TouchableOpacity
+          onPress={() => {
+            let i = filterData(search).findIndex((x: any) => x === item);
+            setCurr(i);
+            setJob(filterData(search)[i].item);
+          }}>
+          {!(index === curr) ? (
+            <Image
+              source={localImages.jobRadioButtonInActive}
+              style={styles.radioButtonStyle}
+            />
+          ) : (
+            <Image
+              source={localImages.jobRadioButtonActive}
+              style={styles.radioButtonStyle}
+            />
+          )}
+        </TouchableOpacity>
+        <View style={styles.renderItemView}>
+          <Text style={styles.renderItemText}>{item.item}</Text>
+          <ItemSeparator lineWidth={styles.itemSeperatorStyle} />
         </View>
+      </View>
     );
   };
 
@@ -68,6 +69,7 @@ export default function ModalScreen({modal, setModal, data,  setJob}: any) {
           <TouchableOpacity
             onPress={() => {
               setModal(!modal);
+              setSearch("")
             }}>
             <Image
               source={localImages.cancelIcon}
@@ -77,21 +79,28 @@ export default function ModalScreen({modal, setModal, data,  setJob}: any) {
         </View>
         <ItemSeparator />
         <View style={styles.searchInputView}>
-          <Input 
-          place={'Search & select job role'} 
-          style={styles.inputStyle} 
-          value={search}
-          onChangeText={(text:string)=>{onSearch(text)}}
+          <Input
+            place={'Search & select job role'}
+            style={styles.inputStyle}
+            onChangeText={(text: string) => {
+              onSearch(text);
+            }}
           />
           <Image source={localImages.search} style={styles.searchIcon} />
         </View>
         <View>
-          <FlatList data={data} renderItem={onRender} keyExtractor={(_item,index)=>index.toString()}/>
+          <FlatList
+            data={filterData(search)}
+            renderItem={onRender}
+            keyExtractor={(_item, index) => index.toString()}
+          />
         </View>
       </View>
       <View style={styles.buttonView}>
         <Button
-        onPress={()=>{setModal(!modal)}}
+          onPress={() => {
+            setModal(!modal);
+          }}
           title="Done"
           customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
@@ -133,15 +142,15 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: vh(0),
     position: 'absolute',
-    justifyContent:'center'
+    justifyContent: 'center',
   },
   jobRoleText: {
-    marginLeft: vw(16)
+    marginLeft: vw(16),
   },
   cancelIconStyle: {
-    height: vh(20), 
-    width: vh(20), 
-    marginRight: vw(16)
+    height: vh(20),
+    width: vh(20),
+    marginRight: vw(16),
   },
   searchInputView: {
     height: vh(42),
@@ -161,22 +170,21 @@ const styles = StyleSheet.create({
     width: vw(311),
     marginTop: vh(20),
   },
-  radioButtonStyle:{
+  radioButtonStyle: {
     height: vh(21),
-    width: vh(21)
+    width: vh(21),
   },
-  renderMainView:{
-    marginTop: vh(32), 
-    height: vh(30), 
+  renderMainView: {
+    marginTop: vh(32),
+    height: vh(30),
     flexDirection: 'row',
-    marginHorizontal:vw(16)
+    marginHorizontal: vw(16),
   },
-  renderItemView:{
-    marginLeft: vw(8)
+  renderItemView: {
+    marginLeft: vw(8),
   },
-  renderItemText:{
-    fontSize: vh(13), 
-    width: '82%'
-  }
-
+  renderItemText: {
+    fontSize: vh(13),
+    width: '82%',
+  },
 });

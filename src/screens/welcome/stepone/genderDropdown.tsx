@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
   selectGender: {
     marginTop: vh(7.5),
     backgroundColor: 'white',
+    borderWidth:0.2,
+    borderColor:Color.Cyan_Blue
   },
   dropDownStyle: {
     backgroundColor: Color.solitude,

@@ -2,6 +2,7 @@ export default {
     search:require('../assets/images/search.png'),
     eyeIcon:require('../assets/images/EyeIcon.png'),
     eyeClosed:require('../assets/images/eyeClosed.png'),
+    deleteIcon:require('../assets/images/DeleteIcon.png'),
     cancelIcon:require('../assets/images/cancel_Icon.png'),
     warningIcon: require('../assets/images/warningBG.png'),
     circleIcon: require('../assets/images/circle_Info.png'),
