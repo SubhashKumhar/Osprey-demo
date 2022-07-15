@@ -15,7 +15,7 @@ export default function AuthStack() {
   return (
     <AuthStacks.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={Names.Login}
+      initialRouteName={Names.basicInfo}
     >
       <AuthStacks.Screen name={Names.Login} component={Login} />
       <AuthStacks.Screen name={Names.Password} component={Password} />

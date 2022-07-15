@@ -12,7 +12,6 @@ import {
 import React, {useRef, useState} from 'react';
 import {vh, vw} from '../../../utils/dimensions';
 import Color from '../../../utils/constant/colors';
-import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import localImages from '../../../utils/localImages';
 import Input from '../../../component/input/input';
@@ -34,8 +33,7 @@ export default function ModalScreen({modal, setModal, data,  setJob}: any) {
 
   const onRender = ({item, index}: any) => {
     return (
-      <View style={{marginHorizontal: vw(16)}}>
-        <View style={{marginTop: vh(32), height: vh(30), flexDirection: 'row'}}>
+        <View style={styles.renderMainView}>
           <TouchableOpacity
             onPress={() => {
               let i = data.findIndex((x:any)=>x === item);
@@ -45,21 +43,20 @@ export default function ModalScreen({modal, setModal, data,  setJob}: any) {
             { !(index===curr)? (
               <Image
                 source={localImages.jobRadioButtonInActive}
-                style={{height: vh(21), width: vh(21)}}
+                style={styles.radioButtonStyle}
               />
             ) : (
               <Image
                 source={localImages.jobRadioButtonActive}
-                style={{height: vh(21), width: vh(21)}}
+                style={styles.radioButtonStyle}
               />
             )}
           </TouchableOpacity>
-          <View style={{marginLeft: vw(8)}}>
-            <Text style={{fontSize: vh(13), width: '82%'}}>{item.item}</Text>
+          <View style={styles.renderItemView}>
+            <Text style={styles.renderItemText}>{item.item}</Text>
             <ItemSeparator lineWidth={styles.itemSeperatorStyle} />
           </View>
         </View>
-      </View>
     );
   };
 
@@ -138,8 +135,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent:'center'
   },
-  jobRoleText: {marginLeft: vw(16)},
-  cancelIconStyle: {height: vh(20), width: vh(20), marginRight: vw(16)},
+  jobRoleText: {
+    marginLeft: vw(16)
+  },
+  cancelIconStyle: {
+    height: vh(20), 
+    width: vh(20), 
+    marginRight: vw(16)
+  },
   searchInputView: {
     height: vh(42),
     marginHorizontal: vw(16),
@@ -158,4 +161,22 @@ const styles = StyleSheet.create({
     width: vw(311),
     marginTop: vh(20),
   },
+  radioButtonStyle:{
+    height: vh(21),
+    width: vh(21)
+  },
+  renderMainView:{
+    marginTop: vh(32), 
+    height: vh(30), 
+    flexDirection: 'row',
+    marginHorizontal:vw(16)
+  },
+  renderItemView:{
+    marginLeft: vw(8)
+  },
+  renderItemText:{
+    fontSize: vh(13), 
+    width: '82%'
+  }
+
 });
