@@ -1,24 +1,22 @@
 import {
   View,
   Text,
-  StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   Image,
   ScrollView,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
-import {vh, vw} from '../../../utils/dimensions';
-import localImages from '../../../utils/localImages';
-import Strings from '../../../utils/constant/string';
-import Color from '../../../utils/constant/colors';
-import GenderDropdown from './genderDropdown';
-import Input from '../../../component/input/input';
-import Button from '../../../component/button';
-import Picker from './datePicker';
+import styles from './style';
 import Header from './header';
+import Picker from './datePicker';
 import ModalScreen from './modalScreen';
 import ImageSelector from './imageSelector';
+import GenderDropdown from './genderDropdown';
+import Button from '../../../component/button';
+import Input from '../../../component/input/input';
+import Color from '../../../utils/constant/colors';
+import React, {useCallback, useState} from 'react';
+import localImages from '../../../utils/localImages';
+import Strings from '../../../utils/constant/string';
 
 const data = [
   {
@@ -67,27 +65,18 @@ const gender = [
 ];
 
 const BasicInfo = ({navigation}: any) => {
-  const [infoDetails, setInfoDetails] = useState({
-    natinality: '',
-    location: '',
-    address: '',
-    cName: '',
-    zipcode: '',
-  });
-
   const [open, setOpen] = useState(false);
-
+  const [modal, setModal] = useState(false);
   const [date, setDate] = useState(new Date());
+  const [selJob, setJob] = useState(data[0].item);
+  const [selectGender, setSelectGender] = useState(null);
 
   const onCalenderPress = () => {
     setOpen(true);
   };
-  const [selectGender, setSelectGender] = useState(null);
 
-  const [selJob, setJob] = useState(data[0].item);
-
-  const onSelect = (item: React.SetStateAction<null>) => {
-    setSelectGender(item);
+  const onModalPress = () => {
+    setModal(!modal);
   };
 
   const handleJob = useCallback(
@@ -97,10 +86,16 @@ const BasicInfo = ({navigation}: any) => {
     [selJob],
   );
 
-  const [modal, setModal] = useState(false);
+  const [infoDetails, setInfoDetails] = useState({
+    natinality: '',
+    location: '',
+    address: '',
+    cName: '',
+    zipcode: '',
+  });
 
-  const onModalPress = () => {
-    setModal(!modal);
+  const onSelect = (item: React.SetStateAction<null>) => {
+    setSelectGender(item);
   };
 
   const [img, setImg] = useState(
@@ -295,139 +290,4 @@ const BasicInfo = ({navigation}: any) => {
 
 export default React.memo(BasicInfo);
 
-const styles = StyleSheet.create({
-  parentMainView: {flex: 1},
-  stepView: {
-    flexDirection: 'row',
-    marginVertical: vh(24),
-    marginHorizontal: vw(63.5),
-    alignItems: 'center',
-  },
-  stepLine: {
-    width: vw(80),
-    marginHorizontal: vw(4),
-    backgroundColor: Color.Grey,
-    opacity: 0.5,
-    height: vh(1),
-  },
-  selectedStep: {
-    height: vh(24),
-    width: vh(24),
-    backgroundColor: Color.Cyan_Blue,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: vh(12),
-  },
-  numberStyle: {
-    color: Color.doveGrey,
-  },
-  highlightNumStyle: {
-    color: Color.White,
-  },
-  tellUsTextView: {
-    height: vh(40),
-    marginTop: vh(30),
-    marginHorizontal: vw(16),
-    borderBottomWidth: 1,
-    borderBottomColor: Color.lightGrey,
-  },
-  tellUsText: {
-    fontSize: vh(15),
-    fontWeight: '500',
-  },
-  genderMainView: {
-    height: vh(67),
-    marginTop: vh(24),
-    marginHorizontal: vw(16),
-    flexDirection: 'row',
-  },
-  genderView: {
-    width: vw(164),
-    borderBottomWidth: 0.2,
-    borderBottomColor: Color.Cyan_Blue,
-  },
-  calanderView: {
-    width: vw(164),
-    marginLeft: vw(14),
-  },
-  astrickStyle: {
-    color: Color.red,
-  },
-  genderText: {
-    color: Color.Black,
-    fontSize: vh(13),
-  },
-  selectGender: {
-    height: vh(42),
-    marginTop: vh(8),
-    borderWidth: 1,
-  },
-  jobRoleView: {
-    height: vh(69),
-    marginHorizontal: vw(16),
-    marginTop: vh(24),
-    zIndex: -1,
-  },
-  selectJobRoleStyle: {
-    height: vh(42),
-    marginTop: vh(10),
-    backgroundColor: Color.solitude,
-    borderRadius: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderColor: Color.Cyan_Blue,
-    borderWidth: 0.2,
-  },
-  nationalityView: {
-    marginHorizontal: vw(16),
-    marginTop: vh(20),
-  },
-  placeColor: {
-    color: Color.Black,
-  },
-  nationalityViewStyle: {
-    justifyContent: 'center',
-    height: vh(42),
-    marginTop: vh(10),
-    width: '100%',
-    borderRadius: 4,
-    backgroundColor: Color.solitude,
-    borderWidth: 0.2,
-    borderColor: Color.Cyan_Blue,
-  },
-  inputViewStyle: {
-    marginLeft: vw(16),
-  },
-  buttonContainerView: {
-    backgroundColor: '#2474ff',
-    marginHorizontal: vw(16),
-    marginTop: vh(12),
-    borderRadius: 4,
-  },
-  buttonTitleView: {
-    color: Color.White,
-    fontWeight: '600',
-  },
-  buttonView: {height: vh(87)},
-  scrollSecondView: {marginBottom: vh(10)},
-  calenderView: {
-    height: vh(42),
-    marginTop: vh(7.5),
-    backgroundColor: Color.solitude,
-    borderRadius: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderWidth: 0.2,
-    borderColor: Color.Cyan_Blue,
-  },
-  calenderText: {
-    marginLeft: vw(16),
-    width: vw(94),
-    fontSize: vh(15),
-  },
-  calenderIcon: {tintColor: Color.Cyan_Blue, marginRight: vw(12)},
-  bottomArrowImage: {height: vh(24), width: vh(24), marginRight: vw(9)},
-  jobRoleText: {marginLeft: vw(16), width: '80%', height: vh(16)},
-});
+

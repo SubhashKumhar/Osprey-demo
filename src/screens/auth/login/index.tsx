@@ -8,9 +8,9 @@ import LocalImages from '../../../utils/constant/localImages';
 import CustomButton from '../../../components/customButton';
 import Color from '../../../utils/constant/colors';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 import {useNavigation} from '@react-navigation/native';
-import {storePhoneNumber} from '../../../redux/auth/action';
+import {storeLoginData} from '../../../redux/auth/action';
 import {useDispatch} from 'react-redux';
 import CountryCode from '../../../components/countryCode';
 import Modal from 'react-native-modal';
@@ -18,20 +18,35 @@ import Modal from 'react-native-modal';
 export default function Login() {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch<any>();
-  const [currentCountryCode, setCurrentCountryCode] = React.useState('+91');
+  const [currentCountryCode, setCurrentCountryCode] = React.useState('+1');
   const [number, setNumber] = React.useState('');
   const [showModal, setShowModal] = useState(false);
 
   const validateNumber = () => {
-    return number.length < 7;
+    return number.length < 8;
   };
   const onChangeText = (text: string) => {
     setNumber(text);
   };
 
   const onContinuePress = () => {
-    dispatch(storePhoneNumber(currentCountryCode + '- ' + number));
-    navigation.navigate(ComponentNames.Password);
+    let payload = {
+      countryCode: currentCountryCode,
+      phoneNumber: number,
+      countryId: 'mongoId',
+    };
+    dispatch(
+      storeLoginData(
+        payload,
+        (resp: Object) => {
+          console.log('inLOGIN', resp);
+          navigation.navigate(ComponentNames.Password);
+        },
+        (error: Object) => {
+          console.log('inLOGIN ERROR', error);
+        },
+      ),
+    );
   };
   const onCountryCodePress = () => {
     setShowModal(true);
@@ -56,7 +71,7 @@ export default function Login() {
             style={styles.countryCodeView}>
             <Text style={styles.countryCodeText}>{currentCountryCode}</Text>
             <Image
-              source={LocalImages.Chevron_Down_Arrow}
+              source={LocalImages.arrowDown}
               style={styles.dropDownButton}
               resizeMode={'contain'}
             />
@@ -73,6 +88,7 @@ export default function Login() {
           <CustomTextInput
             value={number}
             secureTextEntry={false}
+            maxLength={10}
             placeholder={Strings.Phone_Number_Input}
             onChangeText={onChangeText}
             width={259}
@@ -81,9 +97,9 @@ export default function Login() {
         <View style={styles.buttonContainer}>
           <CustomButton
             text={Strings.Continue}
-            textColor={Color.White}
-            bgColor={Color.Cyan_Blue}
-            disableColor={Color.Cyan_Blue_Light}
+            textColor={Color.white}
+            bgColor={Color.cyanBlue}
+            disableColor={Color.lightGrey}
             onPressButton={onContinuePress}
             disable={validateNumber()}
           />

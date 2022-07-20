@@ -5,7 +5,7 @@ import {vh, vw} from '../../../utils/dimensions';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
   },
   innerContainer: {
     flex: 1,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: vh(8),
     fontSize: vw(16),
     fontWeight: '700',
-    color: Color.Cyan_Blue,
+    color: Color.cyanBlue,
   },
   crossImg: {
     height: vh(25),
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   otpBox: {
-    backgroundColor: Color.TextInputBackground,
+    backgroundColor: Color.textInputBackground,
     height: vh(56),
     width: vh(56),
     alignItems: 'center',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: vw(14),
     marginHorizontal: vw(10),
     fontWeight: '600',
-    color: Color.Cyan_Blue,
+    color: Color.cyanBlue,
   },
   resendContainer: {
     flexDirection: 'row',
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginRight: vw(5),
   },
   clockText: {
-    color: Color.Orange,
+    color: Color.orange,
     fontSize: vw(14),
   },
 });

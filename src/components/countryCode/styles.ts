@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     bottom: vh(0),
   },
   innerContainer: {
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
     minHeight: vh(640),
     paddingHorizontal: vw(15),
     paddingTop: vh(15),
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     fontSize: vw(16),
   },
   closeText: {
-    color: Color.White,
+    color: Color.white,
     fontSize: vw(16),
     textAlign: 'right',
     fontWeight: '600',
@@ -47,31 +47,29 @@ export const styles = StyleSheet.create({
     marginHorizontal: vw(20),
   },
   lineSeparator: {
-    backgroundColor: Color.Black,
+    backgroundColor: Color.black,
     height: vh(1),
     opacity: 0.3,
   },
   listHeader: {
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
   },
   textInput: {
     height: vh(48),
     width: '100%',
-    backgroundColor: Color.TextInputBackground,
+    backgroundColor: Color.textInputBackground,
     borderRadius: vh(10),
     padding: vh(10),
   },
   textInputContainer: {
-    // height: vh(70),
-    // bottom: vh(10),
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
     borderRadius: vh(5),
     marginVertical: vh(8),
     alignSelf: 'center',
     width: '95%',
   },
   emptyFlatlist: {
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
     height: vh(650),
   },
 });
