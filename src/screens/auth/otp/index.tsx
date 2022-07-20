@@ -3,11 +3,10 @@ import {
   KeyboardAvoidingView,
   SafeAreaView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Strings from '../../../utils/constant/string';
 import styles from './styles';
 import ItemSeparator from '../../../components/ItemSeparator';
@@ -19,14 +18,11 @@ import {Alert} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import ComponentNames from '../../../utils/constant/componentNameStrings';
 import DottedLine from '../../../components/dottedLine';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 export default function OTP({navigation}:any) {
   const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
   const [otp, setOtp] = useState('');
-  const textInput1 = useRef<any>();
-  const textInput2 = useRef<any>();
-  const textInput3 = useRef<any>();
-  const textInput4 = useRef<any>();
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
 
@@ -80,63 +76,6 @@ console.log("reREnder333")
     navigation.navigate(ComponentNames.role)
   };
 
-  const first = (text: string) => {
-    if (text.length === 1) {
-      if (otp.length < 1) {
-        setOtp(otp + text);
-      } else {
-        let temp = text + otp.slice(-3);
-        setOtp(temp);
-      }
-      textInput2.current.focus();
-    } else {
-      setOtp(otp.slice(-3));
-    }
-  };
-
-  const second = (text: string) => {
-    if (text.length === 1) {
-      if (otp.length < 2) {
-        setOtp(otp + text);
-      } else {
-        let temp = otp.slice(0, 1) + text + otp.slice(-2);
-        setOtp(temp);
-      }
-      textInput3.current.focus();
-    } else {
-      setOtp(otp.slice(0, 1) + otp.slice(-2));
-    }
-  };
-
-  const third = (text: string) => {
-    if (text.length === 1) {
-      if (otp.length < 3) {
-        setOtp(otp + text);
-      } else {
-        let temp = otp.slice(0, 2) + text + otp.slice(-1);
-        setOtp(temp);
-      }
-      textInput4.current.focus();
-    } else {
-      setOtp(otp.slice(0, 2) + otp.slice(-1));
-    }
-  };
-
-  const fourth = (text: string) => {
-    console.log('char', text.charCodeAt(1));
-    if (text.length === 1) {
-      if (otp.length < 4) {
-        setOtp(otp + text);
-      } else {
-        let temp = otp.slice(0, -1);
-        setOtp(temp + text);
-      }
-      textInput4.current.blur();
-    } else {
-      setOtp(otp.slice(0, -1));
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior={'padding'} style={styles.innerContainer}>
@@ -158,84 +97,21 @@ console.log("reREnder333")
             <Text style={styles.otpSentText}>{Strings.OTP_Sent}</Text>
             <Text style={styles.number}>{phoneNumber}</Text>
           </View>
-          <View style={styles.otpSection}>
-            <View style={styles.otpBox}>
-              {/* {!textInput1?.current?.isFocused() && (
-                <Image
-                  source={LocalImages.Grey_Cross}
-                  resizeMode={'stretch'}
-                  style={styles.crossImg}
-                />
-              )} */}
-              <TextInput
-                style={styles.otpInput}
-                ref={textInput1}
-                maxLength={1}
-                keyboardType={'number-pad'}
-                onChangeText={first}
-                onBlur={() => {
-                  console.log('focused', textInput1?.current?.isFocused());
-                }}
-              />
-            </View>
-            <View style={styles.otpBox}>
-              {/* {!textInput2?.current?.isFocused() && (
-                <Image
-                  source={LocalImages.Grey_Cross}
-                  resizeMode={'stretch'}
-                  style={styles.crossImg}
-                />
-              )} */}
-              <TextInput
-                style={styles.otpInput}
-                ref={textInput2}
-                maxLength={1}
-                keyboardType={'number-pad'}
-                onChangeText={second}
-                onBlur={() => {
-                  console.log('focused', textInput1?.current?.isFocused());
-                }}
-              />
-            </View>
-            <View style={styles.otpBox}>
-              {/* {!textInput3?.current?.isFocused() && (
-                <Image
-                  source={LocalImages.Grey_Cross}
-                  resizeMode={'stretch'}
-                  style={styles.crossImg}
-                />
-              )} */}
-              <TextInput
-                style={styles.otpInput}
-                ref={textInput3}
-                keyboardType={'number-pad'}
-                onChangeText={third}
-                maxLength={1}
-                onBlur={() => {
-                  console.log('focused', textInput1?.current?.isFocused());
-                }}
-              />
-            </View>
-            <View style={styles.otpBox}>
-              {/* {!textInput4?.current?.isFocused() && (
-                <Image
-                  source={LocalImages.Grey_Cross}
-                  resizeMode={'stretch'}
-                  style={styles.crossImg}
-                />
-              )} */}
-              <TextInput
-                style={styles.otpInput}
-                ref={textInput4}
-                maxLength={1}
-                keyboardType={'number-pad'}
-                onChangeText={fourth}
-                onBlur={() => {
-                  console.log('focused', textInput1?.current?.isFocused());
-                }}
-              />
-            </View>
-          </View>
+          <OTPInputView
+            style={styles.otpView}
+            pinCount={4}
+            onCodeChanged={(code: string) => {
+              setOtp(code);
+            }}
+            autoFocusOnLoad
+            placeholderTextColor={Color.lightGrey}
+            placeholderCharacter="X"
+            codeInputFieldStyle={styles.underlineStyleBase}
+            // codeInputHighlightStyle={styles.underlineStyleHighLighted}
+            onCodeFilled={code => {
+              console.log(`Code is ${code}, you are good to go!`);
+            }}
+          />
           <View style={styles.resendContainer}>
             <TouchableOpacity
               disabled={!enableReset}
@@ -252,7 +128,11 @@ console.log("reREnder333")
               </Text>
             </TouchableOpacity>
             <View style={styles.timer}>
-              <Image source={LocalImages.clockIcon} style={styles.clockIcon} />
+              <Image
+                source={LocalImages.clockIcon}
+                style={styles.clockIcon}
+                resizeMode={'contain'}
+              />
               <Text style={styles.clockText}>
                 {clockify().displayMinute + ':' + clockify().displaySeconds}
               </Text>

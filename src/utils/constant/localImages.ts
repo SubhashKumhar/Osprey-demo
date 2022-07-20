@@ -19,6 +19,9 @@ const LocalImages = {
   dayIcon: require('../../assets/images/day.png'),
   nightIcon: require('../../assets/images/night.png'),
   editIcon: require('../../assets/images/otp_pencil.png'),
+  uploadIcon: require('../../assets/images/uploadIcon.png'),
+  resume: require('../../assets/images/resume.png'),
+  calender: require('../../assets/images/Calendar_icon1.png'),
 };
 
 export default LocalImages;

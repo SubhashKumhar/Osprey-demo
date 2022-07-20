@@ -9,9 +9,12 @@ const ComponentNames = {
   Password: 'Password',
   basicInfo:'BasicInfo',
   AuthStack: 'AuthStack',
+  AddResume: 'AddResume',
   SetupStack: 'SetupStack',
+  StoreProfile: 'StoreProfile',
   welcomeScreen: 'WelcomeScreen',
   completeProfile: 'CompleteProfile',
+  experienceDetails: 'ExperienceDetailes',
 };
 
 export default ComponentNames;
