@@ -117,10 +117,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  countryCodeText:{fontSize: vh(16), color: '#231e1e'},
+  countryCodeText:{fontSize: vh(16), color: '#6e7f80'},
   phoneView:{
     marginLeft: vw(8),
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#dfebff',
     width: vw(279),
@@ -130,6 +129,11 @@ const styles = StyleSheet.create({
   eyeIconStyle:{
     height:vh(30),
     width:vh(30)
+  },
+  phNumberTextStyle:{
+    marginLeft: vw(10), 
+    fontSize: vh(15), 
+    color: '#6e7f80'
   }
 
 });

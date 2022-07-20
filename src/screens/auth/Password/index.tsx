@@ -23,11 +23,7 @@ export default function Password() {
     setPassword(text);
   };
   const onLoginPress = () => {
-    let payload = {
-      password: password,
-    };
-    dispatch(storePassword(payload));
-    navigation.navigate(ComponentNames.OTP);
+    navigation.navigate(ComponentNames.signUp);
   };
   const validatePassword = () => {
     const reg =
@@ -54,7 +50,7 @@ export default function Password() {
               styles.number
             }>{`${authDetails.countryCode} - ${authDetails.phoneNumber}`}</Text>
         </View>
-        <Text style={styles.textInputHeader}>{Strings.Phone_Number}</Text>
+        <Text style={styles.textInputHeader}>{Strings.password}</Text>
         <View style={styles.textInputView}>
           <CustomTextInput
             value={password}
