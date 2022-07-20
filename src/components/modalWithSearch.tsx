@@ -138,6 +138,7 @@ export default function ModalWithTick({...props}) {
         <View style={styles.textInputContainer}>
           <TextInput
             // value={search}
+            placeholderTextColor={Color.grey}
             onChangeText={onChangeText}
             placeholder={Strings.Search}
             style={styles.textInput}
@@ -187,12 +188,13 @@ const styles = StyleSheet.create({
     fontSize: vw(16),
     marginLeft: vw(16),
     lineHeight: vh(24),
+    color: Color.black,
   },
   crossImgContainer: {
     backgroundColor: Color.lightGrey,
     borderRadius: vh(10),
     height: vh(20),
-    width: vw(20),
+    width: vh(20),
     overflow: 'hidden',
     alignSelf: 'flex-end',
     alignItems: 'center',
@@ -202,7 +204,6 @@ const styles = StyleSheet.create({
   crossImg: {
     height: '50%',
     width: '50%',
-    right: vw(1),
   },
   header: {
     backgroundColor: Color.white,
@@ -226,14 +227,6 @@ const styles = StyleSheet.create({
   leftInsideContainer: {
     flexDirection: 'row',
   },
-  closeText: {
-    color: Color.white,
-    fontSize: vw(16),
-    textAlign: 'right',
-    fontWeight: '600',
-    marginVertical: vh(20),
-    marginHorizontal: vw(20),
-  },
   lineSeparator: {
     backgroundColor: Color.black,
     height: vh(1),
@@ -248,6 +241,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.textInputBackground,
     borderRadius: vh(10),
     padding: vh(10),
+    color: Color.black,
   },
   textInputContainer: {
     backgroundColor: Color.white,
@@ -277,5 +271,6 @@ const styles = StyleSheet.create({
     fontSize: vw(14),
     fontFamily: Fonts.Lato_Bold,
     lineHeight: vh(16.8),
+    color: Color.black,
   },
 });

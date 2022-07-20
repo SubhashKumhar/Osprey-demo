@@ -59,14 +59,17 @@ const styles = StyleSheet.create({
     fontSize: vw(16),
     lineHeight: vh(24),
     fontFamily: Fonts.Lato_Heavy,
+    color: Color.black,
   },
   topTextView: {
     marginHorizontal: vh(16),
+    color: Color.black,
   },
   topText: {
     fontSize: vw(14),
     lineHeight: vh(26),
     fontFamily: Fonts.Lato_Light,
+    color: Color.black,
   },
   dottedLineView: {
     marginHorizontal: vw(16),
@@ -78,6 +81,7 @@ const styles = StyleSheet.create({
   requirementHeaderText: {
     fontSize: vw(14),
     fontFamily: Fonts.Lato_Bold,
+    color: Color.black,
     lineHeight: vh(30),
   },
   requirementText: {
@@ -85,6 +89,7 @@ const styles = StyleSheet.create({
     lineHeight: vh(30),
     marginTop: vh(14),
     fontFamily: Fonts.Lato_Medium,
+    color: Color.black,
   },
   bottomButton: {
     marginTop: 'auto',
@@ -94,7 +99,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttons: {
-    marginHorizontal: vh(8),
+    marginHorizontal: vw(8),
+    bottom: vh(7),
   },
 });
 

@@ -6,8 +6,14 @@ import ItemSeparator from './ItemSeparator';
 import {vw, vh} from '../utils/dimensions';
 import Color from '../utils/constant/colors';
 import Fonts from '../utils/constant/fonts';
+import {useNavigation} from '@react-navigation/native';
 
-export default function StepIndicator({...props}) {
+export default function BackHeader({...props}) {
+  const navigation = useNavigation();
+
+  const onBackPressed = () => {
+    navigation.goBack();
+  };
   return (
     <View>
       <View style={styles.header}>
@@ -15,7 +21,7 @@ export default function StepIndicator({...props}) {
           <TouchableOpacity
             style={styles.arrowleftContainer}
             activeOpacity={0.8}
-            onPress={props.onBackPressed}>
+            onPress={onBackPressed}>
             <Image
               source={LocalImages.arrowLeft}
               style={styles.arrowleft}
@@ -31,25 +37,6 @@ export default function StepIndicator({...props}) {
         )}
       </View>
       <ItemSeparator />
-      {/* Top Current Step View  */}
-
-      <View style={styles.stepView}>
-        <Image
-          source={LocalImages.checkIcon}
-          resizeMode={'contain'}
-          style={styles.arrowleftContainer}
-        />
-        <View style={styles.stepLine} />
-        <Image
-          source={LocalImages.checkIcon}
-          resizeMode={'contain'}
-          style={styles.arrowleftContainer}
-        />
-        <View style={styles.stepLine} />
-        <View style={styles.selectedStep}>
-          <Text style={styles.stepText}>{Strings.Three}</Text>
-        </View>
-      </View>
     </View>
   );
 }
@@ -70,7 +57,7 @@ const styles = StyleSheet.create({
     width: vw(24),
     justifyContent: 'center',
     alignItems: 'center',
-    // top: vh(8),
+    alignSelf: 'center',
   },
   arrowleft: {
     height: '100%',

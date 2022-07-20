@@ -24,12 +24,14 @@ export default function Skills({setModalTitle, setSkillModal}: any) {
     <View>
       <View style={styles.skillContainer}>
         <Text style={styles.skillHeaderText}>{Strings.Add_Skills}</Text>
-        <Text style={styles.skillTitle}>{`${Strings.Skills} *`}</Text>
+        <View style={styles.itemTitle}>
+          <Text style={styles.itemTitleText}>{Strings.Skills}</Text>
+          <Text style={styles.astrickText}>{Strings.astrick}</Text>
+        </View>
         <View style={styles.addSkillView}>
           {skills.length !== 0 && (
             <View style={styles.innerLocationView}>
               {skills.map((item: any, index: number) => {
-                console.log('modal', item);
                 return (
                   <View key={index.toString()} style={styles.selectedLocations}>
                     <Text style={styles.locationText}>

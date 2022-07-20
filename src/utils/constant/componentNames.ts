@@ -7,9 +7,12 @@ const ComponentNames = {
   signUp: 'SignUp',
   Password: 'Password',
   AuthStack: 'AuthStack',
+  AddResume: 'AddResume',
   SetupStack: 'SetupStack',
+  StoreProfile: 'StoreProfile',
   welcomeScreen: 'WelcomeScreen',
   completeProfile: 'CompleteProfile',
+  experienceDetails: 'ExperienceDetailes',
 };
 
 export default ComponentNames;
