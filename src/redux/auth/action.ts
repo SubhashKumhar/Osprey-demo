@@ -9,7 +9,6 @@ const storeLoginData = (
     validatePhoneNumber(
       payload,
       (resp: Object) => {
-        console.log('resp', resp);
         successCallback(resp);
         dispatch({type: 'Store_PhoneNumber', payload: payload});
       },

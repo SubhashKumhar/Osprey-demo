@@ -102,6 +102,10 @@ const BasicInfo = ({navigation}: any) => {
     'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
   );
 
+  const onPressSaveData = ()=>{
+    
+  }
+
   return (
     <View style={styles.parentMainView}>
       <Header />
@@ -282,6 +286,7 @@ const BasicInfo = ({navigation}: any) => {
           title="Save and Continue"
           customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
+          onPress={onPressSaveData}
         />
       </View>
     </View>

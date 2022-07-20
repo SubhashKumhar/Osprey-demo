@@ -6,23 +6,22 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
-import localImages from '../../utils/localImages';
-import Input from '../../component/input/input';
-import Button from '../../component/button';
-import styles from './style';
 import {
   passwordTest,
   emailTest,
   firstNameTest,
 } from '../../utils/constant/validation';
-import Names from '../../utils/constant/componentNameStrings';
+import styles from './style';
+import React, {useState} from 'react';
+import Button from '../../component/button';
+import Input from '../../component/input/input';
+import localImages from '../../utils/localImages';
 import Strings from '../../utils/constant/string';
 import {useDispatch, useSelector} from 'react-redux';
+import Names from '../../utils/constant/componentNameStrings';
+import { StoreUserData } from '../../redux/signUp/action';
 
 export default function SignUp({navigation}: any) {
-  const dispatch = useDispatch();
-
   /**
    * @state change state of error
    */
@@ -47,6 +46,8 @@ export default function SignUp({navigation}: any) {
    */
   const [eyePress, setEyePress] = useState(false);
 
+  const dispatch = useDispatch<any>();
+
   /**
    * @function this function check the firstName,email and password with regex
    */
@@ -61,7 +62,7 @@ export default function SignUp({navigation}: any) {
       setErr(true);
       setErrText(Strings.incorrectPassword);
     } else {
-      dispatch({type: 'UserData', payload: details});
+      dispatch(StoreUserData(details));
       navigation.navigate(Names.OTP);
       setErr(false);
     }
@@ -91,8 +92,7 @@ export default function SignUp({navigation}: any) {
     }
   };
 
-  const {phoneNumber} = useSelector((state:any) => state.AuthReducer);
-  console.log('dsgfhgjhkj', phoneNumber);
+  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -162,8 +162,7 @@ export default function SignUp({navigation}: any) {
             </Text>
           </View>
           <View style={styles.phoneView}>
-            <Text
-              style={styles.phNumberTextStyle}>
+            <Text style={styles.phNumberTextStyle}>
               {phoneNumber.split('-')[1]}
             </Text>
           </View>

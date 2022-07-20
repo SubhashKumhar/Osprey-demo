@@ -10,26 +10,26 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
+import Button from '../../../component/button';
 import {vh, vw} from '../../../utils/dimensions';
 import Color from '../../../utils/constant/colors';
-import ItemSeparator from '../../../components/ItemSeparator';
-import localImages from '../../../utils/localImages';
 import Input from '../../../component/input/input';
-import Button from '../../../component/button';
+import localImages from '../../../utils/localImages';
+import ItemSeparator from '../../../components/ItemSeparator';
 
 export default function ModalScreen({modal, setModal, data, setJob}: any) {
-  const filterData = (txt:any) => {
-    let newData = data.filter(item =>
-      item?.item?.toLowerCase().includes(txt.toLowerCase()),
-    );
-    return newData;
-  };
-
   const [curr, setCurr] = useState(0);
   const [search, setSearch] = useState('');
 
   const onSearch = (text: any) => {
     setSearch(text);
+  };
+
+  const filterData = (txt: any) => {
+    let newData = data.filter(item =>
+      item?.item?.toLowerCase().includes(txt.toLowerCase()),
+    );
+    return newData;
   };
 
   const onRender = ({item, index}: any) => {
@@ -69,7 +69,7 @@ export default function ModalScreen({modal, setModal, data, setJob}: any) {
           <TouchableOpacity
             onPress={() => {
               setModal(!modal);
-              setSearch("")
+              setSearch('');
             }}>
             <Image
               source={localImages.cancelIcon}

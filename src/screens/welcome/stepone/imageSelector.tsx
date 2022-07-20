@@ -1,9 +1,15 @@
-import { View, Text,TouchableOpacity,Image,StyleSheet } from 'react-native'
+import { 
+  View, 
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet 
+} from 'react-native'
 import React,{useState} from 'react'
-import ImagePicker from 'react-native-image-crop-picker';
 import { vh,vw } from '../../../utils/dimensions';
-import localImages from '../../../utils/localImages';
 import Color from '../../../utils/constant/colors';
+import localImages from '../../../utils/localImages';
+import ImagePicker from 'react-native-image-crop-picker';
 
 
 

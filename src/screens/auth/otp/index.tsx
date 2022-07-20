@@ -29,10 +29,13 @@ export default function OTP({navigation}:any) {
   const textInput4 = useRef<any>();
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
-  console.log('otp', otp);
 
+console.log("reREnder333")
   useEffect(() => {
     startTimer();
+    return () => {
+      BackgroundTimer.stopBackgroundTimer();
+    }
   }, []);
 
   useEffect(() => {
@@ -73,6 +76,7 @@ export default function OTP({navigation}:any) {
   };
 
   const onContinuePress = () => {
+    setSecondsLeft(0)
     navigation.navigate(ComponentNames.role)
   };
 
