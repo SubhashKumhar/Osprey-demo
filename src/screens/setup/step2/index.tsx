@@ -40,6 +40,9 @@ function Step2() {
   const {timePreference, skills} = useSelector(
     (state: any) => state.SetupReducer,
   );
+  const onBackDropPress = () => {
+    setViewModal(false);
+  };
 
   const onEditTimePreference = () => {
     setViewTimeModal(true);
@@ -59,7 +62,7 @@ function Step2() {
   const renderTimePreferences = ({item}: any) => {
     return (
       <View style={styles.selectedTimePreferenceView}>
-        <Text>{item}</Text>
+        <Text style={styles.timePreferenceSelectedText}>{item}</Text>
         {timePreference[item.toLowerCase()] !== '' && (
           <Image
             source={
@@ -76,7 +79,9 @@ function Step2() {
             style={styles.timeIcon}
           />
         )}
-        <Text>{timePreference[item.toLowerCase()].split(' ')[0]}</Text>
+        <Text style={styles.timePreferenceSelectedText}>
+          {timePreference[item.toLowerCase()].split(' ')[0]}
+        </Text>
       </View>
     );
   };
@@ -138,9 +143,10 @@ function Step2() {
 
         <View style={styles.skillContainer}>
           <View style={styles.timePreferenceHeader}>
-            <Text style={styles.timePreferenceText}>
-              {Strings.timePreference}
-            </Text>
+            <View style={styles.itemTitle}>
+              <Text style={styles.itemTitleText}>{Strings.timePreference}</Text>
+              <Text style={styles.astrickText}>{Strings.astrick}</Text>
+            </View>
             {memoizedValue && (
               <>
                 <TouchableOpacity
@@ -187,7 +193,14 @@ function Step2() {
       {/* Modal for Location and Job roles */}
 
       <View>
-        <Modal isVisible={viewModal} style={styles.modal}>
+        <Modal
+          isVisible={viewModal}
+          style={styles.modal}
+          animationInTiming={500}
+          animationOutTiming={300}
+          animationOut="fadeOutDown"
+          // onBackdropPress={onBackDropPress}
+        >
           <ModalWithTick
             data={modalData}
             title={modalTitle}
@@ -201,7 +214,13 @@ function Step2() {
       {/* Modal for Time Preferennce */}
 
       <View>
-        <Modal isVisible={viewTimeModal} style={styles.modal}>
+        <Modal
+          isVisible={viewTimeModal}
+          style={styles.modal}
+          animationInTiming={500}
+          animationOutTiming={300}
+          animationOut="fadeOutDown"
+          onBackdropPress={onBackDropPress}>
           <TimePreferenceModal
             setViewTimeModal={setViewTimeModal}
             modalData={LocalData.timePreferences}
@@ -212,7 +231,13 @@ function Step2() {
       {/* Skill Modal */}
 
       <View>
-        <Modal isVisible={skillModal} style={styles.modal}>
+        <Modal
+          isVisible={skillModal}
+          style={styles.modal}
+          animationInTiming={500}
+          animationOutTiming={300}
+          animationOut="fadeOutDown"
+          onBackdropPress={onBackDropPress}>
           <SkillModal
             data={LocalData.SkillData}
             title={modalTitle}

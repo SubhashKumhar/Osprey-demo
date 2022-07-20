@@ -55,34 +55,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Color.cyanBlue,
   },
-  crossImg: {
-    height: vh(25),
-    width: vw(17),
-    opacity: 0.2,
-    position: 'absolute',
-    alignSelf: 'center',
-  },
-  otpBox: {
-    backgroundColor: Color.textInputBackground,
-    height: vh(56),
-    width: vh(56),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: vh(5),
-    marginHorizontal: vw(8),
-  },
-  otpSection: {
-    flexDirection: 'row',
-    marginVertical: vh(24),
-  },
-  otpInput: {
-    height: '100%',
-    width: '100%',
-    alignSelf: 'center',
-    padding: vh(20),
-    fontSize: vh(24),
-    fontWeight: '800',
-  },
   button: {
     marginHorizontal: vw(16),
     marginBottom: vh(16),
@@ -91,8 +63,6 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
   },
   resendBtn: {
-    fontSize: vw(14),
-    marginHorizontal: vw(10),
     fontWeight: '600',
     color: Color.cyanBlue,
   },
@@ -115,6 +85,38 @@ const styles = StyleSheet.create({
   clockText: {
     color: Color.orange,
     fontSize: vw(14),
+  },
+  borderStyleBase: {
+    width: vw(30),
+    height: vh(45),
+  },
+
+  borderStyleHighLighted: {
+    borderColor: Color.grey,
+  },
+
+  underlineStyleBase: {
+    width: vw(56),
+    height: vw(56),
+    borderWidth: 1,
+    backgroundColor: Color.cyanLightOpacity,
+    color: Color.black,
+    fontSize: vw(24),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  underlineStyleHighLighted: {
+    borderColor: Color.cyanBlue,
+    fontSize: vw(24),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  otpView: {
+    height: vh(100),
+    width: vw(272),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

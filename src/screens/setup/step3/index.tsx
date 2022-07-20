@@ -68,7 +68,7 @@ export default function Step3() {
               bgColor={Color.cyanBlue}
               text={Strings.completeProfileButton}
               onPressButton={() => {
-                navigation.navigate(ComponentNames.completeProfile);
+                navigation.navigate(ComponentNames.StoreProfile);
               }}
               disable={false}
               disableColor={''}

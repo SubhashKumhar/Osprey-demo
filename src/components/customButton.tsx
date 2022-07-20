@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   signInWithEmail: {
     height: vh(42),
     marginTop: vh(16),
+    width: '100%',
     borderRadius: 8,
-    // paddingHorizontal: vw(24),
     justifyContent: 'center',
   },
   signUpText: {
