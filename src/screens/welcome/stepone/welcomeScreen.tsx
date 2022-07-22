@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import Color from '../../../utils/constant/colors';
 import {useSelector} from 'react-redux';
@@ -14,10 +7,9 @@ import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import Button from '../../../component/button';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 
-export default function WelcomeScreen({navigation}:any) {
-
+export default function WelcomeScreen({navigation}: any) {
   /**
    * @arr Array of the three Steps
    */
@@ -36,12 +28,11 @@ export default function WelcomeScreen({navigation}:any) {
       subHeader: Strings.identifyDocuments,
     },
   ];
-  
+
   const {data} = useSelector(store => store.SignUpReducer);
-  const onBtnPress = ()=>{
-    navigation.navigate(ComponentNames.basicInfo)
-    
-  }
+  const onBtnPress = () => {
+    navigation.navigate(ComponentNames.basicInfo);
+  };
   return (
     <>
       <View style={styles.mainView}>
@@ -63,20 +54,14 @@ export default function WelcomeScreen({navigation}:any) {
           <ItemSeparator />
         </View>
         <View style={styles.thirdView}>
-          <Text
-            style={styles.completeProfileText}>
+          <Text style={styles.completeProfileText}>
             {Strings.completeProfile}
           </Text>
           {arr.map(item => {
             return (
               <View key={item.header} style={styles.mainHeaderView}>
-                <Text style={styles.headerText}>
-                  {item.header}
-                </Text>
-                <Text
-                  style={styles.subHeaderText}>
-                  {item.subHeader}
-                </Text>
+                <Text style={styles.headerText}>{item.header}</Text>
+                <Text style={styles.subHeaderText}>{item.subHeader}</Text>
               </View>
             );
           })}
@@ -84,12 +69,11 @@ export default function WelcomeScreen({navigation}:any) {
       </View>
       <View style={styles.bottomView}>
         <Button
-        title='Continue with profile setup'
-        customContainerStyle={[styles.buttonContainerView]}
+          title="Continue with profile setup"
+          customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
           onPress={onBtnPress}
         />
-
       </View>
     </>
   );
@@ -98,7 +82,7 @@ export default function WelcomeScreen({navigation}:any) {
 const styles = StyleSheet.create({
   mainView: {
     flex: 0.12,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
     justifyContent: 'flex-end',
   },
   headerView: {
@@ -109,7 +93,7 @@ const styles = StyleSheet.create({
   },
   secondView: {
     flex: 0.77,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
   },
   welcomeTextView: {
     flex: 0.28,
@@ -137,14 +121,14 @@ const styles = StyleSheet.create({
     flex: 0.53,
     marginHorizontal: vw(16),
   },
-  completeProfileText:{
-    fontSize: vh(15), 
-    fontWeight: '500', 
-    marginBottom: vh(32)
+  completeProfileText: {
+    fontSize: vh(15),
+    fontWeight: '500',
+    marginBottom: vh(32),
   },
-  mainHeaderView:{marginTop: vh(24)},
-  headerText:{fontSize: vh(13), fontWeight: '500'},
-  subHeaderText:{
+  mainHeaderView: {marginTop: vh(24)},
+  headerText: {fontSize: vh(13), fontWeight: '500'},
+  subHeaderText: {
     marginTop: vh(4),
     marginLeft: vw(10),
     fontSize: vh(13),
@@ -157,8 +141,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonTitleView: {
-    color: Color.White,
+    color: Color.white,
     fontWeight: '600',
   },
-  bottomView:{flex:0.10,backgroundColor:Color.White}
+  bottomView: {flex: 0.1, backgroundColor: Color.white},
 });

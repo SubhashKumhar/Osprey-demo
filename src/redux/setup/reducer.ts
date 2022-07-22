@@ -11,6 +11,7 @@ const initial_state = {
     sat: '',
     sun: '',
   },
+  manualResume: [],
 };
 
 export const SetupReducer = (
@@ -27,6 +28,10 @@ export const SetupReducer = (
       return {...state, skills: payload};
     case 'Store_TimePreference':
       return {...state, timePreference: payload};
+    case 'Store_ManualResume':
+      return {...state, manualResume: [...state.manualResume, payload]};
+    case 'Update_ManualResume':
+      return {...state, manualResume: payload};
     default:
       return state;
   }

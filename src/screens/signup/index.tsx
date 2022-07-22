@@ -18,8 +18,8 @@ import Input from '../../component/input/input';
 import localImages from '../../utils/localImages';
 import Strings from '../../utils/constant/string';
 import {useDispatch, useSelector} from 'react-redux';
-import Names from '../../utils/constant/componentNameStrings';
-import { StoreUserData } from '../../redux/signUp/action';
+import Names from '../../utils/constant/componentNames';
+import {StoreUserData} from '../../redux/signUp/action';
 
 export default function SignUp({navigation}: any) {
   /**

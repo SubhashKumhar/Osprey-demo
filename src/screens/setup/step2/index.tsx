@@ -40,8 +40,18 @@ function Step2() {
   const {timePreference, skills} = useSelector(
     (state: any) => state.SetupReducer,
   );
-  const onBackDropPress = () => {
-    setViewModal(false);
+  const onBackDropPress = (item: number) => {
+    switch (item) {
+      case 1:
+        setViewModal(false);
+        break;
+      case 2:
+        setViewTimeModal(false);
+        break;
+      case 3:
+        setSkillModal(false);
+        break;
+    }
   };
 
   const onEditTimePreference = () => {
@@ -199,8 +209,7 @@ function Step2() {
           animationInTiming={500}
           animationOutTiming={300}
           animationOut="fadeOutDown"
-          // onBackdropPress={onBackDropPress}
-        >
+          onBackdropPress={() => onBackDropPress(1)}>
           <ModalWithTick
             data={modalData}
             title={modalTitle}
@@ -220,7 +229,7 @@ function Step2() {
           animationInTiming={500}
           animationOutTiming={300}
           animationOut="fadeOutDown"
-          onBackdropPress={onBackDropPress}>
+          onBackdropPress={() => onBackDropPress(2)}>
           <TimePreferenceModal
             setViewTimeModal={setViewTimeModal}
             modalData={LocalData.timePreferences}
@@ -237,7 +246,7 @@ function Step2() {
           animationInTiming={500}
           animationOutTiming={300}
           animationOut="fadeOutDown"
-          onBackdropPress={onBackDropPress}>
+          onBackdropPress={() => onBackDropPress(3)}>
           <SkillModal
             data={LocalData.SkillData}
             title={modalTitle}

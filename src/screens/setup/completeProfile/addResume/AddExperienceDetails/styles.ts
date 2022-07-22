@@ -72,4 +72,18 @@ export const styles = StyleSheet.create({
   addResumeButtonContainer: {
     paddingHorizontal: vw(16),
   },
+  experienceTime: {
+    flexDirection: 'row',
+  },
+  textInput: {
+    marginRight: vw(12),
+  },
+  descriptionInput: {
+    height: '100%',
+    width: '100%',
+    color: Color.Black,
+    fontFamily: Fonts.Lato_Medium,
+    fontSize: vw(16),
+    lineHeight: vh(19.2),
+  },
 });

@@ -1,7 +1,8 @@
 const EndPoint = {
-  login: '/api/v1/user/login',
-  signip: '/api/v1/user/signup',
-  validatePhone: '/api/v1/user/validate-phone-no',
+  login: '/user/login',
+  signUp: '/user/signup',
+  validatePhone: '/user/validate-phone-no',
+  country: '/api/v1/country',
 };
 
 export default EndPoint;

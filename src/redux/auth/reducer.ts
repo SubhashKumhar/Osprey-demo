@@ -1,8 +1,8 @@
 const initial_state = {
   countryCode: '',
-  phoneNumber: '',
+  phoneNo: '',
   password: '',
-  countryId: '',
+  countryId: '6035da44ab5f4c0f9b028a28',
 };
 
 export const AuthReducer = (

@@ -7,7 +7,7 @@ import {storeSkills} from '../../../redux/setup/action';
 import LocalImages from '../../../utils/constant/localImages';
 import DottedLine from '../../../components/dottedLine';
 
-export default function Skills({setModalTitle, setSkillModal}: any) {
+function Skills({setModalTitle, setSkillModal}: any) {
   const dispatch = useDispatch<any>();
   const {skills} = useSelector((state: any) => state.SetupReducer);
 
@@ -72,3 +72,5 @@ export default function Skills({setModalTitle, setSkillModal}: any) {
     </View>
   );
 }
+
+export default React.memo(Skills);

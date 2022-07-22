@@ -3,30 +3,24 @@ import Modal from 'react-native-modal';
 import React, {useEffect, useState} from 'react';
 import NetInfo from '@react-native-community/netinfo';
 
-export default function NetworkInfo(props: any) {
+export default function NetworkInfo() {
   const [connected, setConnected] = useState(false);
-  // useEffect(() => {
-  //   const subscribe = NetInfo.addEventListener(state => {
-  //     console.log('Connection type', state.type);
-  //     console.log('Is connected?', state.isConnected);
-  //     if (state.isConnected) {
-  //       console.log('inside connected');
-  //       setConnected(false);
-  //     } else {
-  //       console.log('inside not connected');
-  //       setConnected(true);
-  //     }
-  //   });
-
-  //   return subscribe;
-  // }, []);
-
   useEffect(() => {
-    NetInfo.addEventListener(state => {
+    const subscribe = NetInfo.addEventListener(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
       setConnected(state.isConnected);
-      console.log('connect', state.isConnected);
     });
+
+    return subscribe;
   }, []);
+
+  // useEffect(() => {
+  //   NetInfo.addEventListener(state => {
+  //     setConnected(state.isConnected);
+  //     console.log('connect', state.isConnected);
+  //   });
+  // }, []);
 
   const onRetryPress = () => {
     NetInfo.refresh().then(state => {
@@ -49,7 +43,6 @@ export default function NetworkInfo(props: any) {
       animationOutTiming={300}
       animationOut="fadeOutDown"
       style={styles.container}>
-      {/* <NoInternet onPressRetry={() => onRetryPress()} /> */}
       <Text>{'No Internet'}</Text>
       <Button title="Retry" onPress={onRetryPress} />
     </Modal>

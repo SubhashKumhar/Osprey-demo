@@ -14,24 +14,23 @@ import LocalImages from '../../../utils/constant/localImages';
 import Color from '../../../utils/constant/colors';
 import {useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
-import {Alert} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 import DottedLine from '../../../components/dottedLine';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
-export default function OTP({navigation}:any) {
+export default function OTP({navigation}: any) {
   const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
   const [otp, setOtp] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
 
-console.log("reREnder333")
+  console.log('reREnder333');
   useEffect(() => {
     startTimer();
     return () => {
       BackgroundTimer.stopBackgroundTimer();
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -72,8 +71,8 @@ console.log("reREnder333")
   };
 
   const onContinuePress = () => {
-    setSecondsLeft(0)
-    navigation.navigate(ComponentNames.role)
+    setSecondsLeft(0);
+    navigation.navigate(ComponentNames.SetupStack);
   };
 
   return (
