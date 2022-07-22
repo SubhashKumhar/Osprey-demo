@@ -19,10 +19,22 @@ export default function Password() {
   const [showPassword, setShowPassword] = useState(true);
   const authDetails = useSelector((state: any) => state.AuthReducer);
   const dispatch = useDispatch<any>();
+
   const onChangeText = (text: any) => {
     setPassword(text);
   };
   const onLoginPress = () => {
+    dispatch(
+      storePassword(
+        password,
+        userDetails => {
+          navigation.navigate(ComponentNames.signUp);
+        },
+        error => {
+          console.log('Password Error', error);
+        },
+      ),
+    );
     navigation.navigate(ComponentNames.signUp);
   };
   const validatePassword = () => {
@@ -33,9 +45,11 @@ export default function Password() {
     }
     return true;
   };
+
   const onEyePress = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <TopAuthHeader />

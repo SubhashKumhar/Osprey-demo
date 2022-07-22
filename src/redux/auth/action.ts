@@ -1,12 +1,15 @@
-import {validatePhoneNumber} from '../../services/api/apiCall';
+import Services from '../../services/Services';
+import EndPoint from '../../utils/endPoint';
 
 const storeLoginData = (
   payload: any,
   successCallback: Function,
   failureCallback: Function,
 ) => {
+  console.log('payload', payload);
   return (dispatch: Function) => {
-    validatePhoneNumber(
+    Services.putApiCall(
+      EndPoint.validatePhone,
       payload,
       (resp: Object) => {
         successCallback(resp);
@@ -14,12 +17,11 @@ const storeLoginData = (
       },
       (error: Object) => {
         failureCallback(error);
-        console.log('error', error);
       },
     );
   };
 };
-const storePassword = (payload: any) => {
+const storePassword = (payload: any, successCallback, failureCallback) => {
   return (dispatch: Function) => {
     dispatch({type: 'Store_Password', payload: payload});
   };

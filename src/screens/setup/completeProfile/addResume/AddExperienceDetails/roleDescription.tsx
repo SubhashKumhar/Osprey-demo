@@ -4,7 +4,7 @@ import Color from '../../../../../utils/constant/colors';
 import Strings from '../../../../../utils/constant/string';
 import {styles} from './styles';
 
-export default function RoleDescription() {
+export default function RoleDescription(props: any) {
   return (
     <View style={styles.jobDetailes}>
       <View style={styles.itemTitle}>
@@ -16,6 +16,12 @@ export default function RoleDescription() {
           placeholder={Strings.enterDescription}
           placeholderTextColor={Color.grey}
           multiline
+          autoCorrect={false}
+          onChangeText={text => {
+            props.setDescription(text);
+          }}
+          style={styles.descriptionInput}
+          value={props.description}
         />
       </View>
     </View>

@@ -22,6 +22,7 @@ const LocalImages = {
   uploadIcon: require('../../assets/images/uploadIcon.png'),
   resume: require('../../assets/images/resume.png'),
   calender: require('../../assets/images/Calendar_icon1.png'),
+  emptyCardboardBox: require('../../assets/images/box.png'),
 };
 
 export default LocalImages;

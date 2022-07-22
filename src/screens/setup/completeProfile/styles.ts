@@ -45,4 +45,17 @@ export const styles = StyleSheet.create({
     marginHorizontal: vw(8),
     bottom: vh(7),
   },
+  storeSavedText: {
+    fontSize: vw(12),
+    lineHeight: vh(18),
+    fontFamily: Fonts.Lato_Regular,
+    color: Color.Cyan_Blue,
+    backgroundColor: Color.cyanLightOpacity,
+    paddingVertical: vh(5),
+    borderRadius: vh(5),
+    marginVertical: vh(4),
+    textAlign: 'center',
+    justifyContent: 'center',
+    width: vw(48),
+  },
 });
