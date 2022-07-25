@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import styles from './style';
 import Header from './header';
 import Picker from './datePicker';
@@ -17,6 +11,7 @@ import Color from '../../../utils/constant/colors';
 import React, {useCallback, useState} from 'react';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
+import LocalImages from '../../../utils/constant/localImages';
 
 const data = [
   {
@@ -98,13 +93,7 @@ const BasicInfo = ({navigation}: any) => {
     setSelectGender(item);
   };
 
-  const [img, setImg] = useState(
-    'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
-  );
-
-  const onPressSaveData = ()=>{
-    
-  }
+  const onPressSaveData = () => {};
 
   return (
     <View style={styles.parentMainView}>
@@ -294,5 +283,3 @@ const BasicInfo = ({navigation}: any) => {
 };
 
 export default React.memo(BasicInfo);
-
-

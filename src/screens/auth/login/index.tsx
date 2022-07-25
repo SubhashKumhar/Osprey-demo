@@ -19,11 +19,11 @@ import Loader from '../../../components/loader';
 export default function Login() {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch<any>();
+  const [isLoading, setIsLoading] = useState(false);
   const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
   const [number, setNumber] = React.useState('');
   const [showModal, setShowModal] = useState(false);
-  const store = useSelector(state => state);
-  console.log('store', store);
+  const {countryId} = useSelector((state: any) => state.AuthReducer);
 
   const validateNumber = () => {
     return number.length < 8;
@@ -33,16 +33,18 @@ export default function Login() {
   };
 
   const onContinuePress = () => {
+    setIsLoading(true);
     let payload = {
       countryCode: currentCountryCode,
       phoneNo: number,
-      countryId: '45cbc4a0e4123f6920000002',
+      countryId: countryId,
     };
     dispatch(
       storeLoginData(
         payload,
         (resp: Object) => {
           console.log('inLOGIN', resp);
+          setIsLoading(false);
           if (resp?.data?.userExist) {
             navigation.navigate(ComponentNames.Password);
           } else {
@@ -113,7 +115,7 @@ export default function Login() {
           />
         </View>
       </View>
-      {/* <Loader /> */}
+      {isLoading && <Loader />}
     </KeyboardAwareScrollView>
   );
 }
