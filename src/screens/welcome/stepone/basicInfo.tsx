@@ -17,10 +17,10 @@ import React, {useCallback, useState} from 'react';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import {useDispatch} from 'react-redux';
-import {InfoUserData} from '../../../redux/welcome/action';
 import BackHeader from '../../../components/backHeader';
 import CustomButton from '../../../components/customButton';
 import ComponentNames from '../../../utils/constant/componentNames';
+import {InfoUserData} from '../../../redux/welcome/action';
 
 const data = [
   {

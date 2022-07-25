@@ -23,6 +23,8 @@ const LocalImages = {
   arrowLeft: require('../../assets/images/arrow-left(non-optimized).png'),
   arrowRight: require('../../assets/images/arrow-right(non-optimized).png'),
   emptyCardboardBox: require('../../assets/images/box.png'),
+  defaultImagePicker:
+    'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
 };
 
 export default LocalImages;

@@ -93,7 +93,7 @@ export default function SignUp({navigation}: any) {
     }
   };
 
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
+  const {phoneNo, countryCode} = useSelector((state: any) => state.AuthReducer);
 
   const onBackPress = () => {
     navigation.goBack();
@@ -159,14 +159,10 @@ export default function SignUp({navigation}: any) {
         </Text>
         <View style={styles.phoneTextViewStyle}>
           <View style={styles.countryCodeView}>
-            <Text style={styles.countryCodeText}>
-              {phoneNumber.split('-')[0]}
-            </Text>
+            <Text style={styles.countryCodeText}>{countryCode}</Text>
           </View>
           <View style={styles.phoneView}>
-            <Text style={styles.phNumberTextStyle}>
-              {phoneNumber.split('-')[1]}
-            </Text>
+            <Text style={styles.phNumberTextStyle}>{phoneNo}</Text>
           </View>
         </View>
 
