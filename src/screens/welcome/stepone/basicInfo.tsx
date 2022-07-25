@@ -4,19 +4,23 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import styles from './style';
-import Header from './header';
 import Picker from './datePicker';
 import ModalScreen from './modalScreen';
 import ImageSelector from './imageSelector';
 import GenderDropdown from './genderDropdown';
-import Button from '../../../component/button';
 import Input from '../../../component/input/input';
 import Color from '../../../utils/constant/colors';
 import React, {useCallback, useState} from 'react';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
+import {useDispatch} from 'react-redux';
+import {InfoUserData} from '../../../redux/welcome/action';
+import BackHeader from '../../../components/backHeader';
+import CustomButton from '../../../components/customButton';
+import ComponentNames from '../../../utils/constant/componentNames';
 
 const data = [
   {
@@ -70,6 +74,7 @@ const BasicInfo = ({navigation}: any) => {
   const [date, setDate] = useState(new Date());
   const [selJob, setJob] = useState(data[0].item);
   const [selectGender, setSelectGender] = useState(null);
+  const dispatch = useDispatch<any>();
 
   const onCalenderPress = () => {
     setOpen(true);
@@ -82,6 +87,7 @@ const BasicInfo = ({navigation}: any) => {
   const handleJob = useCallback(
     (item: any) => {
       setJob(item);
+      setInfoDetails({...infoDetails, job: item});
     },
     [selJob],
   );
@@ -92,23 +98,24 @@ const BasicInfo = ({navigation}: any) => {
     address: '',
     cName: '',
     zipcode: '',
+    job: '',
+    date: '',
+    gender: '',
+    profile: '',
   });
 
   const onSelect = (item: React.SetStateAction<null>) => {
     setSelectGender(item);
   };
 
-  const [img, setImg] = useState(
-    'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
-  );
-
-  const onPressSaveData = ()=>{
-    
-  }
+  const onPressSaveData = () => {
+    dispatch(InfoUserData(infoDetails));
+    navigation.navigate(ComponentNames.SetupStack);
+  };
 
   return (
-    <View style={styles.parentMainView}>
-      <Header />
+    <SafeAreaView style={styles.parentMainView}>
+      <BackHeader title={'Basic Info'} />
       <ScrollView
         style={styles.scrollSecondView}
         showsVerticalScrollIndicator={false}>
@@ -140,6 +147,8 @@ const BasicInfo = ({navigation}: any) => {
               value={selectGender}
               data={gender}
               onSelect={onSelect}
+              infoData={infoDetails}
+              setInfoDetails={setInfoDetails}
             />
           </View>
           <View style={styles.calanderView}>
@@ -162,6 +171,8 @@ const BasicInfo = ({navigation}: any) => {
               <Picker
                 open={open}
                 setOpen={setOpen}
+                infoData={infoDetails}
+                setInfoDetails={setInfoDetails}
                 date={date}
                 setDate={setDate}
               />
@@ -278,21 +289,27 @@ const BasicInfo = ({navigation}: any) => {
           </View>
         </View>
 
-        <ImageSelector />
+        <ImageSelector infoData={infoDetails} setInfoDetails={setInfoDetails} />
       </ScrollView>
 
       <View style={styles.buttonView}>
-        <Button
+        <CustomButton
+          textColor={Color.white}
+          bgColor={Color.cyanBlue}
+          text={'Save and Continue'}
+          onPressButton={onPressSaveData}
+          disable={false}
+          disableColor={''}
+        />
+        {/* <Button
           title="Save and Continue"
           customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
           onPress={onPressSaveData}
-        />
+        /> */}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default React.memo(BasicInfo);
-
-

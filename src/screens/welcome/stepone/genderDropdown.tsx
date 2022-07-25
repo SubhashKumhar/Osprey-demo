@@ -7,6 +7,8 @@ import localImages from '../../../utils/localImages';
 export default function GenderDropdown({
   data,
   value,
+  infoData,
+  setInfoDetails,
   onSelect = () => {},
 }: any) {
   const [showData, setShowData] = useState(false);
@@ -24,7 +26,9 @@ export default function GenderDropdown({
         onPress={() => {
           setShowData(!showData);
         }}>
-        <Text style={styles.textStyle}>{value ? value?.name : 'Select Gender'}</Text>
+        <Text style={styles.textStyle}>
+          {value ? value?.name : 'Select Gender'}
+        </Text>
         <Image
           source={localImages.bottomArrow}
           style={[
@@ -40,6 +44,7 @@ export default function GenderDropdown({
               <TouchableOpacity
                 key={String(i)}
                 onPress={() => {
+                  setInfoDetails({...infoData, gender : val})
                   onSelectedItem(val);
                 }}
                 style={styles.genderItemStyle}
@@ -57,12 +62,12 @@ export default function GenderDropdown({
 const styles = StyleSheet.create({
   selectGender: {
     marginTop: vh(7.5),
-    backgroundColor: 'white',
-    borderWidth:0.2,
-    borderColor:Color.Cyan_Blue
+    backgroundColor: Color.cyanLightOpacity,
+    borderWidth: 0.2,
+    borderColor: Color.Cyan_Blue,
+    borderRadius: 4,
   },
   dropDownStyle: {
-    backgroundColor: Color.solitude,
     height: vh(42),
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,5 +93,5 @@ const styles = StyleSheet.create({
     marginLeft: vw(16),
     fontSize: vh(17),
   },
-  dataItemView:{backgroundColor: '#f3f3f3',elevation:10}
+  dataItemView: {backgroundColor: '#f3f3f3', elevation: 10},
 });
