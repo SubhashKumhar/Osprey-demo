@@ -5,7 +5,7 @@ import Color from '../utils/constant/colors';
 import Fonts from '../utils/constant/fonts';
 
 interface Props {
-  placeholder: string;
+  placeholder?: string;
   width?: number;
   onChangeText?: any;
   value?: string;

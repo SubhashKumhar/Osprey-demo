@@ -8,7 +8,8 @@ import Color from '../utils/constant/colors';
 import Fonts from '../utils/constant/fonts';
 import {useNavigation} from '@react-navigation/native';
 
-export default function BackHeader({...props}) {
+export default function BackHeader(props: any) {
+  const {itemSeperator=true} = props
   const navigation = useNavigation();
 
   const onBackPressed = () => {
@@ -36,7 +37,7 @@ export default function BackHeader({...props}) {
           </TouchableOpacity>
         )}
       </View>
-      <ItemSeparator />
+      {itemSeperator &&<ItemSeparator />}
     </View>
   );
 }

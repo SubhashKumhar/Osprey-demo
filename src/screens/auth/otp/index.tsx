@@ -25,7 +25,6 @@ export default function OTP({navigation}: any) {
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
 
-  console.log('reREnder333');
   useEffect(() => {
     startTimer();
     return () => {
@@ -106,7 +105,6 @@ export default function OTP({navigation}: any) {
             placeholderTextColor={Color.lightGrey}
             placeholderCharacter="X"
             codeInputFieldStyle={styles.underlineStyleBase}
-            // codeInputHighlightStyle={styles.underlineStyleHighLighted}
             onCodeFilled={code => {
               console.log(`Code is ${code}, you are good to go!`);
             }}

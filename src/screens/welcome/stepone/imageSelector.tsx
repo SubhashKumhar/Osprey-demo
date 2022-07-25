@@ -6,7 +6,7 @@ import localImages from '../../../utils/localImages';
 import ImagePicker from 'react-native-image-crop-picker';
 import LocalImages from '../../../utils/constant/localImages';
 
-export default function ImageSelector() {
+export default function ImageSelector(props: any) {
   const [img, setImg] = useState(LocalImages.defaultImagePicker);
 
   return (
@@ -32,6 +32,7 @@ export default function ImageSelector() {
             }).then(image => {
               console.log(image);
               setImg(image.sourceURL);
+              props.setInfoDetails({...props.infoData, profile: img});
             });
           }}>
           <Image source={{uri: img}} style={styles.selectImageStyle} />

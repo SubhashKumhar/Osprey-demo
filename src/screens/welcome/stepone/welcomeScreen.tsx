@@ -1,13 +1,14 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import Color from '../../../utils/constant/colors';
 import {useSelector} from 'react-redux';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import Color from '../../../utils/constant/colors';
 import {vh, vw} from '../../../utils/dimensions';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import Button from '../../../component/button';
-import ComponentNames from '../../../utils/constant/componentNames';
+import ComponentNames from '../../../utils/constant/componentNameStrings';
+import BackHeader from '../../../components/backHeader';
 
 export default function WelcomeScreen({navigation}: any) {
   /**
@@ -29,18 +30,15 @@ export default function WelcomeScreen({navigation}: any) {
     },
   ];
 
-  const {data} = useSelector(store => store.SignUpReducer);
+  const {data} = useSelector((store: any) => store.SignUpReducer);
   const onBtnPress = () => {
     navigation.navigate(ComponentNames.basicInfo);
   };
+
   return (
     <>
       <View style={styles.mainView}>
-        <View style={styles.headerView}>
-          <TouchableOpacity>
-            <Image source={localImages.leftArrow} />
-          </TouchableOpacity>
-        </View>
+        <BackHeader itemSeperator={false} />
       </View>
       <View style={styles.secondView}>
         <View style={styles.welcomeTextView}>
@@ -144,5 +142,5 @@ const styles = StyleSheet.create({
     color: Color.white,
     fontWeight: '600',
   },
-  bottomView: {flex: 0.1, backgroundColor: Color.white},
+  bottomView: {flex: 0.1, backgroundColor: Color.White},
 });

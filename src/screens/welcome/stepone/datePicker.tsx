@@ -1,8 +1,16 @@
-import React, {useState} from 'react';
-import {Button, SafeAreaView, Text} from 'react-native';
+import React from 'react';
+import {SafeAreaView} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
-const Picker = ({open, setOpen, date, setDate}: any) => {
+const Picker = ({
+  open,
+  setOpen,
+  data,
+  setDate,
+  setInfoDetails,
+  infoData,
+}: any) => {
+  // const Picker = ({open, setOpen, date, setDate}: any) => {
   return (
     <SafeAreaView>
       <DatePicker
@@ -10,10 +18,11 @@ const Picker = ({open, setOpen, date, setDate}: any) => {
         androidVariant="nativeAndroid"
         mode="date"
         open={open}
-        date={date}
+        date={data}
         onConfirm={date => {
           setOpen(false);
           setDate(date);
+          setInfoDetails({...infoData, date: date});
         }}
         onCancel={() => {
           setOpen(false);
