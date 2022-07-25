@@ -1,14 +1,13 @@
 const ComponentNames = {
   OTP: 'OTP',
-  role:'role',
+  role: 'role',
   Login: 'Login',
-  signUp:'SignUp',
-  picker:'Picker',
+  signUp: 'SignUp',
+  picker: 'Picker',
   Password: 'Password',
-  basicInfo:'BasicInfo',
+  basicInfo: 'BasicInfo',
   AuthStack: 'AuthStack',
-  welcomeScreen:'WelcomeScreen',
-
+  welcomeScreen: 'WelcomeScreen',
 };
 
 export default ComponentNames;

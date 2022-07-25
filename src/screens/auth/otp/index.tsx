@@ -21,12 +21,11 @@ import DottedLine from '../../../components/dottedLine';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 export default function OTP({navigation}:any) {
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
   const [otp, setOtp] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
+  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
 
-console.log("reREnder333")
   useEffect(() => {
     startTimer();
     return () => {
@@ -78,7 +77,8 @@ console.log("reREnder333")
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView behavior={'padding'} style={styles.innerContainer}>
+      <KeyboardAvoidingView 
+      behavior={'padding'} style={styles.innerContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>{Strings.Verify_Number}</Text>
         </View>
@@ -107,7 +107,6 @@ console.log("reREnder333")
             placeholderTextColor={Color.lightGrey}
             placeholderCharacter="X"
             codeInputFieldStyle={styles.underlineStyleBase}
-            // codeInputHighlightStyle={styles.underlineStyleHighLighted}
             onCodeFilled={code => {
               console.log(`Code is ${code}, you are good to go!`);
             }}

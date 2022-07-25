@@ -11,6 +11,7 @@ interface propInterface {
   disable: boolean;
   disableColor: string;
   width?: number;
+  style?: object;
 }
 
 export default function CustomButton(props: propInterface) {
@@ -21,6 +22,7 @@ export default function CustomButton(props: propInterface) {
     onPressButton,
     disable = false,
     width = '100%',
+    style={}
   } = props;
   return (
     <TouchableOpacity
@@ -29,7 +31,7 @@ export default function CustomButton(props: propInterface) {
         {
           backgroundColor: disable ? props?.disableColor : bgColor,
         },
-        {width: width},
+        {width: width},style
       ]}
       activeOpacity={0.8}
       onPress={() => onPressButton()}

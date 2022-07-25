@@ -4,12 +4,12 @@ import {vw, vh} from '../utils/dimensions';
 import Color from '../utils/constant/colors';
 
 interface Props {
-  placeholder: string;
-  width: number;
-  onChangeText: any;
-  value: string;
-  secureTextEntry: boolean;
-  maxLength: number;
+  placeholder?: string;
+  width?: number;
+  onChangeText?: any;
+  value?: string;
+  secureTextEntry?: boolean;
+  maxLength?: number;
 }
 
 export default function CustomTextInput(props: Props) {

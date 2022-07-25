@@ -2,14 +2,12 @@ import {
   View,
   Text,
   Modal,
-  Alert,
-  SafeAreaView,
   FlatList,
   Image,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Button from '../../../component/button';
 import {vh, vw} from '../../../utils/dimensions';
 import Color from '../../../utils/constant/colors';
@@ -55,7 +53,7 @@ export default function ModalScreen({modal, setModal, data, setJob}: any) {
         </TouchableOpacity>
         <View style={styles.renderItemView}>
           <Text style={styles.renderItemText}>{item.item}</Text>
-          <ItemSeparator lineWidth={styles.itemSeperatorStyle} />
+          <ItemSeparator />
         </View>
       </View>
     );
@@ -113,7 +111,7 @@ const styles = StyleSheet.create({
   mainTopView: {
     bottom: 0,
     position: 'absolute',
-    height: vh(617),
+    height: vh(650),
     width: vw(375),
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
@@ -185,6 +183,7 @@ const styles = StyleSheet.create({
   },
   renderItemText: {
     fontSize: vh(13),
-    width: '82%',
+    width: vw(290),
+    marginBottom: vh(10),
   },
 });
