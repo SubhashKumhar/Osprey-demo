@@ -19,5 +19,23 @@ const storeTimePreference = (payload: any) => {
     dispatch({type: 'Store_TimePreference', payload: payload});
   };
 };
+const storeManualResume = (payload: any) => {
+  return (dispatch: Function) => {
+    dispatch({type: 'Store_ManualResume', payload: payload});
+  };
+};
+const updateManualResume = (payload: any) => {
+  return (dispatch: Function) => {
+    console.log('payload', payload);
+    dispatch({type: 'Update_ManualResume', payload: payload});
+  };
+};
 
-export {storeJobRoles, storeLocation, storeTimePreference, storeSkills};
+export {
+  storeJobRoles,
+  storeLocation,
+  storeTimePreference,
+  storeSkills,
+  storeManualResume,
+  updateManualResume,
+};

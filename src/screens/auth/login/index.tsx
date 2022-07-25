@@ -11,16 +11,19 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ComponentNames from '../../../utils/constant/componentNames';
 import {useNavigation} from '@react-navigation/native';
 import {storeLoginData} from '../../../redux/auth/action';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CountryCode from '../../../components/countryCode';
 import Modal from 'react-native-modal';
+import Loader from '../../../components/loader';
 
 export default function Login() {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch<any>();
-  const [currentCountryCode, setCurrentCountryCode] = React.useState('+1');
+  const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
   const [number, setNumber] = React.useState('');
   const [showModal, setShowModal] = useState(false);
+  const store = useSelector(state => state);
+  console.log('store', store);
 
   const validateNumber = () => {
     return number.length < 8;
@@ -32,15 +35,19 @@ export default function Login() {
   const onContinuePress = () => {
     let payload = {
       countryCode: currentCountryCode,
-      phoneNumber: number,
-      countryId: 'mongoId',
+      phoneNo: number,
+      countryId: '45cbc4a0e4123f6920000002',
     };
     dispatch(
       storeLoginData(
         payload,
         (resp: Object) => {
           console.log('inLOGIN', resp);
-          navigation.navigate(ComponentNames.Password);
+          if (resp?.data?.userExist) {
+            navigation.navigate(ComponentNames.Password);
+          } else {
+            navigation.navigate(ComponentNames.signUp);
+          }
         },
         (error: Object) => {
           console.log('inLOGIN ERROR', error);
@@ -89,6 +96,7 @@ export default function Login() {
             value={number}
             secureTextEntry={false}
             maxLength={10}
+            keyboardType={'number-pad'}
             placeholder={Strings.Phone_Number_Input}
             onChangeText={onChangeText}
             width={259}
@@ -105,6 +113,7 @@ export default function Login() {
           />
         </View>
       </View>
+      {/* <Loader /> */}
     </KeyboardAwareScrollView>
   );
 }

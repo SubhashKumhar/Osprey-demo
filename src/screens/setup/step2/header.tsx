@@ -6,7 +6,7 @@ import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Header() {
+function Header() {
   const navigation = useNavigation<any>();
   const onBackPress = () => {
     navigation.goBack();
@@ -30,3 +30,4 @@ export default function Header() {
     </View>
   );
 }
+export default React.memo(Header);

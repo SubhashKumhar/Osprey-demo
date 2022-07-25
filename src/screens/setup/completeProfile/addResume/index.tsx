@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   Alert,
   Image,
-  Linking,
 } from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
@@ -18,19 +17,16 @@ import Color from '../../../../utils/constant/colors';
 import {useNavigation} from '@react-navigation/native';
 import ComponentNames from '../../../../utils/constant/componentNames';
 import FileViewer from 'react-native-file-viewer';
+import {useSelector} from 'react-redux';
+import WorkExperienceList from './workExperienceList';
 
 export default function AddResume() {
   const navigation = useNavigation<any>();
   const [resume, setResume] = useState({});
+  const {manualResume} = useSelector((state: any) => state.SetupReducer);
 
   const handleLinking = async () => {
     try {
-      // const isSupported = await Linking.canOpenURL(resume.fileCopyUri);
-      // if (isSupported) {
-      //   await Linking.openURL(
-      //     'http://www.africau.edu/images/default/sample.pdf',
-      // );
-      // }
       await FileViewer.open(resume.uri);
     } catch (err) {
       console.log('err', err);
@@ -122,18 +118,24 @@ export default function AddResume() {
           </TouchableOpacity>
         )}
       </View>
-      <View style={styles.uploadResumeView}>
-        <Text style={styles.workExperienceText}>{Strings.workExperience}</Text>
-        <CustomButtonWithBorder
-          onPressButton={onAddWorlExperience}
-          textColor={Color.cyanBlue}
-          bgColor={Color.cyanLightBlue}
-          text={Strings.addWorkExperience}
-          disable={false}
-          disableColor={''}
-          borderColor={Color.cyanBlue}
-        />
-      </View>
+      {manualResume.length === 0 ? (
+        <View style={styles.uploadResumeView}>
+          <Text style={styles.workExperienceText}>
+            {Strings.workExperience}
+          </Text>
+          <CustomButtonWithBorder
+            onPressButton={onAddWorlExperience}
+            textColor={Color.cyanBlue}
+            bgColor={Color.cyanLightBlue}
+            text={Strings.addWorkExperience}
+            disable={false}
+            disableColor={''}
+            borderColor={Color.cyanBlue}
+          />
+        </View>
+      ) : (
+        <WorkExperienceList onAddWorlExperience={onAddWorlExperience} />
+      )}
     </SafeAreaView>
   );
 }

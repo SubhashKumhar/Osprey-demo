@@ -14,23 +14,22 @@ import LocalImages from '../../../utils/constant/localImages';
 import Color from '../../../utils/constant/colors';
 import {useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
-import {Alert} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 import DottedLine from '../../../components/dottedLine';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
-export default function OTP({navigation}:any) {
+export default function OTP({navigation}: any) {
+  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
   const [otp, setOtp] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
 
   useEffect(() => {
     startTimer();
     return () => {
       BackgroundTimer.stopBackgroundTimer();
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -71,14 +70,13 @@ export default function OTP({navigation}:any) {
   };
 
   const onContinuePress = () => {
-    setSecondsLeft(0)
-    navigation.navigate(ComponentNames.role)
+    setSecondsLeft(0);
+    navigation.navigate(ComponentNames.SetupStack);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView 
-      behavior={'padding'} style={styles.innerContainer}>
+      <KeyboardAvoidingView behavior={'padding'} style={styles.innerContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>{Strings.Verify_Number}</Text>
         </View>

@@ -8,12 +8,7 @@ import LocalData from '../../../utils/constant/localData';
 import LocalImages from '../../../utils/constant/localImages';
 import ItemSeparator from '../../../components/ItemSeparator';
 
-export default function Location({
-  setModalTitle,
-  setModalData,
-  setAction,
-  setViewModal,
-}: any) {
+function Location({setModalTitle, setModalData, setAction, setViewModal}: any) {
   const {location} = useSelector((state: any) => state.SetupReducer);
   const dispatch = useDispatch<any>();
 
@@ -82,3 +77,5 @@ export default function Location({
     </View>
   );
 }
+
+export default React.memo(Location);

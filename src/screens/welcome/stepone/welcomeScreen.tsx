@@ -80,7 +80,7 @@ export default function WelcomeScreen({navigation}: any) {
 const styles = StyleSheet.create({
   mainView: {
     flex: 0.12,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
     justifyContent: 'flex-end',
   },
   headerView: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   secondView: {
     flex: 0.77,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
   },
   welcomeTextView: {
     flex: 0.28,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonTitleView: {
-    color: Color.White,
+    color: Color.white,
     fontWeight: '600',
   },
   bottomView: {flex: 0.1, backgroundColor: Color.White},

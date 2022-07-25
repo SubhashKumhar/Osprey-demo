@@ -11,12 +11,7 @@ import CustomButtonWithBorder from '../../../components/customButtonWithBorder';
 import LocalData from '../../../utils/constant/localData';
 import Fonts from '../../../utils/constant/fonts';
 
-export default function JobRole({
-  setModalTitle,
-  setModalData,
-  setAction,
-  setViewModal,
-}: any) {
+function JobRole({setModalTitle, setModalData, setAction, setViewModal}: any) {
   const dispatch = useDispatch<any>();
   const {jobRoles} = useSelector((state: any) => state.SetupReducer);
 
@@ -76,3 +71,5 @@ export default function JobRole({
     </View>
   );
 }
+
+export default React.memo(JobRole);

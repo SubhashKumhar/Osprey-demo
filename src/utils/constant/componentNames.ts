@@ -12,8 +12,10 @@ const ComponentNames = {
   AddResume: 'AddResume',
   SetupStack: 'SetupStack',
   StoreProfile: 'StoreProfile',
+  AddLanguage: 'AddLannguage',
   welcomeScreen: 'WelcomeScreen',
   completeProfile: 'CompleteProfile',
+  languageSelection: 'languageSelection',
   experienceDetails: 'ExperienceDetailes',
 };
 

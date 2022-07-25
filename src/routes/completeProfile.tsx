@@ -1,6 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import CompleteProfile from '../screens/setup/completeProfile';
+import AddLannguage from '../screens/setup/completeProfile/addLanguage/addLanguage';
+import LanguageSelection from '../screens/setup/completeProfile/addLanguage/languageSelection/languageSelection';
 import AddResume from '../screens/setup/completeProfile/addResume';
 import AddExperienceDetails from '../screens/setup/completeProfile/addResume/AddExperienceDetails';
 import ComponentNames from '../utils/constant/componentNames';
@@ -21,6 +23,14 @@ export default function StoreProfile() {
       <StoreProfileInfo.Screen
         name={ComponentNames.experienceDetails}
         component={AddExperienceDetails}
+      />
+      <StoreProfileInfo.Screen
+        name={ComponentNames.AddLanguage}
+        component={AddLannguage}
+      />
+      <StoreProfileInfo.Screen
+        name={ComponentNames.languageSelection}
+        component={LanguageSelection}
       />
     </StoreProfileInfo.Navigator>
   );
