@@ -1,27 +1,30 @@
 import Services from '../../services/Services';
 import EndPoint from '../../utils/endPoint';
 
-const StoreUserData = (payload: any) => {
-  return (dispatch: (arg0: {type: string; payload: any}) => void) => {
-    dispatch({type: 'UserData', payload: payload});
-  };
-};
-
-export const signUp =
-  (data: any, callback: Function, ErrorCallback: Function) => async () => {
-    // if (data.referralCode === '') {
-    //   delete data.referralCode;
-    // }
+export const StoreUserData = (
+  payload: any,
+  successCallback: Function,
+  failureCallback: Function,
+) => {
+  return (dispatch: Function) => {
     Services.postApiCall(
       EndPoint.signUp,
-      data,
+      payload,
       (res: any) => {
-        callback(res);
+        dispatch({
+          type: 'Store_UserData',
+          payload: payload,
+        });
+        dispatch({
+          type: 'Store_accessToken',
+          payload: res.data.accessToken,
+        });
+        successCallback(res);
       },
       (error: any) => {
-        ErrorCallback(error);
+        console.log('failure', error);
+        failureCallback(error);
       },
     );
   };
-
-export {StoreUserData};
+};

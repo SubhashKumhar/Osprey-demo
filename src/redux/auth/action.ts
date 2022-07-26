@@ -6,14 +6,21 @@ const storeLoginData = (
   successCallback: Function,
   failureCallback: Function,
 ) => {
-  console.log('payload', payload);
   return (dispatch: Function) => {
     Services.putApiCall(
       EndPoint.validatePhone,
-      payload,
-      (resp: Object) => {
-        successCallback(resp);
-        dispatch({type: 'Store_PhoneNumber', payload: payload});
+      {
+        countryCode: payload.countryCode,
+        phoneNo: payload.phoneNo,
+        countryId: payload.countryId,
+      },
+      (resp: any) => {
+        if (resp.status === 200) {
+          successCallback(resp);
+          dispatch({type: 'Store_PhoneNumber', payload: payload});
+        } else {
+          failureCallback(resp);
+        }
       },
       (error: Object) => {
         failureCallback(error);
@@ -21,9 +28,38 @@ const storeLoginData = (
     );
   };
 };
-const storePassword = (payload: any, successCallback, failureCallback) => {
+const storePassword = (
+  payload: any,
+  successCallback: Function,
+  failureCallback: Function,
+) => {
   return (dispatch: Function) => {
     dispatch({type: 'Store_Password', payload: payload});
   };
 };
-export {storeLoginData, storePassword};
+
+const resendOtp = (
+  payload: Object,
+  successCallback: Function,
+  failureCallback: Function,
+) => {
+  return (dispatch: Function) => {
+    Services.postApiCall(
+      EndPoint.resendOtp,
+      payload,
+      (res: any) => {
+        dispatch({
+          type: 'Store_accessToken',
+          payload: res.data.accessToken,
+        });
+        dispatch({type: 'Store_authToken', payload: res.data.authToken});
+        successCallback(res);
+      },
+      (err: Object) => {
+        failureCallback(err);
+      },
+    );
+  };
+};
+
+export {storeLoginData, storePassword, resendOtp};

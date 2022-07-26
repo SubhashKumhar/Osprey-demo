@@ -3,6 +3,7 @@ const initial_state = {
   phoneNo: '',
   password: '',
   countryId: '6035da44ab5f4c0f9b028a28',
+  authToken: '',
 };
 
 export const AuthReducer = (
@@ -15,6 +16,8 @@ export const AuthReducer = (
       return {...state, ...payload};
     case 'Store_Password':
       return {...state, ...payload};
+    case 'Store_authToken':
+      return {...state, authToken: payload};
     default:
       return state;
   }
