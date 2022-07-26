@@ -20,6 +20,7 @@ const Strings = {
   submit: 'Submit',
   Search: 'Search',
   gender: 'Gender',
+  proceed: 'Proceed',
   country: 'Country',
   zipcode: 'Zipcode',
   location: 'Location',

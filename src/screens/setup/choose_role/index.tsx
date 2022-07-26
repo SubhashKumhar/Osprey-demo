@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import localImages from '../../../utils/localImages';
-import Button from '../../../component/button';
 import styles from './style';
 import Strings from '../../../utils/constant/string';
 import Names from '../../../utils/constant/componentNames';
 import {useDispatch} from 'react-redux';
 import {storeProfileType} from '../../../redux/setup/action';
 import Loader from '../../../components/loader';
-import ItemSeparator from '../../../components/ItemSeparator';
+import CustomButton from '../../../components/customButton';
+import Color from '../../../utils/constant/colors';
 
 export default function Choose_Role({navigation}: any) {
   const [press, setPress] = useState('');
@@ -96,20 +96,13 @@ export default function Choose_Role({navigation}: any) {
         </View>
       </ScrollView>
       <View style={styles.buttonView}>
-        <Button
-          title="Proceed"
-          disabled={isDisable()}
-          customContainerStyle={[
-            press === '1' || press === '2'
-              ? styles.buttonContainerView
-              : styles.buttonUnselectedContainerView,
-          ]}
-          customTextStyle={[
-            press === '2' || press === '1'
-              ? styles.buttonTitleView
-              : styles.buttonUnselectedText,
-          ]}
-          onPress={onBtnPress}
+        <CustomButton
+          text={Strings.proceed}
+          disable={isDisable()}
+          textColor={Color.white}
+          onPressButton={onBtnPress}
+          bgColor={Color.cyanBlue}
+          disableColor={Color.Cyan_Blue_Light}
         />
       </View>
       {isLoading && <Loader />}
