@@ -6,24 +6,24 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import Strings from '../../../utils/constant/string';
 import styles from './styles';
+import {useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import Color from '../../../utils/constant/colors';
+import Strings from '../../../utils/constant/string';
+import DottedLine from '../../../components/dottedLine';
+import BackgroundTimer from 'react-native-background-timer';
+import CustomButton from '../../../components/customButton';
 import ItemSeparator from '../../../components/ItemSeparator';
 import LocalImages from '../../../utils/constant/localImages';
-import Color from '../../../utils/constant/colors';
-import {useSelector} from 'react-redux';
-import CustomButton from '../../../components/customButton';
-import BackgroundTimer from 'react-native-background-timer';
-import ComponentNames from '../../../utils/constant/componentNames';
-import DottedLine from '../../../components/dottedLine';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
+import ComponentNames from '../../../utils/constant/componentNames';
 
 export default function OTP({navigation}: any) {
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
   const [otp, setOtp] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
+  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
 
   useEffect(() => {
     startTimer();

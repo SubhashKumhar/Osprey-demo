@@ -5,12 +5,11 @@ import DatePicker from 'react-native-date-picker';
 const Picker = ({
   open,
   setOpen,
-  data,
+  date,
   setDate,
-  setInfoDetails,
   infoData,
+  setInfoDetails,
 }: any) => {
-  // const Picker = ({open, setOpen, date, setDate}: any) => {
   return (
     <SafeAreaView>
       <DatePicker
@@ -18,10 +17,10 @@ const Picker = ({
         androidVariant="nativeAndroid"
         mode="date"
         open={open}
-        date={data}
-        onConfirm={date => {
+        date={date}
+        onConfirm={data => {
           setOpen(false);
-          setDate(date);
+          setDate(data);
           setInfoDetails({...infoData, date: date});
         }}
         onCancel={() => {

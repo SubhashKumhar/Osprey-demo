@@ -1,28 +1,28 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
 import styles from '../styles';
-import Strings from '../../../utils/constant/string';
-import TopAuthHeader from '../components/topAuthHeader';
-import CustomTextInput from '../../../components/customTextInput';
-import LocalImages from '../../../utils/constant/localImages';
-import CustomButton from '../../../components/customButton';
-import Color from '../../../utils/constant/colors';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import ComponentNames from '../../../utils/constant/componentNames';
-import {useNavigation} from '@react-navigation/native';
-import {storeLoginData} from '../../../redux/auth/action';
-import {useDispatch, useSelector} from 'react-redux';
-import CountryCode from '../../../components/countryCode';
+import React, {useState} from 'react';
 import Modal from 'react-native-modal';
-import Loader from '../../../components/loader';
+import Color from '../../../utils/constant/colors';
+import {useDispatch, useSelector} from 'react-redux';
+import Strings from '../../../utils/constant/string';
+import {useNavigation} from '@react-navigation/native';
+import TopAuthHeader from '../components/topAuthHeader';
+import {storeLoginData} from '../../../redux/auth/action';
+import CountryCode from '../../../components/countryCode';
+import CustomButton from '../../../components/customButton';
+import LocalImages from '../../../utils/constant/localImages';
+import CustomTextInput from '../../../components/customTextInput';
+import ComponentNames from '../../../utils/constant/componentNames';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+// import Loader from '../../../components/loader';
 
 export default function Login() {
-  const navigation = useNavigation<any>();
   const dispatch = useDispatch<any>();
-  const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
+  const navigation = useNavigation<any>();
+  const store = useSelector(state => state);
   const [number, setNumber] = React.useState('');
   const [showModal, setShowModal] = useState(false);
-  const store = useSelector(state => state);
+  const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
   console.log('store', store);
 
   const validateNumber = () => {

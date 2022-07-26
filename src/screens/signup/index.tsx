@@ -16,7 +16,7 @@ import React, {useState} from 'react';
 import localImages from '../../utils/localImages';
 import Strings from '../../utils/constant/string';
 import {useDispatch, useSelector} from 'react-redux';
-import Names from '../../utils/constant/componentNameStrings';
+import Names from '../../utils/constant/componentNames';
 import {StoreUserData} from '../../redux/signUp/action';
 import CustomButton from '../../components/customButton';
 import Color from '../../utils/constant/colors';
@@ -93,11 +93,11 @@ export default function SignUp({navigation}: any) {
     }
   };
 
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
-
   const onBackPress = () => {
     navigation.goBack();
   };
+
+  const {phoneNo, countryCode} = useSelector((state: any) => state.AuthReducer);
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -159,14 +159,10 @@ export default function SignUp({navigation}: any) {
         </Text>
         <View style={styles.phoneTextViewStyle}>
           <View style={styles.countryCodeView}>
-            <Text style={styles.countryCodeText}>
-              {phoneNumber.split('-')[0]}
-            </Text>
+            <Text style={styles.countryCodeText}>{countryCode}</Text>
           </View>
           <View style={styles.phoneView}>
-            <Text style={styles.phNumberTextStyle}>
-              {phoneNumber.split('-')[1]}
-            </Text>
+            <Text style={styles.phNumberTextStyle}>{phoneNo}</Text>
           </View>
         </View>
 
