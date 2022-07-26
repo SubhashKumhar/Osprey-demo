@@ -14,16 +14,18 @@ import LocalImages from '../../../utils/constant/localImages';
 import CustomTextInput from '../../../components/customTextInput';
 import ComponentNames from '../../../utils/constant/componentNames';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Loader from '../../../components/loader';
 // import Loader from '../../../components/loader';
 
 export default function Login() {
   const dispatch = useDispatch<any>();
   const navigation = useNavigation<any>();
-  const store = useSelector(state => state);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
+  const [countryName, setCountryName] = useState('Singapore');
   const [number, setNumber] = React.useState('');
   const [showModal, setShowModal] = useState(false);
-  const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
-  console.log('store', store);
+  const {countryId} = useSelector((state: any) => state.AuthReducer);
 
   const validateNumber = () => {
     return number.length < 8;
@@ -33,24 +35,26 @@ export default function Login() {
   };
 
   const onContinuePress = () => {
+    setIsLoading(true);
     let payload = {
       countryCode: currentCountryCode,
       phoneNo: number,
-      countryId: '45cbc4a0e4123f6920000002',
+      countryId: countryId,
+      countryName: countryName,
     };
     dispatch(
       storeLoginData(
         payload,
-        (resp: Object) => {
-          console.log('inLOGIN', resp);
-          if (resp?.data?.userExist) {
+        (resp: any) => {
+          setIsLoading(false);
+          if (resp?.data?.data?.userExist) {
             navigation.navigate(ComponentNames.Password);
           } else {
             navigation.navigate(ComponentNames.signUp);
           }
         },
         (error: Object) => {
-          console.log('inLOGIN ERROR', error);
+          console.log('LOGIN ERROR', error);
         },
       ),
     );
@@ -89,6 +93,7 @@ export default function Login() {
             onBackdropPress={onCloseModal}>
             <CountryCode
               onCloseModal={onCloseModal}
+              setCountryName={setCountryName}
               setCurrentCountryCode={setCurrentCountryCode}
             />
           </Modal>
@@ -113,7 +118,7 @@ export default function Login() {
           />
         </View>
       </View>
-      {/* <Loader /> */}
+      {isLoading && <Loader />}
     </KeyboardAwareScrollView>
   );
 }

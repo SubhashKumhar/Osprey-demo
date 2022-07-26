@@ -4,11 +4,10 @@ import {vh, vw} from '../../../utils/dimensions';
 import Color from '../../../utils/constant/colors';
 import localImages from '../../../utils/localImages';
 import ImagePicker from 'react-native-image-crop-picker';
+import LocalImages from '../../../utils/constant/localImages';
 
-export default function ImageSelector({infoData, setInfoDetails}: any) {
-  const [img, setImg] = useState(
-    'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
-  );
+export default function ImageSelector(props: any) {
+  const [img, setImg] = useState(LocalImages.defaultImagePicker);
 
   return (
     <View style={styles.imageMainView}>
@@ -18,9 +17,7 @@ export default function ImageSelector({infoData, setInfoDetails}: any) {
           style={styles.deleteIconView}
           activeOpacity={0.5}
           onPress={() => {
-            setImg(
-              'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png',
-            );
+            setImg(LocalImages.defaultImagePicker);
           }}>
           <Image source={localImages.deleteIcon} style={styles.deleteImage} />
         </TouchableOpacity>
@@ -35,7 +32,7 @@ export default function ImageSelector({infoData, setInfoDetails}: any) {
             }).then(image => {
               console.log(image);
               setImg(image.sourceURL);
-              setInfoDetails({...infoData, profile: img});
+              props.setInfoDetails({...props.infoData, profile: img});
             });
           }}>
           <Image source={{uri: img}} style={styles.selectImageStyle} />

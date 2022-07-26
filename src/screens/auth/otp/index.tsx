@@ -7,23 +7,33 @@ import {
   View,
 } from 'react-native';
 import styles from './styles';
-import {useSelector} from 'react-redux';
 import React, {useEffect, useState} from 'react';
-import Color from '../../../utils/constant/colors';
+import {CommonActions} from '@react-navigation/native';
 import Strings from '../../../utils/constant/string';
-import DottedLine from '../../../components/dottedLine';
-import BackgroundTimer from 'react-native-background-timer';
-import CustomButton from '../../../components/customButton';
 import ItemSeparator from '../../../components/ItemSeparator';
 import LocalImages from '../../../utils/constant/localImages';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
+import Color from '../../../utils/constant/colors';
+import {useDispatch, useSelector} from 'react-redux';
+import CustomButton from '../../../components/customButton';
+import BackgroundTimer from 'react-native-background-timer';
 import ComponentNames from '../../../utils/constant/componentNames';
+import DottedLine from '../../../components/dottedLine';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import Services from '../../../services/Services';
+import EndPoint from '../../../utils/endPoint';
+import {resendOtp} from '../../../redux/auth/action';
+import Loader from '../../../components/loader';
 
 export default function OTP({navigation}: any) {
+  const {phoneNo, countryCode, countryId} = useSelector(
+    (state: any) => state.AuthReducer,
+  );
+  const {accessToken} = useSelector((state: any) => state.SignUpReducer);
+  const [isLoading, setIsLoading] = useState(false);
   const [otp, setOtp] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
-  const {phoneNumber} = useSelector((state: any) => state.AuthReducer);
+  const dispatch = useDispatch<any>();
 
   useEffect(() => {
     startTimer();
@@ -64,14 +74,57 @@ export default function OTP({navigation}: any) {
     };
   };
   const onResetPress = () => {
-    setSecondsLeft(30);
-    setEnableReset(false);
-    startTimer();
+    setIsLoading(true);
+    let payload = {
+      countryCode: countryCode,
+      phoneNo: phoneNo,
+      countryId: countryId,
+    };
+    dispatch(
+      resendOtp(
+        payload,
+        (resp: Object) => {
+          console.log('resp', resp);
+          setIsLoading(false);
+          setSecondsLeft(30);
+          setEnableReset(false);
+          startTimer();
+        },
+        (err: Object) => {
+          setIsLoading(false);
+          console.log('error', err);
+        },
+      ),
+    );
   };
 
   const onContinuePress = () => {
-    setSecondsLeft(0);
-    navigation.navigate(ComponentNames.SetupStack);
+    setIsLoading(true);
+    let payload = {
+      accessToken: accessToken,
+      otp: otp,
+      type: 'SIGNUP',
+    };
+    Services.postApiCall(
+      EndPoint.verifyOtp,
+      payload,
+      (res: Object) => {
+        console.log('successful', res);
+        setIsLoading(false);
+        setSecondsLeft(0);
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: ComponentNames.SetupStack}],
+          }),
+        );
+        // navigation.navigate(ComponentNames.SetupStack);
+      },
+      (err: Object) => {
+        setIsLoading(false);
+        console.log('failed', err);
+      },
+    );
   };
 
   return (
@@ -91,9 +144,13 @@ export default function OTP({navigation}: any) {
             <Text style={styles.otpHeaderText}>{Strings.OTP_Header}</Text>
           </View>
           <DottedLine />
-          <View style={styles.otpSentView}>
-            <Text style={styles.otpSentText}>{Strings.OTP_Sent}</Text>
-            <Text style={styles.number}>{phoneNumber}</Text>
+          <View style={styles.phoneTextViewStyle}>
+            <View style={styles.countryCodeView}>
+              <Text style={styles.countryCodeText}>{countryCode}</Text>
+            </View>
+            <View style={styles.phoneView}>
+              <Text style={styles.phNumberTextStyle}>{` - ${phoneNo}`}</Text>
+            </View>
           </View>
           <OTPInputView
             style={styles.otpView}
@@ -105,9 +162,7 @@ export default function OTP({navigation}: any) {
             placeholderTextColor={Color.lightGrey}
             placeholderCharacter="X"
             codeInputFieldStyle={styles.underlineStyleBase}
-            onCodeFilled={code => {
-              console.log(`Code is ${code}, you are good to go!`);
-            }}
+            onCodeFilled={onContinuePress}
           />
           <View style={styles.resendContainer}>
             <TouchableOpacity
@@ -150,6 +205,7 @@ export default function OTP({navigation}: any) {
           </View>
         </View>
       </KeyboardAvoidingView>
+      {isLoading && <Loader />}
     </SafeAreaView>
   );
 }

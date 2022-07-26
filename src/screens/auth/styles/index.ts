@@ -1,6 +1,7 @@
 import {vh, vw} from '../../../utils/dimensions';
 import {StyleSheet} from 'react-native';
 import Color from '../../../utils/constant/colors';
+import Fonts from '../../../utils/constant/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -77,6 +78,45 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: vw(15),
     alignSelf: 'center',
+  },
+  phoneTextViewStyle: {
+    height: vh(42),
+    alignItems: 'center',
+    borderRadius: 4,
+    flexDirection: 'row',
+  },
+  countryCodeVie: {
+    height: vh(42),
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  countryCodeTex: {
+    fontSize: vh(16),
+    fontFamily: Fonts.Lato_Bold,
+    color: Color.cyanBlue,
+    lineHeight: vh(24),
+  },
+  phoneView: {
+    justifyContent: 'center',
+    width: vw(279),
+    height: vh(42),
+    borderRadius: 4,
+  },
+  phNumberTextStyle: {
+    fontSize: vh(15),
+    fontFamily: Fonts.Lato_Bold,
+    lineHeight: vh(24),
+    color: Color.Cyan_Blue,
+  },
+  forgotPassword: {
+    alignSelf: 'flex-end',
+  },
+  forgotPasswordText: {
+    color: Color.cyanBlue,
+    fontFamily: Fonts.Lato_Black,
+    fontSize: vw(14),
+    lineHeight: vh(16.8),
   },
 });
 export default styles;
