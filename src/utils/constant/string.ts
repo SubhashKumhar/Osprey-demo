@@ -68,6 +68,7 @@ const Strings = {
   Password_Input: 'Enter Password',
   certification: '• Certification',
   Certifications: 'Certifications',
+  forgotPassword: 'Forgot Password',
   LoginHeader: 'Welcome to Pivvot,',
   workExperience: 'Work experience',
   timePreference: 'Time Preference',

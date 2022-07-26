@@ -7,7 +7,7 @@ import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import Button from '../../../component/button';
-import ComponentNames from '../../../utils/constant/componentNameStrings';
+import ComponentNames from '../../../utils/constant/componentNames';
 import BackHeader from '../../../components/backHeader';
 
 export default function WelcomeScreen({navigation}: any) {

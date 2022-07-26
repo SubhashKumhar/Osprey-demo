@@ -16,11 +16,12 @@ import React, {useState} from 'react';
 import localImages from '../../utils/localImages';
 import Strings from '../../utils/constant/string';
 import {useDispatch, useSelector} from 'react-redux';
-import Names from '../../utils/constant/componentNameStrings';
+import Names from '../../utils/constant/componentNames';
 import {StoreUserData} from '../../redux/signUp/action';
 import CustomButton from '../../components/customButton';
 import Color from '../../utils/constant/colors';
 import CustomTextInput from '../../components/customTextInput';
+import Loader from '../../components/loader';
 
 export default function SignUp({navigation}: any) {
   /**
@@ -29,6 +30,10 @@ export default function SignUp({navigation}: any) {
 
   const [err, setErr] = useState(false);
   const [errText, setErrText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const {countryCode, countryName, countryId, phoneNo} = useSelector(
+    (state: any) => state.AuthReducer,
+  );
 
   /**
    * @details state of all the input data
@@ -63,8 +68,32 @@ export default function SignUp({navigation}: any) {
       setErr(true);
       setErrText(Strings.incorrectPassword);
     } else {
-      dispatch(StoreUserData(details));
-      navigation.navigate(Names.OTP);
+      setIsLoading(true);
+      let payload = {
+        firstName: details.fName,
+        middleName: details.mName,
+        lastName: details.lName,
+        email: details.email,
+        password: details.password,
+        countryCode: countryCode,
+        countryName: countryName,
+        countryId: countryId,
+        phoneNo: phoneNo,
+      };
+      dispatch(
+        StoreUserData(
+          payload,
+          (res: any) => {
+            setIsLoading(false);
+            navigation.navigate(Names.OTP);
+            console.log('after Signup', res);
+          },
+          (error: any) => {
+            setIsLoading(false);
+            console.log('error', error);
+          },
+        ),
+      );
       setErr(false);
     }
   };
@@ -92,8 +121,6 @@ export default function SignUp({navigation}: any) {
       return true;
     }
   };
-
-  const {phoneNo, countryCode} = useSelector((state: any) => state.AuthReducer);
 
   const onBackPress = () => {
     navigation.goBack();
@@ -233,6 +260,7 @@ export default function SignUp({navigation}: any) {
           />
         </View>
       </View>
+      {isLoading && <Loader />}
     </SafeAreaView>
   );
 }

@@ -21,6 +21,7 @@ export default function Login() {
   const dispatch = useDispatch<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [currentCountryCode, setCurrentCountryCode] = React.useState('+65');
+  const [countryName, setCountryName] = useState('Singapore');
   const [number, setNumber] = React.useState('');
   const [showModal, setShowModal] = useState(false);
   const {countryId} = useSelector((state: any) => state.AuthReducer);
@@ -38,21 +39,21 @@ export default function Login() {
       countryCode: currentCountryCode,
       phoneNo: number,
       countryId: countryId,
+      countryName: countryName,
     };
     dispatch(
       storeLoginData(
         payload,
-        (resp: Object) => {
-          console.log('inLOGIN', resp);
+        (resp: any) => {
           setIsLoading(false);
-          if (resp?.data?.userExist) {
+          if (resp?.data?.data?.userExist) {
             navigation.navigate(ComponentNames.Password);
           } else {
             navigation.navigate(ComponentNames.signUp);
           }
         },
         (error: Object) => {
-          console.log('inLOGIN ERROR', error);
+          console.log('LOGIN ERROR', error);
         },
       ),
     );
@@ -91,6 +92,7 @@ export default function Login() {
             onBackdropPress={onCloseModal}>
             <CountryCode
               onCloseModal={onCloseModal}
+              setCountryName={setCountryName}
               setCurrentCountryCode={setCurrentCountryCode}
             />
           </Modal>

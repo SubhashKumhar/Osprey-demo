@@ -47,7 +47,6 @@ function AddExperienceDetails() {
         stillInSame: stillEmployed,
         description: description,
       };
-      console.log('temp', temp);
       dispatch(updateManualResume(temp));
     } else {
       let payload = {
