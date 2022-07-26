@@ -4,7 +4,7 @@ import Login from '../screens/auth/login';
 import OTP from '../screens/auth/otp';
 import Password from '../screens/auth/Password';
 import Names from '../utils/constant/componentNames';
-import SignUp from '../screens/signup';
+import SignUp from '../screens/auth/signup';
 
 const AuthStacks = createNativeStackNavigator();
 

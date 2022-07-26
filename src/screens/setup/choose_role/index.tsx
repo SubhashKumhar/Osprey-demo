@@ -1,4 +1,11 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
 import localImages from '../../../utils/localImages';
 import Button from '../../../component/button';
@@ -8,6 +15,7 @@ import Names from '../../../utils/constant/componentNames';
 import {useDispatch} from 'react-redux';
 import {storeProfileType} from '../../../redux/setup/action';
 import Loader from '../../../components/loader';
+import ItemSeparator from '../../../components/ItemSeparator';
 
 export default function Choose_Role({navigation}: any) {
   const [press, setPress] = useState('');
@@ -49,42 +57,44 @@ export default function Choose_Role({navigation}: any) {
   };
 
   return (
-    <View style={styles.parentView}>
-      <View style={styles.mainView}>
-        <Text style={styles.roleTextStyle}>{Strings.chooseRole}</Text>
-      </View>
-
-      <View style={styles.secondViewStyle}>
-        <Image
-          source={localImages.profileTypeImg}
-          style={styles.profileTypeStyle}
-        />
-        <View style={styles.lineView} />
-        <Text style={styles.chooseRoleText}>{Strings.settingUpProfile}</Text>
-        <Text style={styles.setupProfileText}>{Strings.setUpProfileAs}</Text>
-        <View style={styles.workerClientView}>
-          <TouchableOpacity activeOpacity={0.6} onPress={pressWorkerImg}>
-            <Image
-              source={
-                press === '1'
-                  ? localImages.staffWorkerSelected
-                  : localImages.staffWorker
-              }
-              style={styles.staffWorkerStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} onPress={pressClientImg}>
-            <Image
-              source={
-                press === '2'
-                  ? localImages.businessClientSelected
-                  : localImages.businessClient
-              }
-              style={styles.clientStyle}
-            />
-          </TouchableOpacity>
+    <SafeAreaView style={styles.parentView}>
+      <ScrollView contentContainerStyle={styles.innerContainer}>
+        <View style={styles.mainView}>
+          <Text style={styles.roleTextStyle}>{Strings.chooseRole}</Text>
         </View>
-      </View>
+
+        <View style={styles.secondViewStyle}>
+          <Image
+            source={localImages.profileTypeImg}
+            style={styles.profileTypeStyle}
+          />
+          <View style={styles.lineView} />
+          <Text style={styles.chooseRoleText}>{Strings.settingUpProfile}</Text>
+          <Text style={styles.setupProfileText}>{Strings.setUpProfileAs}</Text>
+          <View style={styles.workerClientView}>
+            <TouchableOpacity activeOpacity={0.6} onPress={pressWorkerImg}>
+              <Image
+                source={
+                  press === '1'
+                    ? localImages.staffWorkerSelected
+                    : localImages.staffWorker
+                }
+                style={styles.staffWorkerStyle}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.5} onPress={pressClientImg}>
+              <Image
+                source={
+                  press === '2'
+                    ? localImages.businessClientSelected
+                    : localImages.businessClient
+                }
+                style={styles.clientStyle}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
       <View style={styles.buttonView}>
         <Button
           title="Proceed"
@@ -103,6 +113,6 @@ export default function Choose_Role({navigation}: any) {
         />
       </View>
       {isLoading && <Loader />}
-    </View>
+    </SafeAreaView>
   );
 }
