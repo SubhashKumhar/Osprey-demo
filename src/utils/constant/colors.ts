@@ -21,6 +21,7 @@ const Color = {
   lineSeparator: '#EEEEF4',
   cyanBlueLight: '#F4F8FF',
   Light_SkyBlue: '#d8e6ff',
+  transparent: 'transparent',
   Cyan_Blue_Light: '#71a5ff',
   solitude: 'rgba(223, 235, 255, 1)',
   phoneTextColor: 'rgba(35, 30, 30, 1)',

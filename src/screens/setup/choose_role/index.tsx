@@ -1,27 +1,29 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import localImages from '../../utils/localImages';
-import Button from '../../component/button';
+import localImages from '../../../utils/localImages';
+import Button from '../../../component/button';
 import styles from './style';
-import Strings from '../../utils/constant/string';
-import Names from '../../utils/constant/componentNames';
+import Strings from '../../../utils/constant/string';
+import Names from '../../../utils/constant/componentNames';
+import {useDispatch} from 'react-redux';
+import {storeProfileType} from '../../../redux/setup/action';
+import Loader from '../../../components/loader';
 
 export default function Choose_Role({navigation}: any) {
-  const [press, setPress] = useState(false);
-  const [clientPress, setClientPress] = useState(false);
+  const [press, setPress] = useState('');
+  const dispatch = useDispatch<any>();
+  const [isLoading, setLoading] = useState(false);
 
   const pressWorkerImg = () => {
-    setPress(true);
-    setClientPress(false);
+    setPress('1');
   };
 
   const pressClientImg = () => {
-    setClientPress(true);
-    setPress(false);
+    setPress('2');
   };
 
   const isDisable = () => {
-    if (press == true || clientPress == true) {
+    if (press !== '') {
       return false;
     } else {
       return true;
@@ -29,7 +31,21 @@ export default function Choose_Role({navigation}: any) {
   };
 
   const onBtnPress = () => {
-    navigation.navigate(Names.welcomeScreen);
+    setLoading(true);
+    dispatch(
+      storeProfileType(
+        press,
+        (resp: any) => {
+          console.log('resp', resp);
+          setLoading(false);
+          navigation.navigate(Names.welcomeScreen);
+        },
+        (error: any) => {
+          setLoading(false);
+          console.log('error', error);
+        },
+      ),
+    );
   };
 
   return (
@@ -50,7 +66,7 @@ export default function Choose_Role({navigation}: any) {
           <TouchableOpacity activeOpacity={0.6} onPress={pressWorkerImg}>
             <Image
               source={
-                press
+                press === '1'
                   ? localImages.staffWorkerSelected
                   : localImages.staffWorker
               }
@@ -60,7 +76,7 @@ export default function Choose_Role({navigation}: any) {
           <TouchableOpacity activeOpacity={0.5} onPress={pressClientImg}>
             <Image
               source={
-                clientPress
+                press === '2'
                   ? localImages.businessClientSelected
                   : localImages.businessClient
               }
@@ -74,18 +90,19 @@ export default function Choose_Role({navigation}: any) {
           title="Proceed"
           disabled={isDisable()}
           customContainerStyle={[
-            press == true || clientPress == true
+            press === '1' || press === '2'
               ? styles.buttonContainerView
               : styles.buttonUnselectedContainerView,
           ]}
           customTextStyle={[
-            press == true || clientPress == true
+            press === '2' || press === '1'
               ? styles.buttonTitleView
               : styles.buttonUnselectedText,
           ]}
           onPress={onBtnPress}
         />
       </View>
+      {isLoading && <Loader />}
     </View>
   );
 }

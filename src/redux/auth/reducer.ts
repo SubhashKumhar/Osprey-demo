@@ -18,6 +18,8 @@ export const AuthReducer = (
       return {...state, ...payload};
     case 'Store_authToken':
       return {...state, authToken: payload};
+    case 'Store_CountryId':
+      return {...state, countryId: payload};
     default:
       return state;
   }

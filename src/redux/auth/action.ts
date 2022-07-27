@@ -62,4 +62,10 @@ const resendOtp = (
   };
 };
 
-export {storeLoginData, storePassword, resendOtp};
+const storeCountryId = (payload: any) => {
+  return (dispatch: Function) => {
+    dispatch({type: 'Store_CountryId', payload});
+  };
+};
+
+export {storeLoginData, storePassword, resendOtp, storeCountryId};

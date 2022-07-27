@@ -10,10 +10,7 @@ const Stacks = createNativeStackNavigator();
 export default function MainStack() {
   return (
     <NavigationContainer>
-      <Stacks.Navigator
-        screenOptions={{headerShown: false}}
-        // initialRouteName={Names.SetupStack}
-      >
+      <Stacks.Navigator screenOptions={{headerShown: false}}>
         <Stacks.Screen name={Names.AuthStack} component={AuthStack} />
         <Stacks.Screen name={Names.SetupStack} component={SetupStack} />
       </Stacks.Navigator>

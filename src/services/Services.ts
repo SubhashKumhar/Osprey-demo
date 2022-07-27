@@ -2,6 +2,9 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 import store from '../redux/store';
 import Device from '../utils/device';
+import {showToast} from '../utils/commonFunctions';
+import ScreenNames from '../utils/constant/componentNames';
+import {navigationRef} from './navigationServices';
 
 const deviceId = Device.getUniqueId();
 const devicedetail = {
@@ -25,73 +28,73 @@ const $http = axios.create({
   timeout: 30000,
 });
 
-// $http.interceptors.response.use(
-//   (config: any) => config,
-//   (error: any) => {
-// if (
-//   error?.message?.includes('403') ||
-//   error?.message?.includes('401') || //Session expire
-//   error?.message?.includes('498')
-//   // ||
-//   // error?.message?.includes('440') // Session expire
-// )
-// {
-// commonFunction.showSnackbar('Something Went Wrong', 'black');
-// const route = navigationRef.current?.getCurrentRoute().name;
+$http.interceptors.response.use(
+  (config: any) => config,
+  (error: any) => {
+    if (
+      error?.message?.includes('403') ||
+      error?.message?.includes('401') || //Session expire
+      error?.message?.includes('498')
+      // ||
+      // error?.message?.includes('440') // Session expire
+    ) {
+      showToast('Something Went Wrong');
+      const route = navigationRef.current?.getCurrentRoute().name;
 
-//   if (
-//     route !== ScreenNames.SignIn &&
-//     route !== ScreenNames.ForgotPassword &&
-//     route !== ScreenNames.SignUp &&
-//     route !== ScreenNames.FINDACCOUNT &&
-//     route !== ScreenNames.ForgotPassword
-//   ) {
-//     handleApiError();
-//   } else {
-//     if (
-//       !error?.message?.includes('401') &&
-//       !error?.message?.includes('498')
-//     ) {
-//       // commonFunction.showSnackbar(error?.response?.data?.message, 'black');
-//     }
-//   }
-// } else {
-//   // commonFunction.showSnackbar(error?.response?.data?.message, 'black');
-// }
-//     return error;
-//   },
-// );
+      // if (
+      //   route !== ScreenNames.Login &&
+      //   route !== ScreenNames.ForgotPassword &&
+      //   route !== ScreenNames.signUp &&
+      //   route !== ScreenNames.FINDACCOUNT &&
+      //   route !== ScreenNames.ForgotPassword
+      // ) {
+      //   handleApiError();
+      // } else {
+      //   if (
+      //     !error?.message?.includes('401') &&
+      //     !error?.message?.includes('498')
+      //   ) {
+      //     // commonFunction.showSnackbar(error?.response?.data?.message, 'black');
+      //   }
+      // }
+    } else {
+      showToast(error?.response?.data?.message);
+    }
+    return error;
+  },
+);
 
 const handleApiError = () => {
   // navigationRef.current.navigate(ScreenNames.SessionExpiry);
 };
 
-// $http.interceptors.request.use(
-//   async (req: any) => {
-//     if (req?.headers) {
-//       const getState = await store?.getState();
-//       if (getState) {
-//         const {authToken = '', pushToken = ''} = getState?.Auth;
+$http.interceptors.request.use(
+  async (req: any) => {
+    if (req?.headers) {
+      const getState = await store?.getState();
+      console.log('getState', getState);
+      if (getState) {
+        const {authToken = '', pushToken = ''} = getState?.AuthReducer;
 
-//         if (pushToken && pushToken.length > 0) {
-//           //@ts-ignore
-//           $http.defaults.headers.devicedetails = JSON.stringify({
-//             ...devicedetail,
-//             ...{deviceToken: pushToken},
-//           });
-//         }
+        // if (pushToken && pushToken.length > 0) {
+        //   //@ts-ignore
+        //   $http.defaults.headers.devicedetails = JSON.stringify({
+        //     ...devicedetail,
+        //     ...{deviceToken: pushToken},
+        //   });
+        // }
 
-//         if (authToken && authToken.length > 0) {
-//           $http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
-//         }
-//       }
-//     }
-//     return req;
-//   },
-//   (err: any) => {
-//     return err;
-//   },
-// );
+        if (authToken && authToken.length > 0) {
+          $http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
+        }
+      }
+    }
+    return req;
+  },
+  (err: any) => {
+    return err;
+  },
+);
 
 const setAuthorizationToken = (token: string, _: string = '') => {
   if (token) {

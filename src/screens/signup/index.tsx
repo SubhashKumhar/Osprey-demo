@@ -22,6 +22,7 @@ import CustomButton from '../../components/customButton';
 import Color from '../../utils/constant/colors';
 import CustomTextInput from '../../components/customTextInput';
 import Loader from '../../components/loader';
+import {showToast} from '../../utils/commonFunctions';
 
 export default function SignUp({navigation}: any) {
   /**
@@ -90,7 +91,7 @@ export default function SignUp({navigation}: any) {
           },
           (error: any) => {
             setIsLoading(false);
-            console.log('error', error);
+            showToast(error.data.message);
           },
         ),
       );
