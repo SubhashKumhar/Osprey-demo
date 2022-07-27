@@ -12,6 +12,7 @@ const initial_state = {
     sun: '',
   },
   manualResume: [],
+  accountType: '',
 };
 
 export const SetupReducer = (
@@ -32,6 +33,8 @@ export const SetupReducer = (
       return {...state, manualResume: [...state.manualResume, payload]};
     case 'Update_ManualResume':
       return {...state, manualResume: payload};
+    case 'Store_ProfileType':
+      return {...state, accountType: payload};
     default:
       return state;
   }

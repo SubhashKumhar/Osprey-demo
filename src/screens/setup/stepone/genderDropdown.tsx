@@ -44,7 +44,7 @@ export default function GenderDropdown({
               <TouchableOpacity
                 key={String(i)}
                 onPress={() => {
-                  setInfoDetails({...infoData, gender : val})
+                  setInfoDetails({...infoData, gender: val});
                   onSelectedItem(val);
                 }}
                 style={styles.genderItemStyle}

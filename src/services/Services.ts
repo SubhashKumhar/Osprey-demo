@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {Platform} from 'react-native';
-import store from '../redux/store';
 import Device from '../utils/device';
 
 const deviceId = Device.getUniqueId();

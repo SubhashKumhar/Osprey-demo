@@ -10,7 +10,7 @@ export default function Loader() {
       <Spinner
         isVisible={true}
         size={vh(50)}
-        type={'Circle'}
+        type={'FadingCircleAlt'}
         color={Color.peach}
       />
     </View>

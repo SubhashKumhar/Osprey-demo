@@ -7,27 +7,27 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import React, {useMemo, useState} from 'react';
 import styles from './styles';
-import LocalImages from '../../../utils/constant/localImages';
-import Strings from '../../../utils/constant/string';
-import {useNavigation} from '@react-navigation/native';
-import ItemSeparator from '../../../components/ItemSeparator';
-import Color from '../../../utils/constant/colors';
-import DottedLine from '../../../components/dottedLine';
-import CustomButtonWithBorder from '../../../components/customButtonWithBorder';
-import CustomButton from '../../../components/customButton';
-import ModalWithTick from '../../../components/modalWithSearch';
+import Header from './header';
+import Skills from './skills';
+import JobRole from './jobRoles';
+import Location from './location';
 import Modal from 'react-native-modal';
 import {useSelector} from 'react-redux';
-import LocalData from '../../../utils/constant/localData';
-import TimePreferenceModal from '../components/timePreferenceModal';
+import React, {useMemo, useState} from 'react';
 import SkillModal from '../components/skillModal';
+import Color from '../../../utils/constant/colors';
+import Strings from '../../../utils/constant/string';
+import {useNavigation} from '@react-navigation/native';
+import DottedLine from '../../../components/dottedLine';
+import LocalData from '../../../utils/constant/localData';
+import CustomButton from '../../../components/customButton';
+import LocalImages from '../../../utils/constant/localImages';
+import ItemSeparator from '../../../components/ItemSeparator';
+import ModalWithTick from '../../../components/modalWithSearch';
 import ComponentNames from '../../../utils/constant/componentNames';
-import Header from './header';
-import Location from './location';
-import JobRole from './jobRoles';
-import Skills from './skills';
+import TimePreferenceModal from '../components/timePreferenceModal';
+import CustomButtonWithBorder from '../../../components/customButtonWithBorder';
 
 function Step2() {
   const navigation = useNavigation<any>();
