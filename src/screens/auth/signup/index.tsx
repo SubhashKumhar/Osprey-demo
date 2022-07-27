@@ -10,19 +10,19 @@ import {
   passwordTest,
   emailTest,
   firstNameTest,
-} from '../../utils/constant/validation';
+} from '../../../utils/constant/validation';
 import styles from './style';
 import React, {useState} from 'react';
-import localImages from '../../utils/localImages';
-import Strings from '../../utils/constant/string';
+import Loader from '../../../components/loader';
+import Color from '../../../utils/constant/colors';
+import localImages from '../../../utils/localImages';
+import Strings from '../../../utils/constant/string';
 import {useDispatch, useSelector} from 'react-redux';
-import Names from '../../utils/constant/componentNames';
-import {StoreUserData} from '../../redux/signUp/action';
-import CustomButton from '../../components/customButton';
-import Color from '../../utils/constant/colors';
-import CustomTextInput from '../../components/customTextInput';
-import Loader from '../../components/loader';
-import {showToast} from '../../utils/commonFunctions';
+import {showToast} from '../../../utils/commonFunctions';
+import Names from '../../../utils/constant/componentNames';
+import {StoreUserData} from '../../../redux/signUp/action';
+import CustomButton from '../../../components/customButton';
+import CustomTextInput from '../../../components/customTextInput';
 
 export default function SignUp({navigation}: any) {
   /**
@@ -35,7 +35,6 @@ export default function SignUp({navigation}: any) {
   const {countryCode, countryName, countryId, phoneNo} = useSelector(
     (state: any) => state.AuthReducer,
   );
-
   /**
    * @details state of all the input data
    */

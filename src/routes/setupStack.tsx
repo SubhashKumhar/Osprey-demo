@@ -6,9 +6,9 @@ import Step3 from '../screens/setup/step3';
 import ComponentNames from '../utils/constant/componentNames';
 import Names from '../utils/constant/componentNames';
 import Choose_Role from '../screens/setup/choose_role';
-import WelcomeScreen from '../screens/welcome/stepone/welcomeScreen';
-import BasicInfo from '../screens/welcome/stepone/basicInfo';
-import Picker from '../screens/welcome/stepone/datePicker';
+import WelcomeScreen from '../screens/setup/stepone/welcomeScreen';
+import BasicInfo from '../screens/setup/stepone/basicInfo';
+import Picker from '../screens/setup/stepone/datePicker';
 
 const SetupStacks = createNativeStackNavigator();
 

@@ -23,6 +23,7 @@ const Strings = {
   pageOne: 'page=1',
   allDay: 'All Day',
   resume: '• Resume',
+  proceed: 'Proceed',
   country: 'Country',
   zipcode: 'Zipcode',
   location: 'Location',

@@ -23,11 +23,11 @@ const Color = {
   Light_SkyBlue: '#d8e6ff',
   transparent: 'transparent',
   Cyan_Blue_Light: '#71a5ff',
+  cyanLightOpacity: '#2474FF0D',
+  darkTextInputColor: '#EBF1FC',
   solitude: 'rgba(223, 235, 255, 1)',
   phoneTextColor: 'rgba(35, 30, 30, 1)',
   TextInputBackground: 'rgba(36, 116, 255, 0.05)',
-  cyanLightOpacity: '#2474FF0D',
-  darkTextInputColor: '#EBF1FC',
   textInputBackground: 'rgba(36, 116, 255, 0.05)',
 };
 

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {vh, vw} from '../../utils/dimensions';
-import Color from '../../utils/constant/colors';
+import {vh, vw} from '../../../utils/dimensions';
+import Color from '../../../utils/constant/colors';
 
 const styles = StyleSheet.create({
   mainView: {

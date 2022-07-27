@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import Picker from './datePicker';
+import {useDispatch} from 'react-redux';
 import ModalScreen from './modalScreen';
 import ImageSelector from './imageSelector';
 import GenderDropdown from './genderDropdown';
@@ -16,11 +17,10 @@ import Color from '../../../utils/constant/colors';
 import React, {useCallback, useState} from 'react';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
-import {useDispatch} from 'react-redux';
 import BackHeader from '../../../components/backHeader';
+import {InfoUserData} from '../../../redux/welcome/action';
 import CustomButton from '../../../components/customButton';
 import ComponentNames from '../../../utils/constant/componentNames';
-import {InfoUserData} from '../../../redux/welcome/action';
 
 const data = [
   {
@@ -110,12 +110,12 @@ const BasicInfo = ({navigation}: any) => {
 
   const onPressSaveData = () => {
     dispatch(InfoUserData(infoDetails));
-    navigation.navigate(ComponentNames.SetupStack);
+    navigation.navigate(ComponentNames.Step2);
   };
 
   return (
     <SafeAreaView style={styles.parentMainView}>
-      <BackHeader title={'Basic Info'} />
+      <BackHeader title={Strings.basicInfo} />
       <ScrollView
         style={styles.scrollSecondView}
         showsVerticalScrollIndicator={false}>
@@ -301,12 +301,6 @@ const BasicInfo = ({navigation}: any) => {
           disable={false}
           disableColor={''}
         />
-        {/* <Button
-          title="Save and Continue"
-          customContainerStyle={[styles.buttonContainerView]}
-          customTextStyle={styles.buttonTitleView}
-          onPress={onPressSaveData}
-        /> */}
       </View>
     </SafeAreaView>
   );

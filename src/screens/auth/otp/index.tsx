@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import styles from './styles';
 import React, {useEffect, useState} from 'react';
 import {CommonActions} from '@react-navigation/native';
 import Strings from '../../../utils/constant/string';
-import styles from './styles';
 import ItemSeparator from '../../../components/ItemSeparator';
 import LocalImages from '../../../utils/constant/localImages';
 import Color from '../../../utils/constant/colors';
