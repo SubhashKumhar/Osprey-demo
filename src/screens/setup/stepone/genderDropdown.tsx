@@ -4,13 +4,7 @@ import {vh, vw} from '../../../utils/dimensions';
 import Color from '../../../utils/constant/colors';
 import localImages from '../../../utils/localImages';
 
-export default function GenderDropdown({
-  data,
-  value,
-  infoData,
-  setInfoDetails,
-  onSelect = () => {},
-}: any) {
+export default function GenderDropdown({data, infoData, onSelect}: any) {
   const [showData, setShowData] = useState(false);
 
   const onSelectedItem = (val: any) => {
@@ -27,7 +21,7 @@ export default function GenderDropdown({
           setShowData(!showData);
         }}>
         <Text style={styles.textStyle}>
-          {value ? value?.name : 'Select Gender'}
+          {infoData.gender ? infoData?.gender?.name : 'Select Gender'}
         </Text>
         <Image
           source={localImages.bottomArrow}
@@ -44,7 +38,7 @@ export default function GenderDropdown({
               <TouchableOpacity
                 key={String(i)}
                 onPress={() => {
-                  setInfoDetails({...infoData, gender: val});
+                  // setInfoDetails({...infoData, gender: val});
                   onSelectedItem(val);
                 }}
                 style={styles.genderItemStyle}
