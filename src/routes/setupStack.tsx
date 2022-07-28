@@ -16,7 +16,7 @@ export default function SetupStack() {
   return (
     <SetupStacks.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={ComponentNames.role}>
+      initialRouteName={ComponentNames.basicInfo}>
       <SetupStacks.Screen name={Names.role} component={Choose_Role} />
       <SetupStacks.Screen
         name={Names.welcomeScreen}
