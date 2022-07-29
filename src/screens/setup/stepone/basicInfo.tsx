@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import Picker from './datePicker';
+import {data, gender} from './data';
 import {useDispatch} from 'react-redux';
 import ModalScreen from './modalScreen';
 import ImageSelector from './imageSelector';
@@ -22,59 +23,22 @@ import {InfoUserData} from '../../../redux/welcome/action';
 import CustomButton from '../../../components/customButton';
 import ComponentNames from '../../../utils/constant/componentNames';
 
-const data = [
-  {
-    item: Strings.warehouseAssistent,
-    state: false,
-  },
-  {
-    item: Strings.picker,
-    state: false,
-  },
-  {
-    item: Strings.forkliftDriver,
-    state: false,
-  },
-  {
-    item: Strings.deliveryDriver,
-    state: false,
-  },
-  {
-    item: Strings.administrativeAssistant,
-    state: false,
-  },
-  {
-    item: Strings.frontDeskAssistant,
-    state: false,
-  },
-  {
-    item: Strings.customerServiceAssistant,
-    state: false,
-  },
-];
-
-const gender = [
-  {
-    id: 1,
-    name: 'Male',
-  },
-  {
-    id: 2,
-    name: 'Female',
-  },
-  {
-    id: 3,
-    name: 'Others',
-  },
-];
-
 const BasicInfo = ({navigation}: any) => {
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [selJob, setJob] = useState(data[0].item);
-  const [selectGender, setSelectGender] = useState(null);
+  const [selJob, setJob] = useState(data[0]?.item);
   const dispatch = useDispatch<any>();
+  const [infoDetails, setInfoDetails] = useState({
+    natinality: '',
+    location: '',
+    address: '',
+    cName: '',
+    zipcode: '',
+    job: '',
+    date: new Date(),
+    gender: null,
+    profile: '',
+  });
 
   const onCalenderPress = () => {
     setOpen(true);
@@ -89,23 +53,11 @@ const BasicInfo = ({navigation}: any) => {
       setJob(item);
       setInfoDetails({...infoDetails, job: item});
     },
-    [selJob],
+    [infoDetails],
   );
 
-  const [infoDetails, setInfoDetails] = useState({
-    natinality: '',
-    location: '',
-    address: '',
-    cName: '',
-    zipcode: '',
-    job: '',
-    date: '',
-    gender: '',
-    profile: '',
-  });
-
   const onSelect = (item: React.SetStateAction<null>) => {
-    setSelectGender(item);
+    setInfoDetails({...infoDetails, gender: item});
   };
 
   const onPressSaveData = () => {
@@ -144,11 +96,9 @@ const BasicInfo = ({navigation}: any) => {
               <Text style={styles.astrickStyle}>{Strings.astrick}</Text>
             </Text>
             <GenderDropdown
-              value={selectGender}
               data={gender}
               onSelect={onSelect}
               infoData={infoDetails}
-              setInfoDetails={setInfoDetails}
             />
           </View>
           <View style={styles.calanderView}>
@@ -158,9 +108,11 @@ const BasicInfo = ({navigation}: any) => {
             </Text>
             <View style={styles.calenderView}>
               <Text style={styles.calenderText}>
-                {`${JSON.stringify(date.getDate())}/${JSON.stringify(
-                  date.getMonth() + 1,
-                )}/${JSON.stringify(date.getFullYear())}`}
+                {`${JSON.stringify(
+                  infoDetails?.date?.getDate(),
+                )}/${JSON.stringify(
+                  infoDetails.date.getMonth() + 1,
+                )}/${JSON.stringify(infoDetails.date.getFullYear() - 18)}`}
               </Text>
               <TouchableOpacity onPress={onCalenderPress}>
                 <Image
@@ -173,8 +125,6 @@ const BasicInfo = ({navigation}: any) => {
                 setOpen={setOpen}
                 infoData={infoDetails}
                 setInfoDetails={setInfoDetails}
-                date={date}
-                setDate={setDate}
               />
             </View>
           </View>
@@ -211,7 +161,7 @@ const BasicInfo = ({navigation}: any) => {
           </Text>
           <View style={styles.nationalityViewStyle}>
             <Input
-              place="Singapore"
+              place={Strings.singapore}
               placeholderColor={styles.placeColor}
               style={styles.inputViewStyle}
               maxLength={30}
@@ -226,7 +176,7 @@ const BasicInfo = ({navigation}: any) => {
           <Text style={styles.genderText}>{`${Strings.country}`}</Text>
           <View style={styles.nationalityViewStyle}>
             <Input
-              place="Singapore"
+              place={Strings.singapore}
               placeholderColor={styles.placeColor}
               style={styles.inputViewStyle}
             />
@@ -237,7 +187,7 @@ const BasicInfo = ({navigation}: any) => {
           <Text style={styles.genderText}>{`${Strings.location}`}</Text>
           <View style={styles.nationalityViewStyle}>
             <Input
-              place="Location"
+              place={Strings.location}
               placeholderColor={styles.placeColor}
               style={styles.inputViewStyle}
               onChangeText={(text: string) => {
@@ -251,7 +201,7 @@ const BasicInfo = ({navigation}: any) => {
           <Text style={styles.genderText}>{`${Strings.streetAddress}`}</Text>
           <View style={styles.nationalityViewStyle}>
             <Input
-              place="Address"
+              place={Strings.address}
               placeholderColor={styles.placeColor}
               style={styles.inputViewStyle}
               onChangeText={(text: string) => {
@@ -265,7 +215,7 @@ const BasicInfo = ({navigation}: any) => {
           <Text style={styles.genderText}>{`${Strings.cityName}`}</Text>
           <View style={styles.nationalityViewStyle}>
             <Input
-              place="City Name"
+              place={Strings.cityName}
               placeholderColor={styles.placeColor}
               style={styles.inputViewStyle}
               onChangeText={(text: string) => {
@@ -279,7 +229,7 @@ const BasicInfo = ({navigation}: any) => {
           <Text style={styles.genderText}>{`${Strings.zipcode}`}</Text>
           <View style={styles.nationalityViewStyle}>
             <Input
-              place="Zipcode"
+              place={Strings.zipcode}
               placeholderColor={styles.placeColor}
               style={styles.inputViewStyle}
               onChangeText={(text: string) => {
