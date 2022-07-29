@@ -30,7 +30,7 @@ export default function WelcomeScreen({navigation}: any) {
     },
   ];
 
-  const {data} = useSelector((store: any) => store.SignUpReducer);
+  const {userData} = useSelector((store: any) => store.SignUpReducer);
   const onBtnPress = () => {
     navigation.navigate(ComponentNames.basicInfo);
   };
@@ -43,7 +43,8 @@ export default function WelcomeScreen({navigation}: any) {
       <View style={styles.secondView}>
         <View style={styles.welcomeTextView}>
           <Image source={localImages.confirmationCheck} />
-          <Text style={styles.wecomeText}>{`Welcome ${data.fName} !`}</Text>
+          <Text
+            style={styles.wecomeText}>{`Welcome ${userData?.fName} !`}</Text>
           <Text style={styles.successfullAccountText}>
             {Strings.succesfullyCreatedAccount}
           </Text>

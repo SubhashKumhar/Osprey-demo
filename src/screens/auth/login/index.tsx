@@ -54,6 +54,7 @@ export default function Login() {
           }
         },
         (error: any) => {
+          setIsLoading(false);
           showToast(error.data.message);
         },
       ),
