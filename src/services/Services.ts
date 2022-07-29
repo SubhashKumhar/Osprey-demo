@@ -1,15 +1,11 @@
 import axios from 'axios';
-import {Platform} from 'react-native';
-import Device from '../utils/device';
-import {showToast} from '../utils/commonFunctions';
 import ScreenNames from '../utils/constant/componentNames';
+import {Platform} from 'react-native';
+import {showToast} from '../utils/commonFunctions';
+import store from '../redux/store';
+import DeviceInfo from 'react-native-device-info';
 import {navigationRef} from './navigationServices';
-
-const deviceId = Device.getUniqueId();
-const devicedetail = {
-  deviceType: Platform.OS === 'android' ? 0 : 1,
-  deviceId: JSON.stringify(deviceId),
-};
+// import Config from 'react-native-config';
 
 const isAndroid = Platform.OS === 'android';
 const PlatformNumber = isAndroid ? 0 : 1;
@@ -17,14 +13,21 @@ const ENV_DATA = {
   BASE_URL: 'https://qspreydevapi.appskeeper.in/api/v1',
 };
 
+const deviceId = DeviceInfo.getUniqueId();
+
+const devicedetail = {
+  deviceId,
+  deviceToken: '',
+  deviceType: Platform.OS === 'android' ? 0 : 1,
+};
+
 const $http = axios.create({
   baseURL: ENV_DATA.BASE_URL,
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
-    offset: new Date().getTimezoneOffset(),
-    devicedetails: JSON.stringify(devicedetail),
+    offset: `${new Date().getTimezoneOffset()}`,
   },
-  timeout: 30000,
 });
 
 $http.interceptors.response.use(
@@ -37,25 +40,25 @@ $http.interceptors.response.use(
       // ||
       // error?.message?.includes('440') // Session expire
     ) {
-      showToast('Something Went Wrong');
+      // commonFunction.showSnackbar('Something Went Wrong', 'black');
       const route = navigationRef.current?.getCurrentRoute().name;
 
-      // if (
-      //   route !== ScreenNames.Login &&
-      //   route !== ScreenNames.ForgotPassword &&
-      //   route !== ScreenNames.signUp &&
-      //   route !== ScreenNames.FINDACCOUNT &&
-      //   route !== ScreenNames.ForgotPassword
-      // ) {
-      //   handleApiError();
-      // } else {
-      //   if (
-      //     !error?.message?.includes('401') &&
-      //     !error?.message?.includes('498')
-      //   ) {
-      //     // commonFunction.showSnackbar(error?.response?.data?.message, 'black');
-      //   }
-      // }
+      if (
+        route !== ScreenNames.Login &&
+        // route !== ScreenNames.ForgotPassword &&
+        route !== ScreenNames.signUp
+        // route !== ScreenNames.FINDACCOUNT &&
+        // route !== ScreenNames.ForgotPassword
+      ) {
+        handleApiError();
+      } else {
+        if (
+          !error?.message?.includes('401') &&
+          !error?.message?.includes('498')
+        ) {
+          showToast(error?.response?.data?.message);
+        }
+      }
     } else {
       showToast(error?.response?.data?.message);
     }
@@ -71,17 +74,16 @@ $http.interceptors.request.use(
   async (req: any) => {
     if (req?.headers) {
       const getState = await store?.getState();
-      console.log('getState', getState);
       if (getState) {
         const {authToken = '', pushToken = ''} = getState?.AuthReducer;
 
-        // if (pushToken && pushToken.length > 0) {
-        //   //@ts-ignore
-        //   $http.defaults.headers.devicedetails = JSON.stringify({
-        //     ...devicedetail,
-        //     ...{deviceToken: pushToken},
-        //   });
-        // }
+        if (pushToken && pushToken.length > 0) {
+          //@ts-ignore
+          $http.defaults.headers.devicedetails = JSON.stringify({
+            ...devicedetail,
+            ...{deviceToken: pushToken},
+          });
+        }
 
         if (authToken && authToken.length > 0) {
           $http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
