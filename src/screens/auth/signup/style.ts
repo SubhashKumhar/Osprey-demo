@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {normalize,vh,vw} from '../../utils/dimensions';
-import Color from '../../utils/constant/colors';
+import {vh, vw} from '../../../utils/dimensions';
+import Color from '../../../utils/constant/colors';
 
 const styles = StyleSheet.create({
   mainView: {
@@ -49,20 +49,24 @@ const styles = StyleSheet.create({
   astrickColor: {
     color: 'red',
   },
+  passwordTextInput: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   inputTextViewStyle: {
     height: vh(42),
     padding: vh(16),
-   justifyContent: 'space-between',
-   alignItems:'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#dfebff',
     borderRadius: 4,
-    flexDirection:'row'
+    flexDirection: 'row',
   },
   NextNameText: {
     lineHeight: vh(24),
     fontWeight: '400',
     fontSize: vh(14),
-    marginTop: vh(24),
+    marginTop: vh(20),
     color: Color.Black,
   },
   optionalTextColor: {
@@ -94,44 +98,61 @@ const styles = StyleSheet.create({
     marginLeft: vw(8),
   },
   buttonContainerView: {
-    backgroundColor: '#2474ff',
     marginHorizontal: vw(16),
-    marginTop: vh(12),
-    borderRadius: 4,
-  },
-  buttonTitleView: {
-    color: Color.White,
-    fontWeight: '600',
   },
   phoneTextViewStyle: {
     height: vh(42),
-    alignItems:'center',
+    alignItems: 'center',
     borderRadius: 4,
-    flexDirection:'row'
+    flexDirection: 'row',
+    marginTop: vh(10),
   },
-  countryCodeView:{
+  countryCodeView: {
     height: vh(42),
     width: vw(56),
-    backgroundColor: '#dfebff',
+    backgroundColor: Color.textInputBackground,
     borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  countryCodeText:{fontSize: vh(16), color: '#231e1e'},
-  phoneView:{
+  countryCodeText: {fontSize: vh(16), color: '#6e7f80'},
+  phoneView: {
     marginLeft: vw(8),
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dfebff',
+    backgroundColor: Color.textInputBackground,
     width: vw(279),
     height: vh(42),
-    borderRadius:4
+    borderRadius: 4,
   },
-  eyeIconStyle:{
-    height:vh(30),
-    width:vh(30)
-  }
-
+  eyeContainer: {
+    height: vh(30),
+    width: vh(30),
+    position: 'absolute',
+    right: vw(10),
+    top: vh(17),
+  },
+  eyeIconStyle: {
+    height: '100%',
+    width: '100%',
+  },
+  phNumberTextStyle: {
+    marginLeft: vw(10),
+    fontSize: vh(15),
+    color: '#6e7f80',
+  },
+  errorStyleView: {
+    top: 30,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  errorImg: {
+    height: 20,
+    width: 20,
+  },
+  errorText: {
+    marginLeft: 5,
+    color: 'red',
+  },
 });
 
 export default styles;

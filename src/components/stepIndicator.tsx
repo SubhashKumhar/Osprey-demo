@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     width: vw(24),
     justifyContent: 'center',
     alignItems: 'center',
+    // top: vh(8),
   },
   arrowleft: {
     height: '100%',

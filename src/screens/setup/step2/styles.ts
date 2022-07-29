@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Lato_Semibold,
     lineHeight: vh(16.8),
     marginTop: vh(16),
+    color: Color.black,
   },
   addSkillButton: {
     height: vh(42),
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: vw(14),
     fontFamily: Fonts.Lato_Bold,
     lineHeight: vh(16.8),
+    color: Color.black,
   },
   selectedJobRoles: {
     flexDirection: 'row',
@@ -188,6 +190,7 @@ const styles = StyleSheet.create({
     fontSize: vw(14),
     fontFamily: Fonts.Lato_Semibold,
     lineHeight: vh(16.8),
+    color: Color.black,
   },
   editIcon: {
     height: vh(24),
@@ -198,7 +201,7 @@ const styles = StyleSheet.create({
     marginHorizontal: vw(7),
     height: vh(92),
     alignItems: 'center',
-    width: vw(34),
+    width: vw(35.5),
   },
   timeIcon: {
     height: vh(30),
@@ -208,6 +211,26 @@ const styles = StyleSheet.create({
   },
   timeFlatlist: {
     // paddingHorizontal: vw(16),
+  },
+  timePreferenceSelectedText: {
+    color: Color.black,
+    fontFamily: Fonts.Lato_Semibold,
+  },
+  itemTitle: {
+    flexDirection: 'row',
+    marginTop: vh(16),
+  },
+  astrickText: {
+    color: Color.red,
+    fontSize: vw(14),
+    lineHeight: vh(16.8),
+    fontFamily: Fonts.Lato_Medium,
+  },
+  itemTitleText: {
+    fontSize: vw(14),
+    lineHeight: vh(16.8),
+    color: Color.black,
+    fontFamily: Fonts.Lato_Medium,
   },
 });
 export default styles;

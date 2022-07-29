@@ -12,22 +12,34 @@ import LocalImages from '../../../utils/constant/localImages';
 import {useNavigation} from '@react-navigation/native';
 import ComponentNames from '../../../utils/constant/componentNames';
 import {storePassword} from '../../../redux/auth/action';
+import {showToast} from '../../../utils/commonFunctions';
 
 export default function Password() {
   const navigation = useNavigation<any>();
   const [password, setPassword] = React.useState<string>('');
   const [showPassword, setShowPassword] = useState(true);
-  const authDetails = useSelector((state: any) => state.AuthReducer);
+  const {countryCode, phoneNo} = useSelector((state: any) => state.AuthReducer);
   const dispatch = useDispatch<any>();
+
   const onChangeText = (text: any) => {
     setPassword(text);
   };
   const onLoginPress = () => {
-    let payload = {
-      password: password,
-    };
-    dispatch(storePassword(payload));
-    navigation.navigate(ComponentNames.OTP);
+    dispatch(
+      storePassword(
+        password,
+        (userDetails: any) => {
+          console.log('userDe', userDetails);
+          // if(userDetails.)
+          navigation.navigate(ComponentNames.signUp);
+        },
+        (error: any) => {
+          showToast(JSON.stringify(error.response.data.message));
+          console.log('Password Error', error);
+        },
+      ),
+    );
+    navigation.navigate(ComponentNames.signUp);
   };
   const validatePassword = () => {
     const reg =
@@ -37,9 +49,11 @@ export default function Password() {
     }
     return true;
   };
+
   const onEyePress = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <TopAuthHeader />
@@ -49,12 +63,16 @@ export default function Password() {
             <Text style={styles.headerText}>{Strings.PasswordHeader}</Text>
           </View>
           <Text style={styles.subheaderText}>{Strings.PasswordSubHeader}</Text>
-          <Text
-            style={
-              styles.number
-            }>{`${authDetails.countryCode} - ${authDetails.phoneNumber}`}</Text>
+          <View style={styles.phoneTextViewStyle}>
+            <View style={styles.countryCodeVie}>
+              <Text style={styles.countryCodeTex}>{countryCode}</Text>
+            </View>
+            <View style={styles.phoneView}>
+              <Text style={styles.phNumberTextStyle}>{` - ${phoneNo}`}</Text>
+            </View>
+          </View>
         </View>
-        <Text style={styles.textInputHeader}>{Strings.Phone_Number}</Text>
+        <Text style={styles.textInputHeader}>{Strings.password}</Text>
         <View style={styles.textInputView}>
           <CustomTextInput
             value={password}
@@ -77,6 +95,11 @@ export default function Password() {
             />
           </TouchableOpacity>
         </View>
+        <TouchableOpacity style={styles.forgotPassword}>
+          <Text style={styles.forgotPasswordText}>
+            {Strings.forgotPassword}
+          </Text>
+        </TouchableOpacity>
         <View style={styles.buttonContainer}>
           <CustomButton
             text={Strings.Login}

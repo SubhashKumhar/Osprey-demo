@@ -7,27 +7,27 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import React, {useMemo, useState} from 'react';
 import styles from './styles';
-import LocalImages from '../../../utils/constant/localImages';
-import Strings from '../../../utils/constant/string';
-import {useNavigation} from '@react-navigation/native';
-import ItemSeparator from '../../../components/ItemSeparator';
-import Color from '../../../utils/constant/colors';
-import DottedLine from '../../../components/dottedLine';
-import CustomButtonWithBorder from '../../../components/customButtonWithBorder';
-import CustomButton from '../../../components/customButton';
-import ModalWithTick from '../../../components/modalWithSearch';
+import Header from './header';
+import Skills from './skills';
+import JobRole from './jobRoles';
+import Location from './location';
 import Modal from 'react-native-modal';
 import {useSelector} from 'react-redux';
-import LocalData from '../../../utils/constant/localData';
-import TimePreferenceModal from '../components/timePreferenceModal';
+import React, {useMemo, useState} from 'react';
 import SkillModal from '../components/skillModal';
+import Color from '../../../utils/constant/colors';
+import Strings from '../../../utils/constant/string';
+import {useNavigation} from '@react-navigation/native';
+import DottedLine from '../../../components/dottedLine';
+import LocalData from '../../../utils/constant/localData';
+import CustomButton from '../../../components/customButton';
+import LocalImages from '../../../utils/constant/localImages';
+import ItemSeparator from '../../../components/ItemSeparator';
+import ModalWithTick from '../../../components/modalWithSearch';
 import ComponentNames from '../../../utils/constant/componentNames';
-import Header from './header';
-import Location from './location';
-import JobRole from './jobRoles';
-import Skills from './skills';
+import TimePreferenceModal from '../components/timePreferenceModal';
+import CustomButtonWithBorder from '../../../components/customButtonWithBorder';
 
 function Step2() {
   const navigation = useNavigation<any>();
@@ -40,6 +40,19 @@ function Step2() {
   const {timePreference, skills} = useSelector(
     (state: any) => state.SetupReducer,
   );
+  const onBackDropPress = (item: number) => {
+    switch (item) {
+      case 1:
+        setViewModal(false);
+        break;
+      case 2:
+        setViewTimeModal(false);
+        break;
+      case 3:
+        setSkillModal(false);
+        break;
+    }
+  };
 
   const onEditTimePreference = () => {
     setViewTimeModal(true);
@@ -59,7 +72,7 @@ function Step2() {
   const renderTimePreferences = ({item}: any) => {
     return (
       <View style={styles.selectedTimePreferenceView}>
-        <Text>{item}</Text>
+        <Text style={styles.timePreferenceSelectedText}>{item}</Text>
         {timePreference[item.toLowerCase()] !== '' && (
           <Image
             source={
@@ -76,7 +89,9 @@ function Step2() {
             style={styles.timeIcon}
           />
         )}
-        <Text>{timePreference[item.toLowerCase()].split(' ')[0]}</Text>
+        <Text style={styles.timePreferenceSelectedText}>
+          {timePreference[item.toLowerCase()].split(' ')[0]}
+        </Text>
       </View>
     );
   };
@@ -138,9 +153,10 @@ function Step2() {
 
         <View style={styles.skillContainer}>
           <View style={styles.timePreferenceHeader}>
-            <Text style={styles.timePreferenceText}>
-              {Strings.timePreference}
-            </Text>
+            <View style={styles.itemTitle}>
+              <Text style={styles.itemTitleText}>{Strings.timePreference}</Text>
+              <Text style={styles.astrickText}>{Strings.astrick}</Text>
+            </View>
             {memoizedValue && (
               <>
                 <TouchableOpacity
@@ -187,7 +203,13 @@ function Step2() {
       {/* Modal for Location and Job roles */}
 
       <View>
-        <Modal isVisible={viewModal} style={styles.modal}>
+        <Modal
+          isVisible={viewModal}
+          style={styles.modal}
+          animationInTiming={500}
+          animationOutTiming={300}
+          animationOut="fadeOutDown"
+          onBackdropPress={() => onBackDropPress(1)}>
           <ModalWithTick
             data={modalData}
             title={modalTitle}
@@ -201,7 +223,13 @@ function Step2() {
       {/* Modal for Time Preferennce */}
 
       <View>
-        <Modal isVisible={viewTimeModal} style={styles.modal}>
+        <Modal
+          isVisible={viewTimeModal}
+          style={styles.modal}
+          animationInTiming={500}
+          animationOutTiming={300}
+          animationOut="fadeOutDown"
+          onBackdropPress={() => onBackDropPress(2)}>
           <TimePreferenceModal
             setViewTimeModal={setViewTimeModal}
             modalData={LocalData.timePreferences}
@@ -212,7 +240,13 @@ function Step2() {
       {/* Skill Modal */}
 
       <View>
-        <Modal isVisible={skillModal} style={styles.modal}>
+        <Modal
+          isVisible={skillModal}
+          style={styles.modal}
+          animationInTiming={500}
+          animationOutTiming={300}
+          animationOut="fadeOutDown"
+          onBackdropPress={() => onBackDropPress(3)}>
           <SkillModal
             data={LocalData.SkillData}
             title={modalTitle}

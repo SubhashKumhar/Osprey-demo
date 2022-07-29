@@ -21,6 +21,7 @@ export default function CountryCode(props: any) {
         style={styles.itemContainer}
         onPress={() => {
           props.setCurrentCountryCode(item.dial_code);
+          props.setCountryName(item.name.en);
           props.onCloseModal();
         }}>
         <View style={styles.leftInsideContainer}>

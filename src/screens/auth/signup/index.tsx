@@ -6,25 +6,39 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
-import localImages from '../../utils/localImages';
-import Input from '../../component/input/input';
-import Button from '../../component/button';
-import styles from './style';
 import {
   passwordTest,
   emailTest,
   firstNameTest,
-} from '../../utils/constant/validation';
-import Names from '../../utils/constant/componentNames';
-import Strings from '../../utils/constant/string';
-import {useDispatch} from 'react-redux';
+} from '../../../utils/constant/validation';
+import styles from './style';
+import React, {useState} from 'react';
+import Loader from '../../../components/loader';
+import Color from '../../../utils/constant/colors';
+import localImages from '../../../utils/localImages';
+import Strings from '../../../utils/constant/string';
+import {useDispatch, useSelector} from 'react-redux';
+import {showToast} from '../../../utils/commonFunctions';
+import Names from '../../../utils/constant/componentNames';
+import {StoreUserData} from '../../../redux/signUp/action';
+import CustomButton from '../../../components/customButton';
+import CustomTextInput from '../../../components/customTextInput';
 
 export default function SignUp({navigation}: any) {
-  const dispatch = useDispatch();
+  /**
+   * @state change state of error
+   */
 
   const [err, setErr] = useState(false);
   const [errText, setErrText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const {countryCode, countryName, countryId, phoneNo} = useSelector(
+    (state: any) => state.AuthReducer,
+  );
+  /**
+   * @details state of all the input data
+   */
+
   const [details, setDetails] = useState({
     fName: '',
     mName: '',
@@ -32,8 +46,17 @@ export default function SignUp({navigation}: any) {
     email: '',
     password: '',
   });
+
+  /**
+   * @eye state of Password eye
+   */
   const [eyePress, setEyePress] = useState(false);
 
+  const dispatch = useDispatch<any>();
+
+  /**
+   * @function this function check the firstName,email and password with regex
+   */
   const onProceedPress2 = () => {
     if (!firstNameTest(details.fName)) {
       setErr(true);
@@ -45,16 +68,47 @@ export default function SignUp({navigation}: any) {
       setErr(true);
       setErrText(Strings.incorrectPassword);
     } else {
-      dispatch({type: 'UserData', payload: details});
-      navigation.navigate(Names.role);
+      setIsLoading(true);
+      let payload = {
+        firstName: details.fName,
+        middleName: details.mName,
+        lastName: details.lName,
+        email: details.email,
+        password: details.password,
+        countryCode: countryCode,
+        countryName: countryName,
+        countryId: countryId,
+        phoneNo: phoneNo,
+      };
+      dispatch(
+        StoreUserData(
+          payload,
+          (res: any) => {
+            setIsLoading(false);
+            navigation.navigate(Names.OTP);
+            console.log('after Signup', res);
+          },
+          (error: any) => {
+            setIsLoading(false);
+            showToast(error.data.message);
+          },
+        ),
+      );
       setErr(false);
     }
   };
 
+  /**
+   * @function this function change the state of the eye
+   */
   const onEyePress = () => {
     setEyePress(!eyePress);
   };
 
+  /**
+   *
+   * @returns change the disability of the button
+   */
   const isDisable = () => {
     if (
       details.fName.length > 0 &&
@@ -68,10 +122,14 @@ export default function SignUp({navigation}: any) {
     }
   };
 
+  const onBackPress = () => {
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.mainView}>
       <View style={styles.topHeaderView}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onBackPress}>
           <Image style={styles.backArrow} source={localImages.leftArrow} />
         </TouchableOpacity>
         <Text style={styles.headerText}>{Strings.signUp}</Text>
@@ -87,10 +145,9 @@ export default function SignUp({navigation}: any) {
           {Strings.firstName}
           <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
-        <View style={styles.inputTextViewStyle}>
-          <Input
-            place="Enter your first name"
-            placeholderColor="#333333"
+        <View style={styles.passwordTextInput}>
+          <CustomTextInput
+            placeholder={Strings.signUpFirstName}
             onChangeText={(text: string) => {
               setDetails({...details, fName: text});
             }}
@@ -101,10 +158,9 @@ export default function SignUp({navigation}: any) {
           {Strings.middleName}
           <Text style={styles.optionalTextColor}>{Strings.optional}</Text>
         </Text>
-        <View style={styles.inputTextViewStyle}>
-          <Input
-            place="Enter your middle name"
-            placeholderColor="#333333"
+        <View style={styles.passwordTextInput}>
+          <CustomTextInput
+            placeholder={Strings.signUpMiddleName}
             onChangeText={(text: string) => {
               setDetails({...details, mName: text});
             }}
@@ -115,10 +171,9 @@ export default function SignUp({navigation}: any) {
           {Strings.lastName}
           <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
-        <View style={styles.inputTextViewStyle}>
-          <Input
-            place="Enter your last name"
-            placeholderColor="#333333"
+        <View style={styles.passwordTextInput}>
+          <CustomTextInput
+            placeholder={Strings.singUpLastName}
             onChangeText={(text: string) => {
               setDetails({...details, lName: text});
             }}
@@ -131,10 +186,10 @@ export default function SignUp({navigation}: any) {
         </Text>
         <View style={styles.phoneTextViewStyle}>
           <View style={styles.countryCodeView}>
-            <Text style={styles.countryCodeText}>{'+91'}</Text>
+            <Text style={styles.countryCodeText}>{countryCode}</Text>
           </View>
           <View style={styles.phoneView}>
-            <Input place={'Phone'} placeholderColor="#333333" />
+            <Text style={styles.phNumberTextStyle}>{phoneNo}</Text>
           </View>
         </View>
 
@@ -142,10 +197,9 @@ export default function SignUp({navigation}: any) {
           {Strings.email}
           <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
-        <View style={styles.inputTextViewStyle}>
-          <Input
-            place="Enter your email"
-            placeholderColor="#333333"
+        <View style={styles.passwordTextInput}>
+          <CustomTextInput
+            placeholder={Strings.signUpEmail}
             onChangeText={(text: string) => {
               setDetails({...details, email: text});
             }}
@@ -156,16 +210,15 @@ export default function SignUp({navigation}: any) {
           {Strings.password}
           <Text style={styles.astrickColor}>{Strings.astrick}</Text>
         </Text>
-        <View style={styles.inputTextViewStyle}>
-          <Input
-            place="Enter your password"
-            placeholderColor="#333333"
-            secure={!eyePress}
+        <View style={styles.passwordTextInput}>
+          <CustomTextInput
+            placeholder={Strings.signUpPassword}
             onChangeText={(text: string) => {
               setDetails({...details, password: text});
             }}
+            secureTextEntry={!eyePress}
           />
-          <TouchableOpacity onPress={onEyePress}>
+          <TouchableOpacity style={styles.eyeContainer} onPress={onEyePress}>
             <Image
               source={!eyePress ? localImages.eyeClosed : localImages.eyeIcon}
               style={styles.eyeIconStyle}
@@ -173,13 +226,9 @@ export default function SignUp({navigation}: any) {
           </TouchableOpacity>
         </View>
         {err ? (
-          <View
-            style={{top: 30, flexDirection: 'row', justifyContent: 'center'}}>
-            <Image
-              source={localImages.warningIcon}
-              style={{height: 20, width: 20}}
-            />
-            <Text style={{marginLeft: 5, color: 'red'}}>{errText}</Text>
+          <View style={styles.errorStyleView}>
+            <Image source={localImages.warningIcon} style={styles.errorImg} />
+            <Text style={styles.errorText}>{errText}</Text>
           </View>
         ) : null}
       </ScrollView>
@@ -200,14 +249,18 @@ export default function SignUp({navigation}: any) {
           </Text>
         </View>
 
-        <Button
-          title="Proceed"
-          disabled={isDisable()}
-          customContainerStyle={[styles.buttonContainerView]}
-          customTextStyle={styles.buttonTitleView}
-          onPress={onProceedPress2}
-        />
+        <View style={styles.buttonContainerView}>
+          <CustomButton
+            text="Proceed"
+            disable={isDisable()}
+            bgColor={'#2474ff'}
+            onPressButton={onProceedPress2}
+            textColor={Color.white}
+            disableColor={Color.Cyan_Blue_Light}
+          />
+        </View>
       </View>
+      {isLoading && <Loader />}
     </SafeAreaView>
   );
 }

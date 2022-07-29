@@ -1,21 +1,20 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
 import React from 'react';
-import Color from '../../../utils/constant/colors';
 import {useSelector} from 'react-redux';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import Color from '../../../utils/constant/colors';
 import {vh, vw} from '../../../utils/dimensions';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import ItemSeparator from '../../../components/ItemSeparator';
 import Button from '../../../component/button';
+import ComponentNames from '../../../utils/constant/componentNames';
+import BackHeader from '../../../components/backHeader';
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({navigation}: any) {
+  /**
+   * @arr Array of the three Steps
+   */
+
   const arr = [
     {
       header: Strings.stepOne,
@@ -30,20 +29,22 @@ export default function WelcomeScreen() {
       subHeader: Strings.identifyDocuments,
     },
   ];
-  const {data} = useSelector(store => store.SignUpReducer);
+
+  const {userData} = useSelector((store: any) => store.SignUpReducer);
+  const onBtnPress = () => {
+    navigation.navigate(ComponentNames.basicInfo);
+  };
+
   return (
     <>
       <View style={styles.mainView}>
-        <View style={styles.headerView}>
-          <TouchableOpacity>
-            <Image source={localImages.leftArrow} />
-          </TouchableOpacity>
-        </View>
+        <BackHeader itemSeperator={false} />
       </View>
       <View style={styles.secondView}>
         <View style={styles.welcomeTextView}>
           <Image source={localImages.confirmationCheck} />
-          <Text style={styles.wecomeText}>{`Welcome ${data.fName} !`}</Text>
+          <Text
+            style={styles.wecomeText}>{`Welcome ${userData?.fName} !`}</Text>
           <Text style={styles.successfullAccountText}>
             {Strings.succesfullyCreatedAccount}
           </Text>
@@ -52,20 +53,14 @@ export default function WelcomeScreen() {
           <ItemSeparator />
         </View>
         <View style={styles.thirdView}>
-          <Text
-            style={styles.completeProfileText}>
+          <Text style={styles.completeProfileText}>
             {Strings.completeProfile}
           </Text>
           {arr.map(item => {
             return (
               <View key={item.header} style={styles.mainHeaderView}>
-                <Text style={styles.headerText}>
-                  {item.header}
-                </Text>
-                <Text
-                  style={styles.subHeaderText}>
-                  {item.subHeader}
-                </Text>
+                <Text style={styles.headerText}>{item.header}</Text>
+                <Text style={styles.subHeaderText}>{item.subHeader}</Text>
               </View>
             );
           })}
@@ -73,11 +68,11 @@ export default function WelcomeScreen() {
       </View>
       <View style={styles.bottomView}>
         <Button
-        title='Continue with profile setup'
-        customContainerStyle={[styles.buttonContainerView]}
+          title="Continue with profile setup"
+          customContainerStyle={[styles.buttonContainerView]}
           customTextStyle={styles.buttonTitleView}
+          onPress={onBtnPress}
         />
-
       </View>
     </>
   );
@@ -86,7 +81,7 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   mainView: {
     flex: 0.12,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
     justifyContent: 'flex-end',
   },
   headerView: {
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
   },
   secondView: {
     flex: 0.77,
-    backgroundColor: Color.White,
+    backgroundColor: Color.white,
   },
   welcomeTextView: {
     flex: 0.28,
@@ -125,14 +120,14 @@ const styles = StyleSheet.create({
     flex: 0.53,
     marginHorizontal: vw(16),
   },
-  completeProfileText:{
-    fontSize: vh(15), 
-    fontWeight: '500', 
-    marginBottom: vh(32)
+  completeProfileText: {
+    fontSize: vh(15),
+    fontWeight: '500',
+    marginBottom: vh(32),
   },
-  mainHeaderView:{marginTop: vh(24)},
-  headerText:{fontSize: vh(13), fontWeight: '500'},
-  subHeaderText:{
+  mainHeaderView: {marginTop: vh(24)},
+  headerText: {fontSize: vh(13), fontWeight: '500'},
+  subHeaderText: {
     marginTop: vh(4),
     marginLeft: vw(10),
     fontSize: vh(13),
@@ -145,8 +140,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonTitleView: {
-    color: Color.White,
+    color: Color.white,
     fontWeight: '600',
   },
-  bottomView:{flex:0.10,backgroundColor:Color.White}
+  bottomView: {flex: 0.1, backgroundColor: Color.White},
 });

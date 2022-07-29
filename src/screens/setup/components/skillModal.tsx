@@ -116,6 +116,7 @@ export default function SkillModal({...props}) {
         <View style={styles.textInputContainer}>
           <TextInput
             // value={search}
+            placeholderTextColor={Color.grey}
             onChangeText={onChangeText}
             placeholder={Strings.Search}
             style={styles.textInput}
@@ -190,12 +191,13 @@ const styles = StyleSheet.create({
     fontSize: vw(16),
     marginLeft: vw(16),
     lineHeight: vh(24),
+    color: Color.black,
   },
   crossImgContainer: {
     backgroundColor: Color.lightGrey,
     borderRadius: vh(10),
     height: vh(20),
-    width: vw(20),
+    width: vh(20),
     overflow: 'hidden',
     alignSelf: 'flex-end',
     alignItems: 'center',
@@ -205,7 +207,6 @@ const styles = StyleSheet.create({
   crossImg: {
     height: '50%',
     width: '50%',
-    right: vw(1),
   },
   header: {
     backgroundColor: Color.white,
@@ -249,6 +250,7 @@ const styles = StyleSheet.create({
     height: vh(48),
     width: '100%',
     backgroundColor: Color.textInputBackground,
+    color: Color.black,
     borderRadius: vh(10),
     padding: vh(10),
   },
@@ -278,6 +280,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: vw(14),
+    color: Color.black,
     fontFamily: Fonts.Lato_Bold,
     lineHeight: vh(16.8),
   },
