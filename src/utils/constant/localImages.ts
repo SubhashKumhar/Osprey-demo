@@ -21,6 +21,8 @@ const LocalImages = {
   greyCross: require('../../assets/images/Cancel_job_icon.png'),
   tickedBox: require('../../assets/images/checkedCheckbox.png'),
   emptyBox: require('../../assets/images/CheckBox_Uncheck1.png'),
+  singapore_flag: require('../../assets/images/singaporeflag.png'),
+  malaysian_flag: require('../../assets/images/malaysianflag.png'),
   arrowLeft: require('../../assets/images/arrow-left(non-optimized).png'),
   arrowRight: require('../../assets/images/arrow-right(non-optimized).png'),
   defaultImagePicker:

@@ -15,7 +15,7 @@ import CustomTextInput from '../../../components/customTextInput';
 import ComponentNames from '../../../utils/constant/componentNames';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../../components/loader';
-// import Loader from '../../../components/loader';
+import {showToast} from '../../../utils/commonFunctions';
 
 export default function Login() {
   const dispatch = useDispatch<any>();
@@ -53,8 +53,9 @@ export default function Login() {
             navigation.navigate(ComponentNames.signUp);
           }
         },
-        (error: Object) => {
-          console.log('LOGIN ERROR', error);
+        (error: any) => {
+          setIsLoading(false);
+          showToast(error.data.message);
         },
       ),
     );
@@ -67,14 +68,21 @@ export default function Login() {
     setShowModal(false);
   };
   return (
-    <KeyboardAwareScrollView style={styles.container}>
-      <TopAuthHeader />
+    <KeyboardAwareScrollView
+      bounces={false}
+      scrollEnabled={false}
+      style={styles.container}>
+      <TopAuthHeader
+        countryName={countryName}
+        setCountryName={setCountryName}
+      />
       <View style={styles.bottomContainer}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{Strings.LoginHeader}</Text>
           <Text style={styles.subheaderText}>{Strings.LoginSubHeader}</Text>
         </View>
         <Text style={styles.textInputHeader}>{Strings.Phone_Number}</Text>
+
         <View style={styles.textInputView}>
           <TouchableOpacity
             onPress={onCountryCodePress}

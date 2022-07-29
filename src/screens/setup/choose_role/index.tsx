@@ -16,6 +16,7 @@ import {storeProfileType} from '../../../redux/setup/action';
 import Loader from '../../../components/loader';
 import CustomButton from '../../../components/customButton';
 import Color from '../../../utils/constant/colors';
+import {showToast} from '../../../utils/commonFunctions';
 
 export default function Choose_Role({navigation}: any) {
   const [press, setPress] = useState('');
@@ -50,6 +51,7 @@ export default function Choose_Role({navigation}: any) {
         },
         (error: any) => {
           setLoading(false);
+          showToast(error.data.message);
           console.log('error', error);
         },
       ),
@@ -58,7 +60,7 @@ export default function Choose_Role({navigation}: any) {
 
   return (
     <SafeAreaView style={styles.parentView}>
-      <ScrollView contentContainerStyle={styles.innerContainer}>
+      <ScrollView bounces={false} contentContainerStyle={styles.innerContainer}>
         <View style={styles.mainView}>
           <Text style={styles.roleTextStyle}>{Strings.chooseRole}</Text>
         </View>

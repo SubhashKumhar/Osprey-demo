@@ -21,6 +21,7 @@ const Color = {
   lineSeparator: '#EEEEF4',
   cyanBlueLight: '#F4F8FF',
   Light_SkyBlue: '#d8e6ff',
+  transparent: 'transparent',
   Cyan_Blue_Light: '#71a5ff',
   cyanLightOpacity: '#2474FF0D',
   darkTextInputColor: '#EBF1FC',

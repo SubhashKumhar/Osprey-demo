@@ -12,6 +12,7 @@ import LocalImages from '../../../utils/constant/localImages';
 import {useNavigation} from '@react-navigation/native';
 import ComponentNames from '../../../utils/constant/componentNames';
 import {storePassword} from '../../../redux/auth/action';
+import {showToast} from '../../../utils/commonFunctions';
 
 export default function Password() {
   const navigation = useNavigation<any>();
@@ -33,6 +34,7 @@ export default function Password() {
           navigation.navigate(ComponentNames.signUp);
         },
         (error: any) => {
+          showToast(JSON.stringify(error.response.data.message));
           console.log('Password Error', error);
         },
       ),

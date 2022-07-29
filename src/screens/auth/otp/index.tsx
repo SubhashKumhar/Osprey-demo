@@ -23,6 +23,7 @@ import Services from '../../../services/Services';
 import EndPoint from '../../../utils/endPoint';
 import {resendOtp} from '../../../redux/auth/action';
 import Loader from '../../../components/loader';
+import {showToast} from '../../../utils/commonFunctions';
 
 export default function OTP({navigation}: any) {
   const {phoneNo, countryCode, countryId} = useSelector(
@@ -30,7 +31,7 @@ export default function OTP({navigation}: any) {
   );
   const {accessToken} = useSelector((state: any) => state.SignUpReducer);
   const [isLoading, setIsLoading] = useState(false);
-  const [otp, setOtp] = useState('');
+  var otp = '';
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [enableReset, setEnableReset] = useState(false);
   const dispatch = useDispatch<any>();
@@ -84,7 +85,7 @@ export default function OTP({navigation}: any) {
       resendOtp(
         payload,
         (resp: Object) => {
-          console.log('resp', resp);
+          showToast(resp.message);
           setIsLoading(false);
           setSecondsLeft(30);
           setEnableReset(false);
@@ -98,13 +99,14 @@ export default function OTP({navigation}: any) {
     );
   };
 
-  const onContinuePress = () => {
+  const onContinuePress = (code: string = otp) => {
     setIsLoading(true);
     let payload = {
       accessToken: accessToken,
-      otp: otp,
+      otp: code,
       type: 'SIGNUP',
     };
+    console.log('otpp', otp, payload.otp);
     Services.postApiCall(
       EndPoint.verifyOtp,
       payload,
@@ -120,8 +122,9 @@ export default function OTP({navigation}: any) {
         );
         // navigation.navigate(ComponentNames.SetupStack);
       },
-      (err: Object) => {
+      (err: any) => {
         setIsLoading(false);
+        showToast(err.data.message);
         console.log('failed', err);
       },
     );
@@ -156,7 +159,7 @@ export default function OTP({navigation}: any) {
             style={styles.otpView}
             pinCount={4}
             onCodeChanged={(code: string) => {
-              setOtp(code);
+              otp = code;
             }}
             autoFocusOnLoad
             placeholderTextColor={Color.lightGrey}

@@ -14,9 +14,7 @@ const SetupStacks = createNativeStackNavigator();
 
 export default function SetupStack() {
   return (
-    <SetupStacks.Navigator
-      screenOptions={{headerShown: false}}
-      initialRouteName={ComponentNames.basicInfo}>
+    <SetupStacks.Navigator screenOptions={{headerShown: false}}>
       <SetupStacks.Screen name={Names.role} component={Choose_Role} />
       <SetupStacks.Screen
         name={Names.welcomeScreen}

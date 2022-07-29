@@ -1,12 +1,11 @@
 import axios from 'axios';
+import ScreenNames from '../utils/constant/componentNames';
 import {Platform} from 'react-native';
-import Device from '../utils/device';
-
-const deviceId = Device.getUniqueId();
-const devicedetail = {
-  deviceType: Platform.OS === 'android' ? 0 : 1,
-  deviceId: JSON.stringify(deviceId),
-};
+import {showToast} from '../utils/commonFunctions';
+import store from '../redux/store';
+import DeviceInfo from 'react-native-device-info';
+import {navigationRef} from './navigationServices';
+// import Config from 'react-native-config';
 
 const isAndroid = Platform.OS === 'android';
 const PlatformNumber = isAndroid ? 0 : 1;
@@ -14,83 +13,89 @@ const ENV_DATA = {
   BASE_URL: 'https://qspreydevapi.appskeeper.in/api/v1',
 };
 
+const deviceId = DeviceInfo.getUniqueId();
+
+const devicedetail = {
+  deviceId,
+  deviceToken: '',
+  deviceType: Platform.OS === 'android' ? 0 : 1,
+};
+
 const $http = axios.create({
   baseURL: ENV_DATA.BASE_URL,
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
-    offset: new Date().getTimezoneOffset(),
-    devicedetails: JSON.stringify(devicedetail),
+    offset: `${new Date().getTimezoneOffset()}`,
   },
-  timeout: 30000,
 });
 
-// $http.interceptors.response.use(
-//   (config: any) => config,
-//   (error: any) => {
-// if (
-//   error?.message?.includes('403') ||
-//   error?.message?.includes('401') || //Session expire
-//   error?.message?.includes('498')
-//   // ||
-//   // error?.message?.includes('440') // Session expire
-// )
-// {
-// commonFunction.showSnackbar('Something Went Wrong', 'black');
-// const route = navigationRef.current?.getCurrentRoute().name;
+$http.interceptors.response.use(
+  (config: any) => config,
+  (error: any) => {
+    if (
+      error?.message?.includes('403') ||
+      error?.message?.includes('401') || //Session expire
+      error?.message?.includes('498')
+      // ||
+      // error?.message?.includes('440') // Session expire
+    ) {
+      // commonFunction.showSnackbar('Something Went Wrong', 'black');
+      const route = navigationRef.current?.getCurrentRoute().name;
 
-//   if (
-//     route !== ScreenNames.SignIn &&
-//     route !== ScreenNames.ForgotPassword &&
-//     route !== ScreenNames.SignUp &&
-//     route !== ScreenNames.FINDACCOUNT &&
-//     route !== ScreenNames.ForgotPassword
-//   ) {
-//     handleApiError();
-//   } else {
-//     if (
-//       !error?.message?.includes('401') &&
-//       !error?.message?.includes('498')
-//     ) {
-//       // commonFunction.showSnackbar(error?.response?.data?.message, 'black');
-//     }
-//   }
-// } else {
-//   // commonFunction.showSnackbar(error?.response?.data?.message, 'black');
-// }
-//     return error;
-//   },
-// );
+      if (
+        route !== ScreenNames.Login &&
+        // route !== ScreenNames.ForgotPassword &&
+        route !== ScreenNames.signUp
+        // route !== ScreenNames.FINDACCOUNT &&
+        // route !== ScreenNames.ForgotPassword
+      ) {
+        handleApiError();
+      } else {
+        if (
+          !error?.message?.includes('401') &&
+          !error?.message?.includes('498')
+        ) {
+          showToast(error?.response?.data?.message);
+        }
+      }
+    } else {
+      showToast(error?.response?.data?.message);
+    }
+    return error;
+  },
+);
 
 const handleApiError = () => {
   // navigationRef.current.navigate(ScreenNames.SessionExpiry);
 };
 
-// $http.interceptors.request.use(
-//   async (req: any) => {
-//     if (req?.headers) {
-//       const getState = await store?.getState();
-//       if (getState) {
-//         const {authToken = '', pushToken = ''} = getState?.Auth;
+$http.interceptors.request.use(
+  async (req: any) => {
+    if (req?.headers) {
+      const getState = await store?.getState();
+      if (getState) {
+        const {authToken = '', pushToken = ''} = getState?.AuthReducer;
 
-//         if (pushToken && pushToken.length > 0) {
-//           //@ts-ignore
-//           $http.defaults.headers.devicedetails = JSON.stringify({
-//             ...devicedetail,
-//             ...{deviceToken: pushToken},
-//           });
-//         }
+        if (pushToken && pushToken.length > 0) {
+          //@ts-ignore
+          $http.defaults.headers.devicedetails = JSON.stringify({
+            ...devicedetail,
+            ...{deviceToken: pushToken},
+          });
+        }
 
-//         if (authToken && authToken.length > 0) {
-//           $http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
-//         }
-//       }
-//     }
-//     return req;
-//   },
-//   (err: any) => {
-//     return err;
-//   },
-// );
+        if (authToken && authToken.length > 0) {
+          $http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
+        }
+      }
+    }
+    return req;
+  },
+  (err: any) => {
+    return err;
+  },
+);
 
 const setAuthorizationToken = (token: string, _: string = '') => {
   if (token) {

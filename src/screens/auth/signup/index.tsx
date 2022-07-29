@@ -18,6 +18,7 @@ import Color from '../../../utils/constant/colors';
 import localImages from '../../../utils/localImages';
 import Strings from '../../../utils/constant/string';
 import {useDispatch, useSelector} from 'react-redux';
+import {showToast} from '../../../utils/commonFunctions';
 import Names from '../../../utils/constant/componentNames';
 import {StoreUserData} from '../../../redux/signUp/action';
 import CustomButton from '../../../components/customButton';
@@ -89,7 +90,7 @@ export default function SignUp({navigation}: any) {
           },
           (error: any) => {
             setIsLoading(false);
-            console.log('error', error);
+            showToast(error.data.message);
           },
         ),
       );
